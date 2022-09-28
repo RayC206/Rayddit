@@ -28,7 +28,7 @@ def get_all_posts_for_user():
 
 
   all_posts_json = [post.to_dict() for post in all_posts]
-  return (jsonify(all_posts_json))
+  return jsonify(all_posts_json)
 
 # Get Details of a single post
 @post_routes.route("/<int:post_id>")
@@ -38,14 +38,7 @@ def post_details(post_id):
   if not post:
     return {"message": "Post does not exist"}
 
-  total_votes = 0
-  for vote in post.votes:
-    total_votes += vote.value
-
-  post = post.to_dict()
-  post["total_votes"] = total_votes
-
-  return post
+  return jsonify(post.to_dict())
 
 # Create a post
 @post_routes.route("/", methods=["POST"])

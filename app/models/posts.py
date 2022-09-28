@@ -26,16 +26,21 @@ class Post(db.Model):
     date = datetime.now()
     return timeago.format(self.created_at, date)
 
+  def total_votes(self):
+    return sum(vote.value for vote in self.votes)
+
   def to_dict(self):
       return {
           "id": self.id,
           "user_id": self.user_id,
+          "username": self.user.username,
           "subreddit_id": self.subreddit_id,
           "post_type_id": self.post_type_id,
           "title": self.title,
           "img_url": self.img_url,
           "text": self.text,
           "link_url": self.link_url,
+          "total_votes": self.total_votes(),
           "created_at": self.created_at,
           "updated_at": self.updated_at,
       }
