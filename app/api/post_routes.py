@@ -13,10 +13,22 @@ post_routes = Blueprint('post', __name__)
 # Get All posts
 @post_routes.route("/all")
 def get_all_posts():
-    all_posts = Post.query.order_by(Post.created_at.desc()).all()
+  all_posts = Post.query.order_by(Post.created_at.desc()).all()
 
-    all_posts_json = [post.to_dict() for post in all_posts]
-    return {"posts": all_posts_json}
+  all_posts_json = [post.to_dict() for post in all_posts]
+  return {"posts": all_posts_json}
+
+# Get all posts for the logged in user's subscriptions (Home)
+@post_routes.route("/home")
+def get_all_posts_for_user():
+  subscriptions = current_user.subscription
+  user_subreddits = [subscription.subreddit for subscription in subscriptions]
+  all_posts = Post.query.order_by(Post.created_at.desc()).all()
+  all_posts = [post for post in all_posts if post.subreddit in user_subreddits]
+
+
+  all_posts_json = [post.to_dict() for post in all_posts]
+  return (jsonify(all_posts_json))
 
 # Get Details of a single post
 @post_routes.route("/<int:post_id>")

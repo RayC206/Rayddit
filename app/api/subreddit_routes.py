@@ -111,3 +111,14 @@ def subscribe_to_subreddit(subreddit_id):
 
   db.session.commit()
   return {"message": message}
+
+# Get all subreddits the logged in user is subscribed to
+@subreddit_routes.route('/subscriptions')
+@login_required
+def get_users_subreddits():
+    subscriptions = current_user.subscription
+    subreddits = [subscription.subreddit for subscription in subscriptions]
+
+    return {
+      "subreddits": [subreddit.to_dict() for subreddit in subreddits]
+    }
