@@ -75,3 +75,15 @@ def edit_subreddit(subreddit_id):
     return edited_subreddit.to_dict()
   else:
     return jsonify(form.errors)
+
+# Delete a subreddit
+@subreddit_routes.delete("/<int:subreddit_id>")
+@login_required
+def delete_subreddit(subreddit_id):
+  subreddit = Subreddit.query.get(subreddit_id)
+  if current_user.id == subreddit.owner_id:
+    db.session.delete(subreddit)
+    db.session.commit()
+    return {'message': 'Subreddit successfully deleted'}
+  else:
+    return {'message': 'Only subreddit owner can delete subreddit', 'statusCode': 403}
