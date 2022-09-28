@@ -8,6 +8,7 @@ from ..models.db import db
 from ..models.posts import Post
 from ..models.votes import Vote
 from ..models.subreddits import Subreddit
+from ..models.subscriptions import Subscription
 from ..forms.create_subreddit import SubredditForm
 
 subreddit_routes = Blueprint('subreddit', __name__)
@@ -75,3 +76,49 @@ def edit_subreddit(subreddit_id):
     return edited_subreddit.to_dict()
   else:
     return jsonify(form.errors)
+
+# Delete a subreddit
+@subreddit_routes.delete("/<int:subreddit_id>")
+@login_required
+def delete_subreddit(subreddit_id):
+  subreddit = Subreddit.query.get(subreddit_id)
+  if current_user.id == subreddit.owner_id:
+    db.session.delete(subreddit)
+    db.session.commit()
+    return {'message': 'Subreddit successfully deleted'}
+  else:
+    return {'message': 'Only subreddit owner can delete subreddit', 'statusCode': 403}
+
+# Subscribe/unsubscribe to a subreddit
+@subreddit_routes.route("/<int:subreddit_id>/subscribe", methods=["POST"])
+@login_required
+def subscribe_to_subreddit(subreddit_id):
+  subreddit = Subreddit.query.get(subreddit_id)
+  if not subreddit:
+    return {"message": "Subreddit does not exist"}
+  subscription = Subscription.query.filter(Subscription.subreddit_id == subreddit_id, Subscription.user_id == current_user.id).first()
+  # subscribers = [subscription.user for subscription in subreddit.subscriptions]
+  if not subscription:
+    new_subscription = Subscription(
+      user_id = current_user.id,
+      subreddit_id = subreddit_id
+    )
+    message = "Subscribe success"
+    db.session.add(new_subscription)
+  else:
+    message = "Unsubscribe success"
+    subreddit.subscriptions.remove(subscription)
+
+  db.session.commit()
+  return {"message": message}
+
+# Get all subreddits the logged in user is subscribed to
+@subreddit_routes.route('/subscriptions')
+@login_required
+def get_users_subreddits():
+    subscriptions = current_user.subscription
+    subreddits = [subscription.subreddit for subscription in subscriptions]
+
+    return {
+      "subreddits": [subreddit.to_dict() for subreddit in subreddits]
+    }
