@@ -105,6 +105,46 @@ export const deletePost = (postId) => async (dispatch) => {
   });
   if (res.ok){
     dispatch(removePost(postId));
-  }
+  };
   return res
-}
+};
+
+//Initial State
+const initialState = {}
+
+//Reducer:
+const postsReducer = (state = initialState, action) => {
+  let newState = {};
+  switch (action.type) {
+    case CREATE_POST: {
+      newState = { ...state };
+      newState[action.post.id] = action.post;
+      return newState;
+    }
+    case GET_POST: {
+      newState = { ...state };
+      newState[action.post.id] = action.post;
+      return newState;
+    }
+    case GET_ALL_POST: {
+      action.posts.forEach((post) => {
+        newState[post.id] = post;
+      });
+      return newState;
+    }
+    case EDIT_POST: {
+      newState = { ...state };
+      newState[action.post.id] = action.post;
+      return newState;
+    }
+    case DELETE_POST: {
+      newState = { ...state };
+      delete newState[action.postId];
+      return newState;
+    }
+    default:
+      return state;
+  }
+};
+
+export default postsReducer;
