@@ -8,6 +8,7 @@ from ..models.db import db
 from ..models.posts import Post
 from ..models.votes import Vote
 from ..models.subreddits import Subreddit
+from ..forms.create_subreddit import SubredditForm
 
 subreddit_routes = Blueprint('subreddit', __name__)
 
@@ -32,4 +33,23 @@ def get_all_posts(subreddit_id):
   return jsonify(all_subreddit_posts)
 
 
+# Create a subreddit
+@subreddit_routes.route("/", methods=["POST"])
+def create_subreddit():
+  form = SubredditForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    new_subreddit = Subreddit(
+      name = form.data['name'],
+      owner_id = current_user.id,
+      description = form.data['description'],
+      icon_url = form.data['icon_url'],
+      banner_img = form.data['banner_img']
+    )
+    db.session.add(new_subreddit)
+    db.session.commit()
 
+    new_subreddit = new_subreddit.to_dict()
+    return new_subreddit
+  else:
+    return jsonify(form.errors)
