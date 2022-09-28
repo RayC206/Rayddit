@@ -60,3 +60,51 @@ export const createAPost = (newPost) => async (dispatch) => {
   }
   return res
 }
+
+//Load all posts
+export const getAllPosts = () => async (dispatch) => {
+  const res = await fetch(`/api/posts/all`, {});
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(loadAllPost(data));
+    return data
+  };
+  return res
+};
+
+//Load post by id
+export const loadSinglePost = (postId) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(loadPost(data));
+    return data
+  };
+  return res
+};
+
+//Edit post
+export const editPost = (data) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${data.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+  if (res.ok) {
+    const editedPost = await res.json()
+    dispatch(updatePost(editedPost))
+    return editedPost
+  };
+  return res
+};
+
+//Delete post
+export const deletePost = (postId) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}`, {
+    method: "DELETE"
+  });
+  if (res.ok){
+    dispatch(removePost(postId));
+  }
+  return res
+}
