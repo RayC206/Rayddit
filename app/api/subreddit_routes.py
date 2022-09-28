@@ -35,6 +35,7 @@ def get_all_posts(subreddit_id):
 
 # Create a subreddit
 @subreddit_routes.route("/", methods=["POST"])
+@login_required
 def create_subreddit():
   form = SubredditForm()
   form['csrf_token'].data = request.cookies['csrf_token']
@@ -51,5 +52,26 @@ def create_subreddit():
 
     new_subreddit = new_subreddit.to_dict()
     return new_subreddit
+  else:
+    return jsonify(form.errors)
+
+# Edit a subreddit
+@subreddit_routes.route("/<int:subreddit_id>", methods=["PUT"])
+@login_required
+def edit_subreddit(subreddit_id):
+  form = SubredditForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  edited_subreddit = Subreddit.query.get(subreddit_id)
+  if current_user.id != edited_subreddit.owner_id:
+    return {"message": "You must be the owner of this subreddit to edit", "statusCode": 403}
+
+  if form.validate_on_submit():
+    edited_subreddit.description = form.data['description']
+    edited_subreddit.icon_url = form.data['icon_url']
+    edited_subreddit.banner_img = form.data['banner_img']
+
+    db.session.commit()
+
+    return edited_subreddit.to_dict()
   else:
     return jsonify(form.errors)
