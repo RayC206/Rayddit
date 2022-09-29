@@ -7,8 +7,8 @@ def seed_votes():
     value = 1
   )
   vote2 = Vote(
-    user_id = 1,
-    post_id = 2,
+    user_id = 2,
+    post_id = 1,
     value = 1
   )
   vote3 = Vote(

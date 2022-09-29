@@ -29,7 +29,7 @@ def seed_posts():
         subreddit_id = 4,
         post_type_id = 3,
         title = 'This site is perfect for searching for a beach vacation spot!!!',
-        link = "https://ray-airbnb-clone.herokuapp.com/"
+        link_url = "https://ray-airbnb-clone.herokuapp.com/"
     )
     post5 = Post(
         user_id=4,
@@ -62,7 +62,7 @@ def seed_posts():
     post9 = Post(
         user_id= 1,
         subreddit_id = 4,
-        post_type_id = 3,
+        post_type_id = 1,
         title = 'Why did the programmer quit his job?',
         text = "Because he didn't get arrays."
     )

@@ -166,7 +166,9 @@ const postsReducer = (state = initialState, action) => {
       return newState;
     }
     case GET_ALL_POSTS: {
-      newState = action.posts;
+      action.posts.forEach((post) => {
+        newState[post.id] = post;
+      });
       return { ...newState };
     }
     case EDIT_POST: {
@@ -177,6 +179,18 @@ const postsReducer = (state = initialState, action) => {
     case DELETE_POST: {
       newState = { ...state };
       delete newState[action.deletedPostId];
+      return newState;
+    }
+    case UPVOTE_POST: {
+      newState = { ...state };
+      console.log(newState);
+      console.log(action.post.id);
+      newState[action.post.id] = action.post;
+      return newState;
+    }
+    case DOWNVOTE_POST: {
+      newState = { ...state };
+      newState[action.post.id] = action.post;
       return newState;
     }
     default:

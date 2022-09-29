@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getAllPostsRequest } from "../../store/posts";
+import {
+  downvotePostRequest,
+  getAllPostsRequest,
+  upvotePostRequest,
+} from "../../store/posts";
 
 const Homepage = () => {
   const POST_TYPE_TEXT = 1;
@@ -21,6 +25,14 @@ const Homepage = () => {
     });
   }, [dispatch]);
 
+  const upvotePost = (postId) => {
+    dispatch(upvotePostRequest(postId));
+  };
+
+  const downvotePost = (postId) => {
+    dispatch(downvotePostRequest(postId));
+  };
+
   return (
     <>
       {postsLoaded ? (
@@ -32,15 +44,22 @@ const Homepage = () => {
                 <div>u/{post.username}</div>
                 <div>{post.created_at_timeago}</div>
                 <div>{post.title}</div>
-                {() => {
-                  if (post.post_type_id === POST_TYPE_TEXT) {
-                    return <div>{post.text}</div>;
-                  } else if (post.post_type_id === POST_TYPE_IMAGE) {
-                    return <img src={post.img_url} />;
-                  } else if (post.post_type_id === POST_TYPE_LINK) {
-                    return <a href={post.link_url}>{post.link_url}</a>;
-                  }
-                }}
+                <div>
+                  {(() => {
+                    if (post.post_type_id === POST_TYPE_TEXT) {
+                      return <div>{post.text}</div>;
+                    } else if (post.post_type_id === POST_TYPE_IMAGE) {
+                      return <img src={post.img_url} />;
+                    } else if (post.post_type_id === POST_TYPE_LINK) {
+                      return <a href={post.link_url}>{post.link_url}</a>;
+                    }
+                  })()}
+                </div>
+                <div>
+                  <button onClick={() => upvotePost(post.id)}>Up</button>
+                  {post.total_votes}
+                  <button onClick={() => downvotePost(post.id)}>Down</button>
+                </div>
                 ---
               </div>
             );
