@@ -23,19 +23,25 @@ class Post(db.Model):
   votes = db.relationship("Vote", back_populates="post", cascade="all, delete-orphan")
 
   def post_timeago(self):
-    date = datetime.now()
-    return timeago.format(self.created_at, date)
+    return timeago.format(self.created_at, datetime.datetime.now())
+
+  def total_votes(self):
+    return sum(vote.value for vote in self.votes)
 
   def to_dict(self):
       return {
           "id": self.id,
           "user_id": self.user_id,
+          "username": self.user.username,
           "subreddit_id": self.subreddit_id,
+          "subreddit_name": self.subreddit.name,
           "post_type_id": self.post_type_id,
           "title": self.title,
           "img_url": self.img_url,
           "text": self.text,
           "link_url": self.link_url,
+          "total_votes": self.total_votes(),
           "created_at": self.created_at,
+          "created_at_timeago": self.post_timeago(),
           "updated_at": self.updated_at,
       }

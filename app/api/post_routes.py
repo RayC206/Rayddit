@@ -16,7 +16,7 @@ def get_all_posts():
   all_posts = Post.query.order_by(Post.created_at.desc()).all()
 
   all_posts_json = [post.to_dict() for post in all_posts]
-  return {"posts": all_posts_json}
+  return jsonify(all_posts_json)
 
 # Get all posts for the logged in user's subscriptions (Home)
 @post_routes.route("/home")
@@ -28,7 +28,7 @@ def get_all_posts_for_user():
 
 
   all_posts_json = [post.to_dict() for post in all_posts]
-  return (jsonify(all_posts_json))
+  return jsonify(all_posts_json)
 
 # Get Details of a single post
 @post_routes.route("/<int:post_id>")
@@ -38,14 +38,7 @@ def post_details(post_id):
   if not post:
     return {"message": "Post does not exist"}
 
-  total_votes = 0
-  for vote in post.votes:
-    total_votes += vote.value
-
-  post = post.to_dict()
-  post["total_votes"] = total_votes
-
-  return post
+  return jsonify(post.to_dict())
 
 # Create a post
 @post_routes.route("/", methods=["POST"])
@@ -129,7 +122,7 @@ def upvote_post(post_id):
       vote.value = 1
 
   db.session.commit()
-  return {"message": "Upvote success"}
+  return jsonify(post.to_dict())
 
 # Downvote a post
 @post_routes.route("/<int:post_id>/downvote", methods=["POST"])
@@ -154,4 +147,4 @@ def downvote_post(post_id):
       vote.value = -1
 
   db.session.commit()
-  return {"message": "Downvote success"}
+  return jsonify(post.to_dict())

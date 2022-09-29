@@ -23,11 +23,11 @@ def seed_subreddits():
     banner_img = "https://t4.ftcdn.net/jpg/04/67/96/13/360_F_467961350_LlpfNFYVGUwkofWQzB4uptbSxl12rWps.jpg"
   )
   Food = Subreddit (
-    name = "Food",
+    name = "Travel",
     owner_id = 8,
-    description = "The hub for Food Images and more on Reddit",
-    icon_url = "https://a.thumbs.redditmedia.com/bDWcvO6mkX1TIcTnrO-N-5QJPUaWaq6nnQFel3kywD8.png",
-    banner_img = "https://styles.redditmedia.com/t5_2qh55/styles/bannerBackgroundImage_mkxku8m12of51.png"
+    description = "r/travel is a community about exploring the world. Your pictures, questions, stories, or any good content is welcome.",
+    icon_url = "https://styles.redditmedia.com/t5_2qh41/styles/communityIcon_x4pa3xf5z4d11.jpg?width=256&format=pjpg&s=59e0f9a8925784fbc8fe0af30e583a48019bc2a7",
+    banner_img = "hhttps://www.solidbackgrounds.com/images/950x350/950x350-sea-blue-solid-color-background.jpg"
   )
   Houseplants = Subreddit (
     name = "Houseplants",
