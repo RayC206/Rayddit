@@ -1,116 +1,155 @@
 const CREATE_POST = "posts/create";
 const GET_POST = "posts/getpost";
-const GET_ALL_POST = "posts/getall";
+const GET_ALL_POSTS = "posts/getall";
 const EDIT_POST = "posts/edit";
 const DELETE_POST = "posts/delete";
 const UPVOTE_POST = "posts/upvote";
 const DOWNVOTE_POST = "posts/downvote";
 
-
 // Action Creators
 const createPost = (post) => {
   return {
     type: CREATE_POST,
-    post
+    post,
   };
 };
 
-const loadPost = (post) => {
+const getPost = (post) => {
   return {
     type: GET_POST,
-    post
+    post,
   };
 };
 
-const loadAllPost = (post) => {
+const getAllPosts = (posts) => {
   return {
-    type: GET_ALL_POST,
-    post
+    type: GET_ALL_POSTS,
+    posts,
   };
 };
 
-const updatePost = (post) => {
+const editPost = (post) => {
   return {
     type: EDIT_POST,
-    post
+    post,
   };
 };
 
-const removePost = (postId) => {
+const deletePost = (deletedPostId) => {
   return {
     type: DELETE_POST,
-    postId
+    deletedPostId,
   };
 };
 
+const upvotePost = (post) => {
+  return {
+    type: UPVOTE_POST,
+    post,
+  };
+};
+
+const downvotePost = (post) => {
+  return {
+    type: DOWNVOTE_POST,
+    post,
+  };
+};
 
 // Thunks
 
 //Create
-export const createAPost = (newPost) => async (dispatch) => {
+export const createPostRequest = (newPost) => async (dispatch) => {
   const res = await fetch("/api/posts/", {
     method: "POST",
-    headers: {"Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newPost),
   });
   if (res.ok) {
     const post = await res.json();
     dispatch(createPost(post));
-    return post
+    return post;
   }
-  return res
-}
+  return res;
+};
 
-//Load all posts
-export const getAllPosts = () => async (dispatch) => {
+// Get all posts
+export const getAllPostsRequest = () => async (dispatch) => {
   const res = await fetch(`/api/posts/all`, {});
   if (res.ok) {
-    const data = await res.json();
-    dispatch(loadAllPost(data));
-    return data
-  };
-  return res
+    const posts = await res.json();
+    dispatch(getAllPosts(posts));
+    return posts;
+  }
+  return res;
 };
 
 //Load post by id
-export const loadSinglePost = (postId) => async (dispatch) => {
+export const getPostRequest = (postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${postId}`);
   if (res.ok) {
-    const data = await res.json();
-    dispatch(loadPost(data));
-    return data
-  };
-  return res
+    const post = await res.json();
+    dispatch(getPost(post));
+    return post;
+  }
+  return res;
 };
 
 //Edit post
-export const editPost = (data) => async (dispatch) => {
+export const editPostRequest = (data) => async (dispatch) => {
   const res = await fetch(`/api/posts/${data.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
   if (res.ok) {
-    const editedPost = await res.json()
-    dispatch(updatePost(editedPost))
-    return editedPost
-  };
-  return res
+    const editedPost = await res.json();
+    dispatch(editPost(editedPost));
+    return editedPost;
+  }
+  return res;
 };
 
 //Delete post
-export const deletePost = (postId) => async (dispatch) => {
+export const deletePostRequest = (postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${postId}`, {
-    method: "DELETE"
+    method: "DELETE",
   });
-  if (res.ok){
-    dispatch(removePost(postId));
-  };
-  return res
+  if (res.ok) {
+    dispatch(deletePost(postId));
+    return postId;
+  }
+  return res;
+};
+
+// Upvote post
+export const upvotePostRequest = (postId) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}/upvote`, {
+    method: "POST",
+  });
+  if (res.ok) {
+    const post = await res.json();
+    dispatch(upvotePost(post));
+    return post;
+  }
+  return res;
+};
+
+// Downvote post
+export const downvotePostRequest = (postId) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}/downvote`, {
+    method: "POST",
+  });
+  if (res.ok) {
+    const post = await res.json();
+    dispatch(downvotePost(post));
+    return post;
+  }
+  return res;
 };
 
 //Initial State
-const initialState = {}
+let initialState = {};
 
 //Reducer:
 const postsReducer = (state = initialState, action) => {
@@ -126,11 +165,9 @@ const postsReducer = (state = initialState, action) => {
       newState[action.post.id] = action.post;
       return newState;
     }
-    case GET_ALL_POST: {
-      action.posts.forEach((post) => {
-        newState[post.id] = post;
-      });
-      return newState;
+    case GET_ALL_POSTS: {
+      newState = action.posts;
+      return { ...newState };
     }
     case EDIT_POST: {
       newState = { ...state };
@@ -139,7 +176,7 @@ const postsReducer = (state = initialState, action) => {
     }
     case DELETE_POST: {
       newState = { ...state };
-      delete newState[action.postId];
+      delete newState[action.deletedPostId];
       return newState;
     }
     default:
