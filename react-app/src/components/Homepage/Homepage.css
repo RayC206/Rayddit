@@ -1,16 +1,50 @@
 
+.homePageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100% ;
+  margin: auto;
+}
+
 .outerPostContainer {
   display: flex;
   flex-direction:row;
+  width: 600px;
+  align-items: start;
+  margin: auto;
+  border: 1px solid lightgray;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.createPostDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 500px;
   align-items: center;
   margin: auto;
+}
+
+.createPostDiv > input {
+  display: flex;
+  flex-direction: row;
+  width: 399px;
+  height: 38px;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.createPostDiv > input:hover {
+  cursor: text;
 }
 
 .voteDiv{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
 .postContainer {
@@ -19,12 +53,12 @@
   justify-content: flex-start;
   align-items: center;
   margin: auto;
+  /* border: 1px solid lightgray; */
 }
 
 .postTopDescription {
   display: flex;
 }
-
 
 .postImage {
   width: 500px;
