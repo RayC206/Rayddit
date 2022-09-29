@@ -25,46 +25,53 @@ def seed_posts():
 
     )
     post4 = Post(
-        user_id=2,
-        subreddit_id = 2,
-        post_type_id = 2,
-        title = 'test'
+        user_id=8,
+        subreddit_id = 4,
+        post_type_id = 3,
+        title = 'This site is perfect for searching for a beach vacation spot!!!',
+        link = "https://ray-airbnb-clone.herokuapp.com/"
     )
     post5 = Post(
-        user_id=3,
-        subreddit_id = 3,
+        user_id=4,
+        subreddit_id = 2,
         post_type_id = 2,
-        title = 'test'
+        title = 'Everytime...',
+        img_url = "https://i.redd.it/1fpaatrzw0p91.jpg"
     )
     post6 = Post(
-        user_id=3,
-        subreddit_id = 4,
+        user_id=2,
+        subreddit_id = 1,
         post_type_id = 2,
-        title = 'test'
+        title = ':(',
+        img_url = "https://preview.redd.it/x4xsrmg4bad91.jpg?width=960&crop=smart&auto=webp&s=8ca81ae90bf4f55c89ad597c56bc6a12f5a6b220"
     )
     post7 = Post(
-        user_id=4,
-        subreddit_id = 3,
-        post_type_id = 3,
-        title = 'test'
+        user_id=10,
+        subreddit_id = 4,
+        post_type_id = 2,
+        title = 'Thailand is beautiful',
+        img_url = "https://preview.redd.it/3a04lnoxkvn91.jpg?width=640&crop=smart&auto=webp&s=a9f8b8957184014fddadb56b9da6dd325b281e14"
     )
     post8 = Post(
         user_id=4,
         subreddit_id = 5,
-        post_type_id = 3,
-        title = 'test'
+        post_type_id = 2,
+        title = 'The new leaf on my Philodendron "White Princess"!',
+        img_url = "https://preview.redd.it/athj2ntfs2i81.jpg?width=640&crop=smart&auto=webp&s=13ddd5680377abb35d8c16a3d3087cdaf1cc11c2"
     )
     post9 = Post(
-        user_id=5,
+        user_id= 1,
         subreddit_id = 4,
         post_type_id = 3,
-        title = 'test'
+        title = 'Why did the programmer quit his job?',
+        text = "Because he didn't get arrays."
     )
     post10 = Post(
         user_id=5,
-        subreddit_id = 5,
-        post_type_id = 1,
-        title = 'test'
+        subreddit_id = 3,
+        post_type_id = 2,
+        title = 'Sign up to see content',
+        img_url = "https://i.redd.it/mhasuo9z0gq91.png"
     )
 
 
