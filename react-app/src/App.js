@@ -10,6 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Homepage from './components/Homepage';
 import CreatePost from './components/CreatePost';
+import PostDetails from './components/PostDetails';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -38,6 +39,9 @@ function App() {
         </Route>
         <Route path='/' exact={true} >
           <Homepage/>
+        </Route>
+        <Route path='/post/:postId' exact={true} >
+          <PostDetails />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>

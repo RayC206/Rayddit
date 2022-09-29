@@ -33,10 +33,10 @@ def get_all_posts_for_user():
 # Get Details of a single post
 @post_routes.route("/<int:post_id>")
 def post_details(post_id):
-  post = Post.query.get(post_id)
+  post = Post.query.get_or_404(post_id)
 
   if not post:
-    return {"message": "Post does not exist"}
+    return {"message": "Post does not exist", 'statusCode': 404}
 
   return jsonify(post.to_dict())
 
@@ -70,7 +70,7 @@ def create_post():
 def edit_post(post_id):
   form = PostForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-  edited_post = Post.query.get(post_id)
+  edited_post = Post.query.get_or_404(post_id)
   print("-----",current_user.id)
   if current_user.id != edited_post.user_id:
     return {"message": "You must be the owner of this post to edit", "statusCode": 403}
@@ -91,7 +91,7 @@ def edit_post(post_id):
 @post_routes.delete("/<int:post_id>")
 @login_required
 def delete_post(post_id):
-  post = Post.query.get(post_id)
+  post = Post.query.get_or_404(post_id)
   if current_user.id == post.user_id:
     db.session.delete(post)
     db.session.commit()
@@ -103,9 +103,9 @@ def delete_post(post_id):
 @post_routes.route("/<int:post_id>/upvote", methods=["POST"])
 @login_required
 def upvote_post(post_id):
-  post = Post.query.get(post_id)
+  post = Post.query.get_or_404(post_id)
   if not post:
-    return {"message": "Post does not exist"}
+    return {"message": "Post does not exist", 'statusCode': 404}
 
   vote = Vote.query.filter(Vote.user_id == current_user.id, Vote.post_id == post_id).first()
   if not vote:
@@ -128,7 +128,7 @@ def upvote_post(post_id):
 @post_routes.route("/<int:post_id>/downvote", methods=["POST"])
 @login_required
 def downvote_post(post_id):
-  post = Post.query.get(post_id)
+  post = Post.query.get_or_404(post_id)
   if not post:
     return {"message": "Post does not exist"}
 
