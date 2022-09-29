@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "./Homepage.css";
 
 import {
@@ -14,6 +15,7 @@ const Homepage = () => {
   const POST_TYPE_LINK = 3;
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const posts = useSelector((state) => Object.values(state.posts));
   console.log(posts);
@@ -34,8 +36,20 @@ const Homepage = () => {
     dispatch(downvotePostRequest(postId));
   };
 
+  const createPostPage = () => {
+    let path = `/submit`;
+    history.push(path);
+  };
+
   return (
-    <>
+    <div className="homePageDiv">
+      <div className="createPostDiv">
+        <input
+          type="text"
+          placeholder="Create Post"
+          onClick={createPostPage}
+        />
+      </div>
       {postsLoaded ? (
         posts.length ? (
           posts.map((post) => {
@@ -80,7 +94,7 @@ const Homepage = () => {
       ) : (
         <div>Loading...</div>
       )}
-    </>
+    </div>
   );
 };
 
