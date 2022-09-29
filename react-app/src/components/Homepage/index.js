@@ -44,11 +44,7 @@ const Homepage = () => {
   return (
     <div className="homePageDiv">
       <div className="createPostDiv">
-        <input
-          type="text"
-          placeholder="Create Post"
-          onClick={createPostPage}
-        />
+        <input type="text" placeholder="Create Post" onClick={createPostPage} />
       </div>
       {postsLoaded ? (
         posts.length ? (

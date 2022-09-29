@@ -39,7 +39,7 @@ const PostDetails = () => {
   };
 
   return (
-    <div>
+    <div className="detailPageContainer">
       {postLoaded ? (
         post.length ? (
           post.map((post) => {
@@ -61,21 +61,25 @@ const PostDetails = () => {
                     </div>
                   </div>
                   <div className="postDetailTitle">{post.title}</div>
-                </div>
-                <div className="postDetailContent">
-                  {(() => {
-                    if (post.post_type_id === POST_TYPE_TEXT) {
-                      return <div className="postDetailText">{post.text}</div>;
-                    } else if (post.post_type_id === POST_TYPE_IMAGE) {
-                      return <img className="postDetailImage" src={post.img_url} />;
-                    } else if (post.post_type_id === POST_TYPE_LINK) {
-                      return (
-                        <a className="postLinkurl" href={post.link_url}>
-                          {post.link_url}
-                        </a>
-                      );
-                    }
-                  })()}
+                  <div className="postDetailContent">
+                    {(() => {
+                      if (post.post_type_id === POST_TYPE_TEXT) {
+                        return (
+                          <div className="postDetailText">{post.text}</div>
+                        );
+                      } else if (post.post_type_id === POST_TYPE_IMAGE) {
+                        return (
+                          <img className="postDetailImage" src={post.img_url} />
+                        );
+                      } else if (post.post_type_id === POST_TYPE_LINK) {
+                        return (
+                          <a className="postLinkurl" href={post.link_url}>
+                            {post.link_url}
+                          </a>
+                        );
+                      }
+                    })()}
+                  </div>
                 </div>
               </div>
             );
