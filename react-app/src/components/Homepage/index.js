@@ -54,7 +54,7 @@ const Homepage = () => {
         posts.length ? (
           posts.map((post) => {
             return (
-              <div className="outerPostContainer">
+              <div className="outerPostContainer" key={post.id}>
                 <div className="voteDiv">
                   <button onClick={() => upvotePost(post.id)}>Up</button>
                   {post.total_votes}
