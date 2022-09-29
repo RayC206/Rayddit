@@ -1,0 +1,32 @@
+
+.outerPostContainer {
+  display: flex;
+  flex-direction:row;
+  width: 500px;
+  align-items: center;
+  margin: auto;
+}
+
+.voteDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.postContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: auto;
+}
+
+.postTopDescription {
+  display: flex;
+}
+
+
+.postImage {
+  width: 500px;
+  height: 500px;
+}

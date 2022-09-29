@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "./Homepage.css";
 
 import {
   downvotePostRequest,
@@ -39,28 +40,37 @@ const Homepage = () => {
         posts.length ? (
           posts.map((post) => {
             return (
-              <div>
-                <div>r/{post.subreddit_name}</div>
-                <div>u/{post.username}</div>
-                <div>{post.created_at_timeago}</div>
-                <div>{post.title}</div>
-                <div>
-                  {(() => {
-                    if (post.post_type_id === POST_TYPE_TEXT) {
-                      return <div>{post.text}</div>;
-                    } else if (post.post_type_id === POST_TYPE_IMAGE) {
-                      return <img src={post.img_url} />;
-                    } else if (post.post_type_id === POST_TYPE_LINK) {
-                      return <a href={post.link_url}>{post.link_url}</a>;
-                    }
-                  })()}
-                </div>
-                <div>
+              <div className="outerPostContainer">
+                <div className="voteDiv">
                   <button onClick={() => upvotePost(post.id)}>Up</button>
                   {post.total_votes}
                   <button onClick={() => downvotePost(post.id)}>Down</button>
                 </div>
-                ---
+                <div className="postContainer">
+                  <div className="postTopDescription">
+                    <div className="postSubredditName">
+                      r/{post.subreddit_name}
+                    </div>
+                    <div className="postUsername">u/{post.username}</div>
+                    <div className="postTimeago">{post.created_at_timeago}</div>
+                  </div>
+                  <div className="postTitle">{post.title}</div>
+                  <div className="postContent">
+                    {(() => {
+                      if (post.post_type_id === POST_TYPE_TEXT) {
+                        return <div className="postText">{post.text}</div>;
+                      } else if (post.post_type_id === POST_TYPE_IMAGE) {
+                        return <img className="postImage" src={post.img_url} />;
+                      } else if (post.post_type_id === POST_TYPE_LINK) {
+                        return (
+                          <a className="postLinkurl" href={post.link_url}>
+                            {post.link_url}
+                          </a>
+                        );
+                      }
+                    })()}
+                  </div>
+                </div>
               </div>
             );
           })
