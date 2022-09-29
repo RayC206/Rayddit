@@ -6,12 +6,12 @@ import "./CreatePost.css";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState(null);
+  const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState(null);
   const [linkUrl, setLinkUrl] = useState(null);
   const [text, setText] = useState(null);
-  // const [subreddit, setSubreddit] = useState("");
-  // const [postType, setPostTyoe] = useState("");
+  const [subreddit, setSubreddit] = useState(1);
+  const [postType, setPostTyoe] = useState(1);
   const [errors, setErrors] = useState([]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
@@ -24,14 +24,18 @@ const CreatePost = () => {
     setErrors([]);
     let newPostData = {
       title: title,
-      imageUrl: imageUrl,
-      linkUrl: linkUrl,
+      img_url: imageUrl,
+      link_url: linkUrl,
       text: text,
-      subreddit: 1,
-      postType: 1,
+      subreddit_id: subreddit,
+      post_type_id: postType,
     };
+    console.log("NEW POST DATA");
+    console.log(newPostData);
     return dispatch(createPostRequest(newPostData))
       .then(async (res) => {
+        console.log("RESPONSE");
+        console.log(res);
         setSubmitSuccess(true);
       })
       .catch(async (res) => {
@@ -50,8 +54,8 @@ const CreatePost = () => {
     <div className="formContainer">
       <form className="postsCreate" onSubmit={handleSubmit}>
         <ul>
-          {errors.map((error,idx) => (
-            <li key= {idx}>{error}</li>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
           ))}
         </ul>
         <h1 className="createSpotTitle">Create Post</h1>
@@ -61,7 +65,7 @@ const CreatePost = () => {
             type="text"
             placeholder="Title"
             value={title}
-            onChange ={(e) => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
             required
           />
         </label>
@@ -71,8 +75,7 @@ const CreatePost = () => {
             type="text"
             placeholder="Image URL"
             value={imageUrl}
-            onChange ={(e) => setImageUrl(e.target.value)}
-
+            onChange={(e) => setImageUrl(e.target.value)}
           />
         </label>
         <label className="createTitle">
@@ -81,8 +84,7 @@ const CreatePost = () => {
             type="text"
             placeholder="Link URL"
             value={linkUrl}
-            onChange ={(e) => setLinkUrl(e.target.value)}
-
+            onChange={(e) => setLinkUrl(e.target.value)}
           />
         </label>
         <label className="createTitle">
@@ -91,14 +93,33 @@ const CreatePost = () => {
             type="text"
             placeholder="text"
             value={text}
-            onChange ={(e) => setText(e.target.value)}
-
+            onChange={(e) => setText(e.target.value)}
           />
         </label>
+        {/* <label className="createSubreddit">
+          <span>Subreddit:</span>
+          <input
+            type="text"
+            placeholder="Subreddit"
+            value={subreddit}
+            // onChange={(e) => setPreviewImage(e.target.value)}
+          />
+        </label> */}
+        {/* <label className="createPostType">
+          <span>Post Type:</span>
+          <input
+            type="text"
+            placeholder="Post Type"
+            value={postType}
+            // onChange={(e) => setPreviewImage(e.target.value)}
+          />
+        </label> */}
+        <button className="createSpotButton" type="submit">
+          Create new post
+        </button>
       </form>
     </div>
-  )
-
+  );
 };
 
-export default CreatePost
+export default CreatePost;
