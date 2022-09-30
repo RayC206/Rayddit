@@ -22,15 +22,19 @@ const ProfilePage = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const posts = useSelector((state) => Object.values(state.posts));
 
-  const userOwnsProfile = sessionUser.id === userId;
-
   const [postsLoaded, setPostsLoaded] = useState(false);
+  const [userOwnsProfile, setUserOwnsProfile] = useState(false);
+  console.log(userOwnsProfile);
 
   useEffect(() => {
     dispatch(getUserPostsRequest(userId)).then(() => {
       setPostsLoaded(true);
     });
-  }, [dispatch]);
+  }, [dispatch, userId]);
+
+  useEffect(() => {
+    setUserOwnsProfile(sessionUser.id === userId);
+  }, [sessionUser, userId]);
 
   const upvotePost = (postId) => {
     dispatch(upvotePostRequest(postId));

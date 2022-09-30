@@ -1,15 +1,22 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import LogoutButton from '../auth/LogoutButton';
 
 const NavBar = () => {
+  const sessionUser = useSelector((state) => state.session.user);
   return (
     <nav>
       <ul>
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
             Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to={`/user/${sessionUser.id}`} exact={true} activeClassName='active'>
+            Profile
           </NavLink>
         </li>
         <li>
