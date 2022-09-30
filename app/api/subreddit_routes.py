@@ -18,7 +18,7 @@ subreddit_routes = Blueprint('subreddit', __name__)
 # Get details of a Subreddit
 @subreddit_routes.route('/<int:subreddit_id>')
 def get_subreddit(subreddit_id):
-  subreddit = Subreddit.query.get(subreddit_id)
+  subreddit = Subreddit.query.get_or_404(subreddit_id)
   print(subreddit)
   return subreddit.to_dict()
 
@@ -62,7 +62,7 @@ def create_subreddit():
 def edit_subreddit(subreddit_id):
   form = SubredditForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-  edited_subreddit = Subreddit.query.get(subreddit_id)
+  edited_subreddit = Subreddit.query.get_or_404(subreddit_id)
   if current_user.id != edited_subreddit.owner_id:
     return {"message": "You must be the owner of this subreddit to edit", "statusCode": 403}
 
@@ -81,7 +81,7 @@ def edit_subreddit(subreddit_id):
 @subreddit_routes.delete("/<int:subreddit_id>")
 @login_required
 def delete_subreddit(subreddit_id):
-  subreddit = Subreddit.query.get(subreddit_id)
+  subreddit = Subreddit.query.get_or_404(subreddit_id)
   if current_user.id == subreddit.owner_id:
     db.session.delete(subreddit)
     db.session.commit()
@@ -93,7 +93,7 @@ def delete_subreddit(subreddit_id):
 @subreddit_routes.route("/<int:subreddit_id>/subscribe", methods=["POST"])
 @login_required
 def subscribe_to_subreddit(subreddit_id):
-  subreddit = Subreddit.query.get(subreddit_id)
+  subreddit = Subreddit.query.get_or_404(subreddit_id)
   if not subreddit:
     return {"message": "Subreddit does not exist"}
   subscription = Subscription.query.filter(Subscription.subreddit_id == subreddit_id, Subscription.user_id == current_user.id).first()

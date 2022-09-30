@@ -106,8 +106,11 @@ export const editPostRequest = (data) => async (dispatch) => {
     const editedPost = await res.json();
     dispatch(editPost(editedPost));
     return editedPost;
+  } else if (res.status < 500) { // error handling
+    return await res.json();
+  } else {
+    return ["An error occurred. Please try again."];
   }
-  return res;
 };
 
 //Delete post
@@ -161,7 +164,7 @@ const postsReducer = (state = initialState, action) => {
       return newState;
     }
     case GET_POST: {
-      newState = { ...state };
+      newState = {}; // don't return all posts, return only the fetched post
       newState[action.post.id] = action.post;
       return newState;
     }

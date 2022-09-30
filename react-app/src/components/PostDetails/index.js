@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import "./Homepage.css";
+import { useParams, useHistory } from "react-router-dom";
+import "./PostDetails.css";
 
 import {
   downvotePostRequest,
-  getAllPostsRequest,
+  getPostRequest,
   upvotePostRequest,
 } from "../../store/posts";
 
-const Homepage = () => {
+const PostDetails = () => {
   const POST_TYPE_TEXT = 1;
   const POST_TYPE_IMAGE = 2;
   const POST_TYPE_LINK = 3;
 
+  let { postId } = useParams();
+  postId = Number(postId);
   const dispatch = useDispatch();
   const history = useHistory();
-  const sessionUser = useSelector((state) => state.session.user);
-  const posts = useSelector((state) => Object.values(state.posts));
-  console.log(posts);
+  const post = useSelector((state) => Object.values(state.posts));
 
-  const [postsLoaded, setPostsLoaded] = useState(false);
+  const [postLoaded, setPostLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllPostsRequest()).then(() => {
-      setPostsLoaded(true);
+    dispatch(getPostRequest(postId)).then(() => {
+      setPostLoaded(true);
     });
   }, [dispatch]);
 
@@ -36,46 +36,39 @@ const Homepage = () => {
     dispatch(downvotePostRequest(postId));
   };
 
-  const createPostPage = () => {
-    let path = `/submit`;
-    history.push(path);
-  };
-
-  const postDetailPage = (e, postId) => {
-    let path = `/post/${postId}`;
-    history.push(path);
-  };
-
   return (
-    <div className="homePageDiv">
-      <div className="createPostDiv">
-        <input type="text" placeholder="Create Post" onClick={createPostPage} />
-      </div>
-      {postsLoaded ? (
-        posts.length ? (
-          posts.map((post) => {
+    <div className="detailPageContainer">
+      {postLoaded ? (
+        post.length ? (
+          post.map((post) => {
             return (
-              <div className="outerPostContainer" key={post.id}>
+              <div className="outerPostDetailContainer" key={post.id}>
                 <div className="voteDiv">
                   <button onClick={() => upvotePost(post.id)}>Up</button>
                   {post.total_votes}
                   <button onClick={() => downvotePost(post.id)}>Down</button>
                 </div>
-                <div className="postContainer" onClick={(e) => postDetailPage(e)}>
-                  <div className="postTopDescription">
-                    <div className="postSubredditName">
+                <div className="postDetailContainer">
+                  <div className="postDetailTopDescription">
+                    <div className="postDetailSubredditName">
                       r/{post.subreddit_name}
                     </div>
-                    <div className="postUsername">u/{post.username}</div>
-                    <div className="postTimeago">{post.created_at_timeago}</div>
+                    <div className="postDetailUsername">u/{post.username}</div>
+                    <div className="postDetailTimeago">
+                      {post.created_at_timeago}
+                    </div>
                   </div>
-                  <div className="postTitle">{post.title}</div>
-                  <div className="postContent">
+                  <div className="postDetailTitle">{post.title}</div>
+                  <div className="postDetailContent">
                     {(() => {
                       if (post.post_type_id === POST_TYPE_TEXT) {
-                        return <div className="postText">{post.text}</div>;
+                        return (
+                          <div className="postDetailText">{post.text}</div>
+                        );
                       } else if (post.post_type_id === POST_TYPE_IMAGE) {
-                        return <img className="postImage" src={post.img_url} />;
+                        return (
+                          <img className="postDetailImage" src={post.img_url} />
+                        );
                       } else if (post.post_type_id === POST_TYPE_LINK) {
                         return (
                           <a className="postLinkurl" href={post.link_url}>
@@ -90,7 +83,7 @@ const Homepage = () => {
             );
           })
         ) : (
-          <div>No posts yet</div>
+          <div>Post does not exist</div>
         )
       ) : (
         <div>Loading...</div>
@@ -99,4 +92,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default PostDetails;
