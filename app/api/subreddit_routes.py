@@ -14,6 +14,14 @@ from ..forms.create_subreddit import SubredditForm
 subreddit_routes = Blueprint('subreddit', __name__)
 
 
+#Get all subreddits
+@subreddit_routes.route('/all')
+def get_all_subreddits():
+  subreddit_list = Subreddit.query.order_by(Subreddit.name).all()
+
+  all_subreddits = [subreddit.to_dict() for subreddit in subreddit_list]
+  return jsonify(all_subreddits)
+
 
 # Get details of a Subreddit
 @subreddit_routes.route('/<int:subreddit_id>')

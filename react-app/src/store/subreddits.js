@@ -1,6 +1,6 @@
 const CREATE_SUBREDDIT = "subreddit/create";
 const GET_SUBREDDIT = "subreddit/getsubreddit";
-const GET_ALL_SUBREDDITS = "subreddit/getallsubreddits";
+const GET_ALL_USERS_SUBREDDITS = "subreddit/getallUsersSubreddits";
 const EDIT_SUBREDDIT = "subreddit/edit";
 const DELETE_SUBREDDIT = "subreddit/delete"
 
@@ -19,9 +19,9 @@ const getSubreddit = (subreddit) => {
   };
 };
 
-const getAllSubreddits = (subreddits) => {
+const getAllUsersSubreddits = (subreddits) => {
   return {
-    type: GET_ALL_SUBREDDITS,
+    type: GET_ALL_USERS_SUBREDDITS,
     subreddits,
   };
 };
@@ -71,6 +71,17 @@ export const getSubredditRequest = (subredditId) => async (dispatch) => {
   }
   return res;
 }
+
+// Get all users subreddits
+export const getAllUsersSubredditsRequest= () => async (dispatch) => {
+  const res = await fetch(`/api/subreddits/subscriptions`, {});
+  if (res.ok) {
+    const subreddits = await res.json();
+    dispatch(getAllUsersSubreddits(subreddits));
+    return subreddits;
+  }
+  return res;
+};
 
 
 //Initial State
