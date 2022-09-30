@@ -69,8 +69,11 @@ export const createPostRequest = (newPost) => async (dispatch) => {
     const post = await res.json();
     dispatch(createPost(post));
     return post;
+  } else if (res.status < 500) { // error handling
+    return await res.json();
+  } else {
+    return ["An error occurred. Please try again."];
   }
-  return res;
 };
 
 // Get all posts

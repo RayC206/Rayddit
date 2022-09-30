@@ -41,29 +41,22 @@ const CreatePost = () => {
     };
     console.log("NEW POST DATA");
     console.log(newPostData);
-    return dispatch(createPostRequest(newPostData))
-      .then(async (res) => {
-        console.log("RESPONSE");
-        console.log(res);
+    return dispatch(createPostRequest(newPostData)).then(async (res) => {
+      if (!res.errors) {
         setSubmitSuccess(true);
-      })
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data) {
-          if (data.errors) {
-            setErrors(data.errors);
-          } else if (data.message) {
-            setErrors([data.message]);
-          }
-        }
-      });
+      } else {
+        setErrors(Object.values(res.errors));
+      }
+    });
   };
 
   return (
     <div className="formContainer">
       <ul>
         {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
+          <li className="createPost_li" key={idx}>
+            {error}
+          </li>
         ))}
       </ul>
       <h1 className="createSpotTitle">Create Post</h1>
