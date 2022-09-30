@@ -1,6 +1,7 @@
 const CREATE_POST = "posts/create";
 const GET_POST = "posts/getpost";
 const GET_ALL_POSTS = "posts/getall";
+const GET_USER_POSTS = "posts/getuserposts";
 const EDIT_POST = "posts/edit";
 const DELETE_POST = "posts/delete";
 const UPVOTE_POST = "posts/upvote";
@@ -24,6 +25,13 @@ const getPost = (post) => {
 const getAllPosts = (posts) => {
   return {
     type: GET_ALL_POSTS,
+    posts,
+  };
+};
+
+const getUserPosts = (posts) => {
+  return {
+    type: GET_USER_POSTS,
     posts,
   };
 };
@@ -69,7 +77,8 @@ export const createPostRequest = (newPost) => async (dispatch) => {
     const post = await res.json();
     dispatch(createPost(post));
     return post;
-  } else if (res.status < 500) { // error handling
+  } else if (res.status < 500) {
+    // error handling
     return await res.json();
   } else {
     return ["An error occurred. Please try again."];
@@ -82,6 +91,17 @@ export const getAllPostsRequest = () => async (dispatch) => {
   if (res.ok) {
     const posts = await res.json();
     dispatch(getAllPosts(posts));
+    return posts;
+  }
+  return res;
+};
+
+// Get all posts authored by a user (profile)
+export const getUserPostsRequest = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/posts_by_user`, {});
+  if (res.ok) {
+    const posts = await res.json();
+    dispatch(getUserPosts(posts));
     return posts;
   }
   return res;
@@ -109,7 +129,8 @@ export const editPostRequest = (data) => async (dispatch) => {
     const editedPost = await res.json();
     dispatch(editPost(editedPost));
     return editedPost;
-  } else if (res.status < 500) { // error handling
+  } else if (res.status < 500) {
+    // error handling
     return await res.json();
   } else {
     return ["An error occurred. Please try again."];
@@ -177,6 +198,12 @@ const postsReducer = (state = initialState, action) => {
       });
       return { ...newState };
     }
+    case GET_USER_POSTS: {
+      action.posts.forEach((post) => {
+        newState[post.id] = post;
+      });
+      return { ...newState };
+    }
     case EDIT_POST: {
       newState = { ...state };
       newState[action.post.id] = action.post;
@@ -189,8 +216,6 @@ const postsReducer = (state = initialState, action) => {
     }
     case UPVOTE_POST: {
       newState = { ...state };
-      console.log(newState);
-      console.log(action.post.id);
       newState[action.post.id] = action.post;
       return newState;
     }
