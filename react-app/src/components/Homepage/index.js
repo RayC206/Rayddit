@@ -46,6 +46,11 @@ const Homepage = () => {
     history.push(path);
   };
 
+  const usersProfilePage = (userId) => {
+    let path = `/user/${userId}`;
+    history.push(path);
+  };
+
   return (
     <div className="homePageDiv">
       <div className="createPostDiv">
@@ -63,17 +68,17 @@ const Homepage = () => {
                 </div>
                 <div
                   className="postContainer"
-                  onClick={(e) => postDetailPage(post.id)}
+                  // onClick={(e) => postDetailPage(post.id)}
                 >
                   <div className="postTopDescription">
                     <div className="postSubredditName">
                       r/{post.subreddit_name}
                     </div>
-                    <div className="postUsername">u/{post.username}</div>
+                    <div className="postUsername" onClick={(e) => usersProfilePage(post.user_id)}>u/{post.username}</div>
                     <div className="postTimeago">{post.created_at_timeago}</div>
                   </div>
                   <div className="postTitle">{post.title}</div>
-                  <div className="postContent">
+                  <div className="postContent" onClick={(e) => postDetailPage(post.id)}>
                     {(() => {
                       if (post.post_type_id === POST_TYPE_TEXT) {
                         return <div className="postText">{post.text}</div>;
