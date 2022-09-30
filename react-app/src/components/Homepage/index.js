@@ -41,8 +41,8 @@ const Homepage = () => {
     history.push(path);
   };
 
-  const postDetailPage = (e, postId) => {
-    let path = `/post/${postId}`;
+  const postDetailPage = (postId) => {
+    let path = `/posts/${postId}`;
     history.push(path);
   };
 
@@ -61,7 +61,10 @@ const Homepage = () => {
                   {post.total_votes}
                   <button onClick={() => downvotePost(post.id)}>Down</button>
                 </div>
-                <div className="postContainer" onClick={(e) => postDetailPage(e)}>
+                <div
+                  className="postContainer"
+                  onClick={(e) => postDetailPage(post.id)}
+                >
                   <div className="postTopDescription">
                     <div className="postSubredditName">
                       r/{post.subreddit_name}

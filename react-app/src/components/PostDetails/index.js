@@ -19,6 +19,8 @@ const PostDetails = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const post = useSelector((state) => Object.values(state.posts));
+  console.log("POST");
+  console.log(post);
 
   const [postLoaded, setPostLoaded] = useState(false);
 
