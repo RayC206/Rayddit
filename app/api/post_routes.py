@@ -38,7 +38,7 @@ def post_details(post_id):
   if not post:
     return {"message": "Post does not exist", 'statusCode': 404}
 
-  return jsonify(post.to_dict())
+  return post.to_dict()
 
 # Create a post
 @post_routes.route("/", methods=["POST"])
@@ -84,8 +84,11 @@ def edit_post(post_id):
     db.session.commit()
 
     return edited_post.to_dict()
-  else:
-    return jsonify(form.errors)
+  else: # error handling
+    error_response = {
+      'errors': form.errors
+    }
+    return jsonify(error_response), 400
 
 ## Delete a post
 @post_routes.delete("/<int:post_id>")

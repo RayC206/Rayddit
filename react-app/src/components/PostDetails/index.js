@@ -19,14 +19,12 @@ const PostDetails = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const post = useSelector((state) => Object.values(state.posts));
-  console.log("POST");
-  console.log(post[0]);
 
-  const [postLoaded, setPostsLoaded] = useState(false);
+  const [postLoaded, setPostLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(getPostRequest(postId)).then(() => {
-      setPostsLoaded(true);
+      setPostLoaded(true);
     });
   }, [dispatch]);
 
