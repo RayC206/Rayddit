@@ -59,7 +59,7 @@ const CreatePost = () => {
           </li>
         ))}
       </ul>
-      <h1 className="createSpotTitle">Create Post</h1>
+      <h1 className="createPostTitle">Create Post</h1>
       {/* post type radio buttons */}
       <div>
         <div className="createPostType">
@@ -110,7 +110,7 @@ const CreatePost = () => {
             />
           </label>
 
-          <button className="createSpotButton" type="submit">
+          <button className="createPostButton" type="submit">
             Create new post
           </button>
         </form>
@@ -137,7 +137,7 @@ const CreatePost = () => {
               onChange={(e) => setImageUrl(e.target.value)}
             />
           </label>
-          <button className="createSpotButton" type="submit">
+          <button className="createPostButton" type="submit">
             Create new post
           </button>
         </form>
@@ -164,7 +164,7 @@ const CreatePost = () => {
               onChange={(e) => setLinkUrl(e.target.value)}
             />
           </label>
-          <button className="createSpotButton" type="submit">
+          <button className="createPostButton" type="submit">
             Create new post
           </button>
         </form>

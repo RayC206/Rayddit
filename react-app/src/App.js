@@ -13,6 +13,7 @@ import CreatePost from './components/CreatePost';
 import PostDetails from './components/PostDetails';
 import EditPost from './components/EditPost';
 import ProfilePage from './components/ProfilePage';
+import CreateSubreddit from './components/CreateSubreddit';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -56,6 +57,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/posts/:postId/edit' exact={true} >
           <EditPost/>
+        </ProtectedRoute>
+        <ProtectedRoute path='/create-subreddit' exact={true} >
+          <CreateSubreddit/>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
