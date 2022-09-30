@@ -61,6 +61,17 @@ export const createSubredditRequest = (newSubreddit) => async (dispatch) => {
   }
 };
 
+// Get a subreddit by id
+export const getSubredditRequest = (subredditId) => async (dispatch) => {
+  const res = await fetch(`/api/subreddits/${subredditId}`, {});
+  if (res.ok) {
+    const subreddit = await res.json();
+    dispatch(getSubreddit(subreddit));
+    return subreddit;
+  }
+  return res;
+}
+
 
 //Initial State
 let initialState = {};
@@ -74,9 +85,13 @@ const subredditReducer = (state = initialState, action) => {
       newState[action.subreddit.id] = action.subreddit;
       return newState
     }
+    case GET_SUBREDDIT: {
+      newState = {}
+      newState[action.subreddit.id] = action.subreddit;
+      return newState
+    }
     default:
       return state;
-
   }
 }
 
