@@ -14,6 +14,7 @@ import PostDetails from './components/PostDetails';
 import EditPost from './components/EditPost';
 import ProfilePage from './components/ProfilePage';
 import CreateSubreddit from './components/CreateSubreddit';
+import SubredditPage from './components/SubredditPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -45,6 +46,9 @@ function App() {
         </Route>
         <Route path='/posts/:postId' exact={true} >
           <PostDetails />
+        </Route>
+        <Route path='/subreddits/:subredditId' exact={true} >
+          <SubredditPage />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
