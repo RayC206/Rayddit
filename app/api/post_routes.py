@@ -61,8 +61,11 @@ def create_post():
 
     new_post = new_post.to_dict()
     return new_post
-  else:
-    return jsonify(form.errors)
+  else: # error handling
+    error_response = {
+      'errors': form.errors
+    }
+    return jsonify(error_response), 400
 
 ## Edit a post
 @post_routes.route("/<int:post_id>", methods=["PUT"])
