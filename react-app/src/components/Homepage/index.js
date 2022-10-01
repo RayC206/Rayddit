@@ -54,7 +54,14 @@ const Homepage = () => {
   return (
     <div className="homePageDiv">
       <div className="createPostDiv">
-        <input type="text" placeholder="Create Post" onClick={createPostPage} />
+        <div className="createInputContainer">
+          <input
+            type="text"
+            placeholder="Create Post"
+            className="inputBox"
+            onClick={createPostPage}
+          />
+        </div>
       </div>
       {postsLoaded ? (
         posts.length ? (
@@ -74,11 +81,19 @@ const Homepage = () => {
                     <div className="postSubredditName">
                       r/{post.subreddit_name}
                     </div>
-                    <div className="postUsername" onClick={(e) => usersProfilePage(post.user_id)}>u/{post.username}</div>
+                    <div
+                      className="postUsername"
+                      onClick={(e) => usersProfilePage(post.user_id)}
+                    >
+                      u/{post.username}
+                    </div>
                     <div className="postTimeago">{post.created_at_timeago}</div>
                   </div>
                   <div className="postTitle">{post.title}</div>
-                  <div className="postContent" onClick={(e) => postDetailPage(post.id)}>
+                  <div
+                    className="postContent"
+                    onClick={(e) => postDetailPage(post.id)}
+                  >
                     {(() => {
                       if (post.post_type_id === POST_TYPE_TEXT) {
                         return <div className="postText">{post.text}</div>;

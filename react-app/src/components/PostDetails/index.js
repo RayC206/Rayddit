@@ -38,39 +38,49 @@ const PostDetails = () => {
     dispatch(downvotePostRequest(postId));
   };
 
+  const usersProfilePage = (userId) => {
+    let path = `/user/${userId}`;
+    history.push(path);
+  };
+
   return (
     <div className="detailPageContainer">
       {postLoaded ? (
         post.length ? (
           post.map((post) => {
             return (
-              <div className="outerPostDetailContainer" key={post.id}>
+              <div className="outerPostContainer" key={post.id}>
                 <div className="voteDiv">
                   <button onClick={() => upvotePost(post.id)}>Up</button>
                   {post.total_votes}
                   <button onClick={() => downvotePost(post.id)}>Down</button>
                 </div>
-                <div className="postDetailContainer">
-                  <div className="postDetailTopDescription">
-                    <div className="postDetailSubredditName">
+                <div
+                  className="postContainer"
+                  // onClick={(e) => postDetailPage(post.id)}
+                >
+                  <div className="postTopDescription">
+                    <div className="postSubredditName">
                       r/{post.subreddit_name}
                     </div>
-                    <div className="postDetailUsername">u/{post.username}</div>
-                    <div className="postDetailTimeago">
-                      {post.created_at_timeago}
+                    <div
+                      className="postUsername"
+                      onClick={(e) => usersProfilePage(post.user_id)}
+                    >
+                      u/{post.username}
                     </div>
+                    <div className="postTimeago">{post.created_at_timeago}</div>
                   </div>
-                  <div className="postDetailTitle">{post.title}</div>
-                  <div className="postDetailContent">
+                  <div className="postTitle">{post.title}</div>
+                  <div
+                    className="postContent"
+                    // onClick={(e) => postDetailPage(post.id)}
+                  >
                     {(() => {
                       if (post.post_type_id === POST_TYPE_TEXT) {
-                        return (
-                          <div className="postDetailText">{post.text}</div>
-                        );
+                        return <div className="postText">{post.text}</div>;
                       } else if (post.post_type_id === POST_TYPE_IMAGE) {
-                        return (
-                          <img className="postDetailImage" src={post.img_url} />
-                        );
+                        return <img className="postImage" src={post.img_url} />;
                       } else if (post.post_type_id === POST_TYPE_LINK) {
                         return (
                           <a className="postLinkurl" href={post.link_url}>
@@ -85,7 +95,7 @@ const PostDetails = () => {
             );
           })
         ) : (
-          <div>Post does not exist</div>
+          <div>No posts yet</div>
         )
       ) : (
         <div>Loading...</div>
