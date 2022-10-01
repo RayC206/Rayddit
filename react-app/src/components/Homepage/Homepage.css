@@ -12,9 +12,10 @@
   width: 600px;
   align-items: start;
   margin: auto;
-  border: 1px solid lightgray;
+  border: 1px solid rgb(64, 59, 59);
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+  background-color: rgb(28, 25, 25);
 }
 
 .createPostDiv {
@@ -24,6 +25,8 @@
   width: 500px;
   align-items: center;
   margin: auto;
+  background-color: rgb(28, 25, 25);
+  border: 1px solid rgb(64, 59, 59);
 }
 
 .createPostDiv > input {

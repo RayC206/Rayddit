@@ -64,7 +64,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <>
+    <div className="pageContainer">
       {postsLoaded ? (
         posts.length ? (
           posts.map((post) => {
@@ -130,7 +130,7 @@ const ProfilePage = () => {
       ) : (
         <div>Loading...</div>
       )}
-    </>
+    </div>
   );
 };
 
