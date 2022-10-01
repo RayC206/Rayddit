@@ -13,6 +13,8 @@ import CreatePost from './components/CreatePost';
 import PostDetails from './components/PostDetails';
 import EditPost from './components/EditPost';
 import ProfilePage from './components/ProfilePage';
+import CreateSubreddit from './components/CreateSubreddit';
+import SubredditPage from './components/SubredditPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -45,6 +47,9 @@ function App() {
         <Route path='/posts/:postId' exact={true} >
           <PostDetails />
         </Route>
+        <Route path='/subreddits/:subredditId' exact={true} >
+          <SubredditPage />
+        </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
@@ -56,6 +61,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/posts/:postId/edit' exact={true} >
           <EditPost/>
+        </ProtectedRoute>
+        <ProtectedRoute path='/create-subreddit' exact={true} >
+          <CreateSubreddit/>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
