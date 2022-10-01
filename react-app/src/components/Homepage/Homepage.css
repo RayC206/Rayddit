@@ -1,9 +1,16 @@
 
-.homePageContainer {
+.homePageDiv {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   width: 100% ;
   margin: auto;
+}
+
+.rowOne {
+  display: flex;
+  flex-direction: column;
+
 }
 
 .outerPostContainer {
@@ -12,10 +19,14 @@
   width: 600px;
   align-items: start;
   margin: auto;
-  border: 1px solid rgb(64, 59, 59);
-  margin-top: 1.5rem;
+  border: 1px solid rgb(206, 195, 195);
+
   margin-bottom: 1.5rem;
   background-color: #f2f4f5;
+}
+
+.outerPostContainer:hover {
+  border: 1px solid rgb(64, 59, 59);
 }
 
 .createPostDiv {
@@ -25,10 +36,13 @@
   align-items: center;
   margin: auto;
   height: 55px;
-  border: 1px solid rgb(64, 59, 59);
-  margin-top: 1.5rem;
+  border: 1px solid rgb(206, 195, 195);
   margin-bottom: 1.5rem;
   background-color:#f2f4f5;
+}
+
+.createPostDiv:hover {
+  border: 1px solid rgb(64, 59, 59);
 }
 
 .createInputContainer > input{
@@ -91,4 +105,21 @@
 .postImage {
   width: 500px;
   height: 500px;
+}
+
+
+.rowTwo{
+  display: flex;
+  width: 310px;
+  flex-direction: column;
+  align-content: flex-end;
+  margin-left:20px ;
+  margin-right: 10px;
+}
+
+.subredditSuggestions {
+  display: flex;
+  border: 1px solid red;
+  height: 430px;
+  width: 310px;
 }
