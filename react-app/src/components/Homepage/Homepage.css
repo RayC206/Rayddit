@@ -18,9 +18,8 @@
   flex-direction:row;
   width: 600px;
   align-items: start;
-  margin: auto;
+  /* margin: auto; */
   border: 1px solid rgb(206, 195, 195);
-
   margin-bottom: 1.5rem;
   background-color: #f2f4f5;
 }
@@ -120,6 +119,16 @@
 .subredditSuggestions {
   display: flex;
   border: 1px solid red;
+  background-color: #f2f4f5;
   height: 430px;
+  width: 310px;
+}
+
+.createSubreddit {
+  display: flex;
+  border: 1px solid red;
+  background-color: #f2f4f5;
+  margin-top: 20px;
+  height: 150px;
   width: 310px;
 }

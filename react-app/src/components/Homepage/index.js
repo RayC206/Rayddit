@@ -129,6 +129,7 @@ const Homepage = () => {
         </div>
         <div className="rowTwo">
           <div className="subredditSuggestions"></div>
+          <div className="createSubreddit"></div>
         </div>
       </div>
     </div>

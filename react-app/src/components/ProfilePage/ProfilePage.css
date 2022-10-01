@@ -1,0 +1,7 @@
+.userProfileInfo {
+  display: flex;
+  border: 1px solid red;
+  background-color: #f2f4f5;
+  height: 380px;
+  width: 310px;
+}

@@ -1,0 +1,17 @@
+.subredditBanner {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.subredditBanner > img {
+  width: 100%;
+  height: 200px;
+}
+
+.subredditTitle {
+  width: 100%;
+  height: 120px;
+  background-color:  #f2f4f5;
+  margin-bottom: 20px;
+}
