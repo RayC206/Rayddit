@@ -61,8 +61,11 @@ def create_subreddit():
 
     new_subreddit = new_subreddit.to_dict()
     return new_subreddit
-  else:
-    return jsonify(form.errors)
+  else: # error handling
+    error_response = {
+      'errors': form.errors
+    }
+    return jsonify(error_response), 400
 
 # Edit a subreddit
 @subreddit_routes.route("/<int:subreddit_id>", methods=["PUT"])
@@ -82,8 +85,11 @@ def edit_subreddit(subreddit_id):
     db.session.commit()
 
     return edited_subreddit.to_dict()
-  else:
-    return jsonify(form.errors)
+  else: # error handling
+    error_response = {
+      'errors': form.errors
+    }
+    return jsonify(error_response), 400
 
 # Delete a subreddit
 @subreddit_routes.delete("/<int:subreddit_id>")
@@ -125,8 +131,6 @@ def subscribe_to_subreddit(subreddit_id):
 @login_required
 def get_users_subreddits():
     subscriptions = current_user.subscription
-    subreddits = [subscription.subreddit for subscription in subscriptions]
+    subreddits = [subscription.subreddit.to_dict() for subscription in subscriptions]
 
-    return {
-      "subreddits": [subreddit.to_dict() for subreddit in subreddits]
-    }
+    return jsonify(subreddits)

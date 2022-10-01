@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getSubredditRequest, getAllSubredditsPostsRequest } from "../../store/subreddits";
+import { getSubredditRequest } from "../../store/subreddits";
+import { getAllSubredditsPostsRequest } from "../../store/posts";
 
-import {
-  downvotePostRequest,
-  upvotePostRequest,
-} from "../../store/posts";
+import { downvotePostRequest, upvotePostRequest } from "../../store/posts";
 
 const SubredditPage = () => {
   const POST_TYPE_TEXT = 1;
@@ -18,21 +16,19 @@ const SubredditPage = () => {
   let { subredditId } = useParams();
   subredditId = Number(subredditId);
   const subredditInfo = useSelector((state) => Object.values(state.subreddits));
-  const posts = useSelector((state)=> Object.values(state.posts))
+  const posts = useSelector((state) => Object.values(state.posts));
+
+  const [subredditLoaded, setSubredditLoaded] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
-  console.log("SUBREDDIT")
-  console.log(subredditInfo)
-  console.log("POSTS")
-  console.log(posts)
 
   useEffect(() => {
-    dispatch(getSubredditRequest(subredditId))
-    dispatch(getAllSubredditsPostsRequest(subredditId))
-
-    .then(() => {
+    dispatch(getSubredditRequest(subredditId)).then(() => {
+      setSubredditLoaded(true);
+    });
+    dispatch(getAllSubredditsPostsRequest(subredditId)).then(() => {
       setPostsLoaded(true);
     });
-  }, [dispatch, subredditId]);
+  }, [dispatch]);
 
   const upvotePost = (postId) => {
     dispatch(upvotePostRequest(postId));
@@ -47,9 +43,69 @@ const SubredditPage = () => {
     history.push(path);
   };
 
-  return  (
-    <div>test</div>
-  )
-}
+  return (
+    <>
+      {subredditLoaded &&
+        subredditInfo.map((subreddit) => {
+          return (
+            <div>
+              <img src={subreddit.banner_img}></img>
+              <div>{subreddit.name}</div>
+              <div>{subreddit.created_at}</div>
+              <div>{subreddit.description}</div>
+              <img src={subreddit.icon_url}></img>
+            </div>
+          );
+        })}
+      {postsLoaded ? (
+        posts.length ? (
+          posts.map((post) => {
+            return (
+              <div className="outerPostContainer" key={post.id}>
+                <div className="voteDiv">
+                  <button onClick={() => upvotePost(post.id)}>Up</button>
+                  {post.total_votes}
+                  <button onClick={() => downvotePost(post.id)}>Down</button>
+                </div>
+                <div
+                  className="postContainer"
+                  onClick={(e) => postDetailPage(post.id)}
+                >
+                  <div className="postTopDescription">
+                    <div className="postSubredditName">
+                      r/{post.subreddit_name}
+                    </div>
+                    <div className="postUsername">u/{post.username}</div>
+                    <div className="postTimeago">{post.created_at_timeago}</div>
+                  </div>
+                  <div className="postTitle">{post.title}</div>
+                  <div className="postContent">
+                    {(() => {
+                      if (post.post_type_id === POST_TYPE_TEXT) {
+                        return <div className="postText">{post.text}</div>;
+                      } else if (post.post_type_id === POST_TYPE_IMAGE) {
+                        return <img className="postImage" src={post.img_url} />;
+                      } else if (post.post_type_id === POST_TYPE_LINK) {
+                        return (
+                          <a className="postLinkurl" href={post.link_url}>
+                            {post.link_url}
+                          </a>
+                        );
+                      }
+                    })()}
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div>User hasnt posted anything yet.</div>
+        )
+      ) : (
+        <div>Loading...</div>
+      )}
+    </>
+  );
+};
 
 export default SubredditPage;

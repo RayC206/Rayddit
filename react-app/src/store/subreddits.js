@@ -1,10 +1,9 @@
 const CREATE_SUBREDDIT = "subreddit/create";
 const GET_SUBREDDIT = "subreddit/getsubreddit";
 const GET_ALL_SUBREDDITS = "subreddit/getAll";
-const GET_ALL_SUBREDDITS_POSTS = "subreddit/getAllposts";
 const GET_ALL_USERS_SUBREDDITS = "subreddit/getallUsersSubreddits";
 const EDIT_SUBREDDIT = "subreddit/edit";
-const DELETE_SUBREDDIT = "subreddit/delete"
+const DELETE_SUBREDDIT = "subreddit/delete";
 
 //Action Creators
 const createSubreddit = (subreddit) => {
@@ -17,16 +16,9 @@ const createSubreddit = (subreddit) => {
 const getAllSubreddits = (subreddits) => {
   return {
     type: GET_ALL_SUBREDDITS,
-    subreddits
-  }
-}
-
-const getAllSubredditsPosts = (posts) => {
-  return {
-    type: GET_ALL_SUBREDDITS_POSTS,
-    posts
-  }
-}
+    subreddits,
+  };
+};
 
 const getSubreddit = (subreddit) => {
   return {
@@ -49,13 +41,12 @@ const editSubreddit = (subreddit) => {
   };
 };
 
-const deleteSubreddit = (subreddit) => {
+const deleteSubreddit = (deletedSubredditId) => {
   return {
     type: DELETE_SUBREDDIT,
-    subreddit,
+    deletedSubredditId,
   };
 };
-
 
 //Thunks
 
@@ -86,7 +77,7 @@ export const getAllSubredditsRequest = () => async (dispatch) => {
     return subreddits;
   }
   return res;
-}
+};
 
 // Get a subreddit by id
 export const getSubredditRequest = (subredditId) => async (dispatch) => {
@@ -97,10 +88,10 @@ export const getSubredditRequest = (subredditId) => async (dispatch) => {
     return subreddit;
   }
   return res;
-}
+};
 
 // Get all users subreddits
-export const getAllUsersSubredditsRequest= () => async (dispatch) => {
+export const getAllUsersSubredditsRequest = () => async (dispatch) => {
   const res = await fetch(`/api/subreddits/subscriptions`, {});
   if (res.ok) {
     const subreddits = await res.json();
@@ -110,31 +101,48 @@ export const getAllUsersSubredditsRequest= () => async (dispatch) => {
   return res;
 };
 
-// Get all posts from a subreddit
-export const getAllSubredditsPostsRequest = (subredditId) => async (dispatch) => {
-  const res = await fetch(`/api/subreddits/${subredditId}/posts`, {});
+//Edit Subreddit
+export const editSubredditRequest = (data) => async (dispatch) => {
+  const res = await fetch(`/api/subreddits/${data.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
   if (res.ok) {
-    const posts = await res.json();
-    dispatch(getAllSubredditsPosts(posts));
-    console.log("HERE")
-    console.log(posts)
-    return posts;
+    const editedSubreddit = await res.json();
+    dispatch(editSubreddit(editedSubreddit));
+    return editedSubreddit;
+  } else if (res.status < 500) {
+    // error handling
+    return await res.json();
+  } else {
+    return ["An error occurred. Please try again."];
+  }
+};
+
+// Delete Subreddit
+export const deleteSubredditRequest = (subredditId) => async (dispatch) => {
+  const res = await fetch(`/api/subreddits/${subredditId}`, {
+    method: "DELETE",
+  });
+  if (res.ok) {
+    dispatch(deleteSubreddit(subredditId));
+    return subredditId;
   }
   return res;
 };
-
 
 //Initial State
 let initialState = {};
 
 //Reducer
 const subredditReducer = (state = initialState, action) => {
-  let newState ={};
+  let newState = {};
   switch (action.type) {
     case CREATE_SUBREDDIT: {
       newState = { ...state };
       newState[action.subreddit.id] = action.subreddit;
-      return newState
+      return newState;
     }
     // case GET_ALL_SUBREDDITS:{
     //   action.subreddits.forEach((subreddit)=>{
@@ -143,25 +151,29 @@ const subredditReducer = (state = initialState, action) => {
     //   return { ...newState }
     // }
     case GET_SUBREDDIT: {
-      newState = {}
+      newState = {};
       newState[action.subreddit.id] = action.subreddit;
-      return newState
+      return newState;
     }
     case GET_ALL_USERS_SUBREDDITS: {
-      action.subreddits.forEach((subreddit)=>{
+      action.subreddits.forEach((subreddit) => {
         newState[subreddit.id] = subreddit;
       });
-      return { ...newState }
-    }
-    case GET_ALL_SUBREDDITS_POSTS: {
-      action.posts.forEach((post) => {
-        newState[post.id] = post;
-      });
       return { ...newState };
+    }
+    case EDIT_SUBREDDIT: {
+      newState = { ...state };
+      newState[action.subreddit.id] = action.subreddit;
+      return newState;
+    }
+    case DELETE_SUBREDDIT: {
+      newState = { ...state };
+      delete newState[action.deletedSubredditId];
+      return newState;
     }
     default:
       return state;
   }
-}
+};
 
 export default subredditReducer;

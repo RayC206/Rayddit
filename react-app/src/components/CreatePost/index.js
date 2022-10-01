@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { createPostRequest } from "../../store/posts";
+import { getAllUsersSubredditsRequest } from "../../store/subreddits";
 import "./CreatePost.css";
 
 const CreatePost = () => {
@@ -10,6 +11,8 @@ const CreatePost = () => {
   const POST_TYPE_LINK = 3;
 
   const dispatch = useDispatch();
+  const subreddits = useSelector((state) => Object.values(state.subreddits));
+
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState(null);
   const [linkUrl, setLinkUrl] = useState(null);
@@ -19,13 +22,27 @@ const CreatePost = () => {
   const [errors, setErrors] = useState([]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  const [subredditsLoaded, setSubredditsLoaded] = useState(false);
+  console.log("SUBREDDITS");
+  console.log(subreddits);
+
+  useEffect(() => {
+    dispatch(getAllUsersSubredditsRequest()).then(() => {
+      setSubredditsLoaded(true);
+    });
+  }, [dispatch]);
+
   if (submitSuccess) {
     return <Redirect to="/" />;
   }
 
   const selectPostType = (postType) => {
-    console.log(postType);
     setPostType(postType);
+  };
+
+  const handleSubredditChange = (e) => {
+    console.log(e.target.value);
+    setSubreddit(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -39,8 +56,6 @@ const CreatePost = () => {
       subreddit_id: subreddit,
       post_type_id: postType,
     };
-    console.log("NEW POST DATA");
-    console.log(newPostData);
     return dispatch(createPostRequest(newPostData)).then(async (res) => {
       if (!res.errors) {
         setSubmitSuccess(true);
@@ -60,6 +75,14 @@ const CreatePost = () => {
         ))}
       </ul>
       <h1 className="createPostTitle">Create Post</h1>
+      <div>
+        <select onChange={handleSubredditChange}>
+          {subredditsLoaded &&
+            subreddits.map((subreddit) => {
+              return <option value={subreddit.id}>{subreddit.name}</option>;
+            })}
+        </select>
+      </div>
       {/* post type radio buttons */}
       <div>
         <div className="createPostType">

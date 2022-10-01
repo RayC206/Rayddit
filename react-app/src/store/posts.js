@@ -1,6 +1,7 @@
 const CREATE_POST = "posts/create";
 const GET_POST = "posts/getpost";
 const GET_ALL_POSTS = "posts/getall";
+const GET_ALL_SUBREDDITS_POSTS = "subreddit/get_all_subreddits_post";
 const GET_USER_POSTS = "posts/getuserposts";
 const EDIT_POST = "posts/edit";
 const DELETE_POST = "posts/delete";
@@ -25,6 +26,13 @@ const getPost = (post) => {
 const getAllPosts = (posts) => {
   return {
     type: GET_ALL_POSTS,
+    posts,
+  };
+};
+
+const getAllSubredditsPosts = (posts) => {
+  return {
+    type: GET_ALL_SUBREDDITS_POSTS,
     posts,
   };
 };
@@ -95,6 +103,20 @@ export const getAllPostsRequest = () => async (dispatch) => {
   }
   return res;
 };
+
+// Get all posts from a subreddit
+export const getAllSubredditsPostsRequest =
+  (subredditId) => async (dispatch) => {
+    const res = await fetch(`/api/subreddits/${subredditId}/posts`, {});
+    if (res.ok) {
+      const posts = await res.json();
+      dispatch(getAllSubredditsPosts(posts));
+      // console.log("HERE")
+      // console.log(posts)
+      return posts;
+    }
+    return res;
+  };
 
 // Get all posts authored by a user (profile)
 export const getUserPostsRequest = (userId) => async (dispatch) => {
@@ -193,6 +215,12 @@ const postsReducer = (state = initialState, action) => {
       return newState;
     }
     case GET_ALL_POSTS: {
+      action.posts.forEach((post) => {
+        newState[post.id] = post;
+      });
+      return { ...newState };
+    }
+    case GET_ALL_SUBREDDITS_POSTS: {
       action.posts.forEach((post) => {
         newState[post.id] = post;
       });
