@@ -3,6 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getSubredditRequest } from "../../store/subreddits";
 import { getAllSubredditsPostsRequest } from "../../store/posts";
+
+import {
+  TiArrowUpOutline,
+  TiArrowUpThick,
+  TiArrowDownOutline,
+  TiArrowDownThick,
+} from "react-icons/ti";
+
 import "./Subreddit.css";
 import iconBackground from './iconbackground.png'
 import { downvotePostRequest, upvotePostRequest } from "../../store/posts";
@@ -76,10 +84,6 @@ const SubredditPage = () => {
                   </div>
                 </div>
               </div>
-              {/* <div>{subreddit.name}</div> */}
-              {/* <div>{subreddit.created_at}</div>
-              <div>{subreddit.description}</div>
-            <img src={subreddit.icon_url}></img> */}
             </div>
           );
         })}
@@ -101,11 +105,15 @@ const SubredditPage = () => {
                 return (
                   <div className="outerPostContainer" key={post.id}>
                     <div className="voteDiv">
-                      <button onClick={() => upvotePost(post.id)}>Up</button>
+                    <TiArrowUpThick
+                        className="thickUpvote"
+                        onClick={() => upvotePost(post.id)}
+                      />
                       {post.total_votes}
-                      <button onClick={() => downvotePost(post.id)}>
-                        Down
-                      </button>
+                      <TiArrowDownThick
+                        className="thickDownvote"
+                        onClick={() => downvotePost(post.id)}
+                      />
                     </div>
                     <div
                       className="postContainer"

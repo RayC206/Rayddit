@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import "./ProfilePage.css";
+import {
+  TiArrowUpOutline,
+  TiArrowUpThick,
+  TiArrowDownOutline,
+  TiArrowDownThick,
+} from "react-icons/ti";
 
 import {
   deletePostRequest,
@@ -88,11 +94,15 @@ const ProfilePage = () => {
                 return (
                   <div className="outerPostContainer" key={post.id}>
                     <div className="voteDiv">
-                      <button onClick={() => upvotePost(post.id)}>Up</button>
+                      <TiArrowUpThick
+                        className="thickUpvote"
+                        onClick={() => upvotePost(post.id)}
+                      />
                       {post.total_votes}
-                      <button onClick={() => downvotePost(post.id)}>
-                        Down
-                      </button>
+                      <TiArrowDownThick
+                        className="thickDownvote"
+                        onClick={() => downvotePost(post.id)}
+                      />
                     </div>
                     <div
                       className="postContainer"

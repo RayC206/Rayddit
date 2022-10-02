@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import {
+  TiArrowUpOutline,
+  TiArrowUpThick,
+  TiArrowDownOutline,
+  TiArrowDownThick,
+} from "react-icons/ti";
 import "./Homepage.css";
 
 import {
@@ -71,11 +77,19 @@ const Homepage = () => {
                 return (
                   <div className="outerPostContainer" key={post.id}>
                     <div className="voteDiv">
-                      <button onClick={() => upvotePost(post.id)}>Up</button>
+                      <TiArrowUpThick
+                        className="thickUpvote"
+                        onClick={() => upvotePost(post.id)}
+                      />
+                      {/* <button onClick={() => upvotePost(post.id)}>Up</button> */}
                       {post.total_votes}
-                      <button onClick={() => downvotePost(post.id)}>
+                      <TiArrowDownThick
+                        className="thickDownvote"
+                        onClick={() => downvotePost(post.id)}
+                      />
+                      {/* <button onClick={() => downvotePost(post.id)}>
                         Down
-                      </button>
+                      </button> */}
                     </div>
                     <div
                       className="postContainer"

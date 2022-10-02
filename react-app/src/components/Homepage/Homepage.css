@@ -134,3 +134,25 @@
   height: 150px;
   width: 310px;
 }
+
+.thickUpvote {
+  color: rgba(255, 140, 0, 0.434);
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.25;
+}
+
+.thickUpvote:hover {
+  cursor: pointer;
+}
+
+.thickDownvote {
+  color: rgba(0, 0, 255, 0.26);
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.25;
+}
+
+.thickDownvote:hover {
+  cursor: pointer;
+}
