@@ -20,9 +20,6 @@ const EditPost = () => {
   const [errors, setErrors] = useState([]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  console.log("here");
-  console.log(title);
-
   useEffect(() => {
     if (post.title) {
       setTitle(post.title);

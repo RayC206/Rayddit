@@ -23,8 +23,6 @@ const CreatePost = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const [subredditsLoaded, setSubredditsLoaded] = useState(false);
-  console.log("SUBREDDITS");
-  console.log(subreddits);
 
   useEffect(() => {
     dispatch(getAllUsersSubredditsRequest()).then(() => {
@@ -41,7 +39,6 @@ const CreatePost = () => {
   };
 
   const handleSubredditChange = (e) => {
-    console.log(e.target.value);
     setSubreddit(e.target.value);
   };
 

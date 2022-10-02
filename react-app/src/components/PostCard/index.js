@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import './PostCard.css'
+import "./PostCard.css";
 
 import { downvotePostRequest, upvotePostRequest } from "../../store/posts";
 
@@ -63,12 +63,6 @@ const PostCard = ({ post }) => {
     let path = `/user/${userId}`;
     history.push(path);
   };
-  console.log("POST");
-  console.log(post);
-  console.log(post.votes);
-  console.log(isUpvotedByUser);
-  console.log(isDownvotedByUser);
-  // setIsUpvotedByUser(false);
 
   return (
     <div className="outerPostContainer" key={post.id}>
@@ -85,11 +79,11 @@ const PostCard = ({ post }) => {
           ></TiArrowUpThick>
         )}
         {isUpvotedByUser ? (
-          <span class="upvotedTotalCount">{post.total_votes}</span>
+          <span className="upvotedTotalCount">{post.total_votes}</span>
         ) : isDownvotedByUser ? (
-          <span class="downvotedTotalCount">{post.total_votes}</span>
+          <span className="downvotedTotalCount">{post.total_votes}</span>
         ) : (
-          <span class="unvotedTotalCount">{post.total_votes}</span>
+          <span className="unvotedTotalCount">{post.total_votes}</span>
         )}
 
         {isDownvotedByUser ? (
@@ -106,7 +100,12 @@ const PostCard = ({ post }) => {
       </div>
       <div className="postContainer">
         <div className="postTopDescription">
-          <div className="postSubredditName" onClick={(e) => subredditPage(post.subreddit_id)}>r/{post.subreddit_name}</div>
+          <div
+            className="postSubredditName"
+            onClick={(e) => subredditPage(post.subreddit_id)}
+          >
+            r/{post.subreddit_name}
+          </div>
           <div
             className="postUsername"
             onClick={(e) => usersProfilePage(post.user_id)}

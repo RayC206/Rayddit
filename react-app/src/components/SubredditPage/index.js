@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getSubredditRequest } from "../../store/subreddits";
+import {
+  getSubredditRequest,
+  subscribeToSubredditRequest,
+} from "../../store/subreddits";
 import { getAllSubredditsPostsRequest } from "../../store/posts";
 import createIcon from "../Homepage/createIcon.png";
 import PostCard from "../PostCard";
@@ -11,13 +14,16 @@ import "./Subreddit.css";
 const SubredditPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+
   let { subredditId } = useParams();
   subredditId = Number(subredditId);
   const subredditInfo = useSelector((state) => Object.values(state.subreddits));
   const posts = useSelector((state) => Object.values(state.posts));
+  const sessionUser = useSelector((state) => state.session.user);
 
   const [subredditLoaded, setSubredditLoaded] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
+  const [userJoinedSubreddit, setUserJoinedSubreddit] = useState(false);
 
   useEffect(() => {
     dispatch(getSubredditRequest(subredditId)).then(() => {
@@ -28,9 +34,24 @@ const SubredditPage = () => {
     });
   }, [dispatch]);
 
+  useEffect(() => {
+    if (subredditLoaded) {
+      subredditInfo[0].subscriptions.forEach((subscription) => {
+        if (subscription.user_id === sessionUser.id) {
+          setUserJoinedSubreddit(true);
+        }
+      });
+    }
+  }, [subredditInfo]);
+
   const createPostPage = () => {
     let path = `/submit`;
     history.push(path);
+  };
+
+  const joinSubreddit = () => {
+    dispatch(subscribeToSubredditRequest(subredditId));
+    setUserJoinedSubreddit(!userJoinedSubreddit);
   };
 
   return (
@@ -54,6 +75,11 @@ const SubredditPage = () => {
                         r/{subreddit.name}
                       </div>
                     </div>
+                    {userJoinedSubreddit ? (
+                      <button onClick={() => joinSubreddit()}>Joined</button>
+                    ) : (
+                      <button onClick={() => joinSubreddit()}>Join</button>
+                    )}
                   </div>
                 </div>
               </div>
