@@ -1,10 +1,19 @@
 
 .rowOneSubreddit {
+  display: flex;
+  flex-direction: column;
   margin-top: 1rem;
+
 }
 
 .rowTwoSubreddit {
+  display: flex;
+  width: 310px;
+  flex-direction: column;
+  align-content: flex-end;
   margin-top: 1rem;
+  margin-left:20px ;
+  margin-right: 10px;
 }
 .subredditBanner {
   display: flex;

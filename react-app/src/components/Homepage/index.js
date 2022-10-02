@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import createIcon from "./createIcon.png"
+import { useHistory, useParams } from "react-router-dom";
+import { getAllSubredditsRequest } from "../../store/subreddits";
+import createIcon from "./createIcon.png";
 import {
   TiArrowUpOutline,
   TiArrowUpThick,
@@ -24,12 +25,18 @@ const Homepage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
+  const subredditInfo = useSelector((state) => Object.values(state.subreddits));
   const posts = useSelector((state) => Object.values(state.posts));
-  console.log(posts);
+  console.log("HERE___");
+  console.log(subredditInfo);
 
   const [postsLoaded, setPostsLoaded] = useState(false);
+  const [subredditLoaded, setSubredditLoaded] = useState(false);
 
   useEffect(() => {
+    dispatch(getAllSubredditsRequest()).then(() => {
+      setSubredditLoaded(true);
+    });
     dispatch(getAllPostsRequest()).then(() => {
       setPostsLoaded(true);
     });
@@ -58,12 +65,19 @@ const Homepage = () => {
     history.push(path);
   };
 
+  const subredditsPage = (subredditId) => {
+    let path = `/r/${subredditId}`;
+    history.push(path);
+  };
+
   return (
     <div className="pageContainer">
       <div className="homePageDiv">
         <div className="rowOne">
           <div className="createPostDiv">
-              <div className="createIcon"><img  src={createIcon}></img></div>
+            <div className="createIcon">
+              <img src={createIcon}></img>
+            </div>
             <div className="createInputContainer">
               <input
                 type="text"
@@ -144,8 +158,25 @@ const Homepage = () => {
           )}
         </div>
         <div className="rowTwo">
-          <div className="subredditSuggestions"></div>
-          <div className="createSubreddit"></div>
+          <div className="homePageSubredditInfo">
+            <div className="aboutSubreddit">
+              <span>Recommended Communities</span>
+            </div>
+            {subredditLoaded &&
+              subredditInfo.map((subreddit) => {
+                return (
+                  <>
+                    <div className="homepageSubredditDescriptionDiv" onClick={(e) => subredditsPage(subreddit.id)}>
+                      <div className="homepageSubredditDescription" >
+                        <div className="homeSubredditIcon"><img src={subreddit.icon_url}></img></div>
+                        <div className="homeSubredditName">{subreddit.name}</div>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
+          </div>
+          {/* <div className="createSubreddit"></div> */}
         </div>
       </div>
     </div>

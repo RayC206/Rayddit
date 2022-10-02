@@ -88,7 +88,7 @@ const SubredditPage = () => {
           );
         })}
       <div className="homePageDiv">
-        <div className="rowOne rowOneSubreddit">
+        <div className="rowOneSubreddit">
           <div className="createPostDiv">
           <div className="createIcon"><img  src={createIcon}></img></div>
             <div className="createInputContainer">
@@ -166,7 +166,7 @@ const SubredditPage = () => {
             <div>Loading...</div>
           )}
         </div>
-        <div className="rowTwo rowTwoSubreddit">
+        <div className="rowTwoSubreddit">
           {subredditLoaded &&
             subredditInfo.map((subreddit) => {
               return (

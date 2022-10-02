@@ -173,3 +173,44 @@
 .thickDownvote:hover {
   cursor: pointer;
 }
+
+
+.homepageSubredditDescriptionDiv {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  /* border: 1px solid red; */
+  height: 40px;
+  width: 288=7px;
+  padding: 12px;
+}
+
+.homepageSubredditDescriptionDiv:hover {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  cursor: pointer;
+}
+
+.homepageSubredditDescription{
+  display: flex;
+  align-content: center;
+ height: 50px;
+}
+
+.homePageSubredditInfo{
+  height: 500px;
+  border: 1px solid rgb(206, 195, 195);
+  background-color:  #f2f4f5;
+}
+
+.homeSubredditIcon > img {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+
+.homeSubredditName {
+  padding-left: 15px;
+  align-self: center;
+  font-size: 15px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
