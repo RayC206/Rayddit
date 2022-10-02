@@ -1,7 +1,21 @@
 .userProfileInfo {
   display: flex;
+  flex-direction: column;
   border: 1px solid red;
   background-color: #f2f4f5;
   height: 380px;
-  width: 310px;
+  width: 370px;
+}
+
+.userProfileBanner {
+  border: 1px solid red;
+  height: 95px;
+  background-color: #629fff;
+
+}
+
+.profileInfodDiv {
+  border: 1px solid red;
+  height: 100px;
+  width: 200px;
 }

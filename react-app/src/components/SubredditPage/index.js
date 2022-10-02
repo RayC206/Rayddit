@@ -12,7 +12,6 @@ import {
 } from "react-icons/ti";
 
 import "./Subreddit.css";
-import iconBackground from './iconbackground.png'
 import { downvotePostRequest, upvotePostRequest } from "../../store/posts";
 
 const SubredditPage = () => {

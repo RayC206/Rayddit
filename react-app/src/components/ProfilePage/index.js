@@ -155,8 +155,13 @@ const ProfilePage = () => {
           )}
         </div>
         <div className="rowTwo">
-          <div className="userProfileInfo"></div>
-          {/* <div className="createSubreddit"></div> */}
+          {}
+          <div className="userProfileInfo">
+            <div className="userProfileBanner"></div>
+            <div className="profileInfodDiv">
+
+            </div>
+          </div>
         </div>
       </div>
     </div>

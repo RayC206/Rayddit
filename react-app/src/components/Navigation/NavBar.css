@@ -11,8 +11,8 @@
 }
 
 #navBarContainer {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 0px;
   background-color: #f2f4f5;
   width: 100%;
   /* margin-left: 8%;
