@@ -122,6 +122,10 @@
   color: #f2f4f5;
 }
 
+/* .homepageSubredditContent {
+  display: flex;
+} */
+
 .subredditDescriptionDiv {
   /* border: 1px solid red; */
   height: 100px;

@@ -30,8 +30,7 @@ const ProfilePage = () => {
 
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [userOwnsProfile, setUserOwnsProfile] = useState(false);
-  const [users, setUsers] = useState([]);
-  console.log(userOwnsProfile);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
     dispatch(getUserPostsRequest(userId)).then(() => {
@@ -41,13 +40,14 @@ const ProfilePage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch('/api/users/');
+      const response = await fetch(`/api/users/${userId}`);
       const responseData = await response.json();
-      setUsers(responseData.users);
+      console.log("USER");
+      setUser(responseData);
+      console.log(user);
     }
     fetchData();
   }, []);
-
 
   useEffect(() => {
     setUserOwnsProfile(sessionUser.id === userId);
@@ -154,6 +154,24 @@ const ProfilePage = () => {
                           }
                         })()}
                       </div>
+                      {userOwnsProfile && (
+                        <div>
+                          <button
+                            onClick={() => {
+                              editPost(post.id);
+                            }}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => {
+                              deletePost(post.id);
+                            }}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 );
@@ -166,17 +184,17 @@ const ProfilePage = () => {
           )}
         </div>
         <div className="rowTwo">
-
-          {/* {users.map((user)=>{
-            return (
-          <div className="userProfileInfo">
-            <div>{user.name}</div>
-            <div className="userProfileBanner"></div>
-            <div className="profileInfodDiv"></div>
-          </div>
-
-            )
-          })} */}
+          {user && (
+            // user.map((user) => {
+            // return (
+            <div className="userProfileInfo">
+              <div>{user.username}</div>
+              <div className="userProfileBanner"></div>
+              <div className="profileInfodDiv"></div>
+            </div>
+            // );
+            // })}
+          )}
         </div>
       </div>
     </div>

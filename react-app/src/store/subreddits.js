@@ -144,11 +144,11 @@ const subredditReducer = (state = initialState, action) => {
       newState[action.subreddit.id] = action.subreddit;
       return newState;
     }
-    case GET_ALL_SUBREDDITS:{
-      action.subreddits.forEach((subreddit)=>{
+    case GET_ALL_SUBREDDITS: {
+      action.subreddits.forEach((subreddit) => {
         newState[subreddit.id] = subreddit;
       });
-      return { ...newState }
+      return { ...newState };
     }
     case GET_SUBREDDIT: {
       newState = {};

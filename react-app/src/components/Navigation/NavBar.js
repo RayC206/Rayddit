@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import LogoutButton from '../auth/LogoutButton';
-import ProfileButton from './ProfileButton';
+import LogoutButton from "../auth/LogoutButton";
+import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
-import './NavBar.css'
-import logo from './logo.png';
+import "./NavBar.css";
+import logo from "./logo.png";
 
-const NavBar = ({isLoaded}) => {
+const NavBar = ({ isLoaded }) => {
   const sessionUser = useSelector((state) => state.session.user);
   const [loginFormModalIsOpen, setLoginFormModalIsOpen] = useState(false);
 
-  let sessionLinks
+  let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
       <>
@@ -27,8 +27,8 @@ const NavBar = ({isLoaded}) => {
     sessionLinks = (
       <div id="rightNav">
         <button onClick={() => setLoginFormModalIsOpen(true)}>
-        <Link to="/login">Log in</Link>
-
+          <Link to="/login">Log in</Link>
+          {/* Log in */}
         </button>
         {/* <LoginFormModal
           isOpen={loginFormModalIsOpen}
@@ -46,10 +46,7 @@ const NavBar = ({isLoaded}) => {
         <div id="navBar">
           <div id="logo_div">
             <NavLink exact to="/">
-              <img
-                src={logo}
-                alt="rayddit"
-              ></img>
+              <img src={logo} alt="rayddit"></img>
             </NavLink>
           </div>
           {isLoaded && sessionLinks}
@@ -57,6 +54,6 @@ const NavBar = ({isLoaded}) => {
       </div>
     </nav>
   );
-}
+};
 
 export default NavBar;

@@ -55,6 +55,11 @@ const Homepage = () => {
     history.push(path);
   };
 
+  const createSubredditPage = () => {
+    let path = `/create-subreddit`;
+    history.push(path);
+  };
+
   const postDetailPage = (postId) => {
     let path = `/posts/${postId}`;
     history.push(path);
@@ -156,6 +161,7 @@ const Homepage = () => {
             <div className="aboutSubreddit">
               <span>Recommended Communities</span>
             </div>
+            <div className="homepageSubredditContent">
             {subredditLoaded &&
               subredditInfo.map((subreddit) => {
                 return (
@@ -163,7 +169,7 @@ const Homepage = () => {
                     <div
                       className="homepageSubredditDescriptionDiv"
                       onClick={(e) => subredditsPage(subreddit.id)}
-                    >
+                      >
                       <div className="homepageSubredditDescription">
                         <div className="homeSubredditIcon">
                           <img src={subreddit.icon_url}></img>
@@ -176,6 +182,13 @@ const Homepage = () => {
                   </>
                 );
               })}
+              </div>
+            <div className="subredditCreateDiv">
+              <a className="createSubredditButton" onClick={createSubredditPage}>
+                {" "}
+                Create a Subreddit
+              </a>
+            </div>
           </div>
           {/* <div className="createSubreddit"></div> */}
         </div>

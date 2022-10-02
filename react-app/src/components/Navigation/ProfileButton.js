@@ -9,8 +9,6 @@ function ProfileButton({ user }) {
   // const sessionUser = useSelector((state) => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
-  console.log("here");
-  console.log(user);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -43,12 +41,12 @@ function ProfileButton({ user }) {
   return (
     <>
       <nav className="profileDropdownDiv" onClick={openMenu}>
-        <div className="profileDropdown" >
+        <div className="profileDropdown">
           <div className="menu_drop">
             <div className="user_icon">
               <img src={user.profile_image}></img>
             </div>
-              <span>{user.username}</span>
+            <span>{user.username}</span>
           </div>
         </div>
         {showMenu && (

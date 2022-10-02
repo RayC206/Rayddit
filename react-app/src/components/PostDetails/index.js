@@ -23,27 +23,29 @@ const PostDetails = () => {
 
   let { postId } = useParams();
   postId = Number(postId);
-  let { subredditId } = useParams();
-  subredditId = Number(subredditId);
+  let subredditId;
+  // subredditId = Number(subredditId);
   const dispatch = useDispatch();
   const history = useHistory();
   const subredditInfo = useSelector((state) => Object.values(state.subreddits));
   const post = useSelector((state) => Object.values(state.posts));
-  console.log("POST");
-  console.log(post[0]);
+
+  if (post && post.length) {
+    subredditId = post[0].subreddit_id;
+  }
 
   const [subredditLoaded, setSubredditLoaded] = useState(false);
   const [postLoaded, setPostLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(getSubredditRequest(subredditId)).then(() => {
-
-      setSubredditLoaded(true);
-    });
     dispatch(getPostRequest(postId)).then(() => {
       setPostLoaded(true);
+      subredditId &&
+        dispatch(getSubredditRequest(subredditId)).then(() => {
+          setSubredditLoaded(true);
+        });
     });
-  }, [dispatch]);
+  }, [dispatch, subredditId]);
 
   const upvotePost = (postId) => {
     dispatch(upvotePostRequest(postId));
@@ -62,7 +64,6 @@ const PostDetails = () => {
     let path = `/submit`;
     history.push(path);
   };
-
 
   return (
     <div className="pageContainer">
@@ -151,8 +152,8 @@ const PostDetails = () => {
           )}
         </div>
         <div className="rowTwo">
-        {postLoaded &&
-            post.map((subreddit) => {
+          {subredditLoaded &&
+            subredditInfo.map((subreddit) => {
               return (
                 <>
                   <div className="subredditInformation">
@@ -160,12 +161,20 @@ const PostDetails = () => {
                       <span>About Community</span>
                     </div>
                     <div className="subredditDescriptionDiv">
-                      <div className="subredditDescription">{subreddit.description}</div>
+                      <div className="subredditDescription">
+                        {subreddit.description}
+                      </div>
                       {/* <div className="subredditBornDate">{subreddit.created_at}</div> */}
                     </div>
-                      <div className="subredditCreatePostDiv">
-                        <a className="createSubredditPost" onClick={createPostPage}> create post</a>
-                      </div>
+                    <div className="subredditCreatePostDiv">
+                      <a
+                        className="createSubredditPost"
+                        onClick={createPostPage}
+                      >
+                        {" "}
+                        create post
+                      </a>
+                    </div>
                   </div>
                   {/* <div className="createSubreddit"></div> */}
                 </>
