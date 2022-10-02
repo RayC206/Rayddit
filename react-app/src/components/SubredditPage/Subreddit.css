@@ -7,11 +7,12 @@
 .subredditBanner > img {
   width: 100%;
   height: 200px;
+  /* height: auto; */
 }
 
 .subredditTitle {
   width: 100%;
-  height: 120px;
+  height: 95px;
   background-color:  #f2f4f5;
   margin-bottom: 20px;
 }
@@ -20,15 +21,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 929px;
-  height: 120px;
+  height: 95px;
   margin: auto;
 }
 
 .titleDivContent {
   display: flex;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   position: absolute;
   height: 80px;
   width: 350px;
@@ -60,7 +61,7 @@
   flex-direction: column;
   margin-top: 24px ;
   padding-left: 16px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   height: 80px;
   width: 369px;
 }
@@ -74,4 +75,70 @@
 .littleSubredditName {
   font-family: sans-serif;
   font-size: 14px;
+}
+
+.subredditInformation {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  background-color: #f2f4f5;
+  height: 290px;
+  width: 310px;
+}
+
+.aboutSubreddit{
+  display: flex;
+  align-content: center;
+  /* border: 1px solid red; */
+  height: 50px;
+  width: 310px;
+  background-color: rgb(161, 162, 180);
+}
+
+.aboutSubreddit > span {
+  align-self: center;
+  padding-left: 15px;
+  font-family: sans-serif;
+  font-weight: 500;
+  color: #f2f4f5;
+}
+
+.subredditDescriptionDiv {
+  /* border: 1px solid red; */
+  height: 100px;
+  width: 288=7px;
+  padding: 12px;
+}
+
+.subredditDescription {
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+.subredditCreatePostDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid red; */
+  height: 150px;
+}
+
+.createSubredditPost {
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  font-size: 15px;
+  justify-content: center;
+  /* border: 1px solid red; */
+  border-radius: 9999px;
+  width: 290px;
+  height: 40px;
+  color: #f2f4f5;
+  background-color: rgb(161, 162, 180);
+}
+
+.createSubredditPost:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
+  background-color: rgb(152, 153, 193);
+  cursor: pointer;
 }

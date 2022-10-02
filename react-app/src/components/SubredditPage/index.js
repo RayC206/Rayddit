@@ -162,8 +162,19 @@ const SubredditPage = () => {
             subredditInfo.map((subreddit) => {
               return (
                 <>
-                  <div className="subredditSuggestions"></div>
-                  <div className="createSubreddit"></div>
+                  <div className="subredditInformation">
+                    <div className="aboutSubreddit">
+                      <span>About Community</span>
+                    </div>
+                    <div className="subredditDescriptionDiv">
+                      <div className="subredditDescription">{subreddit.description}</div>
+                      {/* <div className="subredditBornDate">{subreddit.created_at}</div> */}
+                    </div>
+                      <div className="subredditCreatePostDiv">
+                        <a className="createSubredditPost" onClick={createPostPage}> create post</a>
+                      </div>
+                  </div>
+                  {/* <div className="createSubreddit"></div> */}
                 </>
               );
             })}

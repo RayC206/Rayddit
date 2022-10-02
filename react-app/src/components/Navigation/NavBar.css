@@ -34,6 +34,7 @@
   width: 12%;
   display: flex;
   align-items: center;
+  padding-left: 20px;
   /* justify-content: center; */
 
 }
