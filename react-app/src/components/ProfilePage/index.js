@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import "./ProfilePage.css";
 import PostCard from "../PostCard";
 
-import { getUserPostsRequest } from "../../store/posts";
+import { deletePostRequest,getUserPostsRequest } from "../../store/posts";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -39,6 +39,15 @@ const ProfilePage = () => {
     setUserOwnsProfile(sessionUser.id === userId);
   }, [sessionUser, userId]);
 
+  const editPost = (postId) => {
+    let path = `/posts/${postId}/edit`;
+    history.push(path);
+  };
+
+  const deletePost = (postId) => {
+    dispatch(deletePostRequest(postId));
+  };
+
   return (
     <div className="pageContainer">
       <div className="homePageDiv">
@@ -56,7 +65,29 @@ const ProfilePage = () => {
           {postsLoaded ? (
             posts.length ? (
               posts.map((post) => {
-                return <PostCard post={post} />;
+                return (
+                  <>
+                    {userOwnsProfile && (
+                      <div>
+                        <button
+                          onClick={() => {
+                            editPost(post.id);
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => {
+                            deletePost(post.id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                    <PostCard post={post} />
+                  </>
+                );
               })
             ) : (
               <div>No posts yet</div>
@@ -67,15 +98,13 @@ const ProfilePage = () => {
         </div>
         <div className="rowTwo">
           {user && (
-            // user.map((user) => {
-            // return (
             <div className="userProfileInfo">
-              <div>{user.username}</div>
               <div className="userProfileBanner"></div>
-              <div className="profileInfodDiv"></div>
+              <div className="profileInfodDiv">
+                <img src={user.profile_image}></img>
+                <span>u/{user.username}</span>
+              </div>
             </div>
-            // );
-            // })}
           )}
         </div>
       </div>

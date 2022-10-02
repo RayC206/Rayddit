@@ -63,3 +63,9 @@
 .unvotedTotalCount {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+
+.postSubredditName:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -1,21 +1,36 @@
 .userProfileInfo {
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   background-color: #f2f4f5;
   height: 380px;
-  width: 370px;
+  width: 320px;
 }
 
 .userProfileBanner {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   height: 95px;
   background-color: #629fff;
 
 }
 
 .profileInfodDiv {
-  border: 1px solid red;
+  border: 1px solid rgb(242, 234, 234);
   height: 100px;
-  width: 200px;
+  width: 105px;
+  top: 7rem;
+  margin-left: 20px;
+  background-color:  #f2f4f5;
+  position: absolute;
+}
+
+.profileInfodDiv > img {
+  height: 99px;
+  width: 100px;
+}
+
+.profileInfodDiv > span {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  margin-left: 5px;
 }

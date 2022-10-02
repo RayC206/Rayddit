@@ -54,6 +54,11 @@ const PostCard = ({ post }) => {
     history.push(path);
   };
 
+  const subredditPage = (subredditId) => {
+    let path = `/r/${subredditId}`;
+    history.push(path);
+  };
+
   const usersProfilePage = (userId) => {
     let path = `/user/${userId}`;
     history.push(path);
@@ -101,7 +106,7 @@ const PostCard = ({ post }) => {
       </div>
       <div className="postContainer">
         <div className="postTopDescription">
-          <div className="postSubredditName">r/{post.subreddit_name}</div>
+          <div className="postSubredditName" onClick={(e) => subredditPage(post.subreddit_id)}>r/{post.subreddit_name}</div>
           <div
             className="postUsername"
             onClick={(e) => usersProfilePage(post.user_id)}
