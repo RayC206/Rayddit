@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import createIcon from "./createIcon.png"
 import {
   TiArrowUpOutline,
   TiArrowUpThick,
@@ -62,6 +63,7 @@ const Homepage = () => {
       <div className="homePageDiv">
         <div className="rowOne">
           <div className="createPostDiv">
+              <div className="createIcon"><img  src={createIcon}></img></div>
             <div className="createInputContainer">
               <input
                 type="text"

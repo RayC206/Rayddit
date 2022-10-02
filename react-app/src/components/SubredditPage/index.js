@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getSubredditRequest } from "../../store/subreddits";
 import { getAllSubredditsPostsRequest } from "../../store/posts";
+import createIcon from "../Homepage/createIcon.png"
 
 import {
   TiArrowUpOutline,
@@ -87,8 +88,9 @@ const SubredditPage = () => {
           );
         })}
       <div className="homePageDiv">
-        <div className="rowOne">
+        <div className="rowOne rowOneSubreddit">
           <div className="createPostDiv">
+          <div className="createIcon"><img  src={createIcon}></img></div>
             <div className="createInputContainer">
               <input
                 type="text"
@@ -164,7 +166,7 @@ const SubredditPage = () => {
             <div>Loading...</div>
           )}
         </div>
-        <div className="rowTwo">
+        <div className="rowTwo rowTwoSubreddit">
           {subredditLoaded &&
             subredditInfo.map((subreddit) => {
               return (

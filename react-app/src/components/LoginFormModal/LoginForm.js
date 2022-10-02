@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 
-const LoginForm = () => {
+const LoginForm = ({modalToggle}) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,6 +15,9 @@ const LoginForm = () => {
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
+    }
+    if (data) {
+      modalToggle(false)
     }
   };
 
@@ -31,9 +34,9 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
-      <h1>Test</h1>
-    <form onSubmit={onLogin}>
+    <>
+    <h1></h1>
+    <form className="loginContainer" onSubmit={onLogin}>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
@@ -42,6 +45,7 @@ const LoginForm = () => {
       <div>
         <label htmlFor='email'>Email</label>
         <input
+        className='loginNameInput'
           name='email'
           type='text'
           placeholder='Email'
@@ -52,16 +56,17 @@ const LoginForm = () => {
       <div>
         <label htmlFor='password'>Password</label>
         <input
+        className='loginPasswordInput'
           name='password'
           type='password'
           placeholder='Password'
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
+        <button className="loginButton" type='submit'>Login</button>
       </div>
     </form>
-    </div>
+    </>
   );
 };
 

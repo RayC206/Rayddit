@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogoutButton from '../auth/LogoutButton';
 import ProfileButton from './ProfileButton';
-// import LoginFormModal from "../LoginFormModal";
+import LoginFormModal from "../LoginFormModal";
 import './NavBar.css'
 import logo from './logo.png';
 
@@ -26,7 +26,10 @@ const NavBar = ({isLoaded}) => {
   } else {
     sessionLinks = (
       <div id="rightNav">
-        <button onClick={() => setLoginFormModalIsOpen(true)}>Log In</button>
+        <button onClick={() => setLoginFormModalIsOpen(true)}>
+        <Link to="/login">Log in</Link>
+
+        </button>
         {/* <LoginFormModal
           isOpen={loginFormModalIsOpen}
           modalToggle={setLoginFormModalIsOpen}
