@@ -10,6 +10,7 @@
 .rowOne {
   display: flex;
   flex-direction: column;
+  margin-top: 1rem;
 
 }
 
@@ -112,6 +113,7 @@
   width: 310px;
   flex-direction: column;
   align-content: flex-end;
+  margin-top: 1rem;
   margin-left:20px ;
   margin-right: 10px;
 }

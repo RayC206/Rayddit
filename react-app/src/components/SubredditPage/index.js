@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { getSubredditRequest } from "../../store/subreddits";
 import { getAllSubredditsPostsRequest } from "../../store/posts";
 import "./Subreddit.css";
-
+import iconBackground from './iconbackground.png'
 import { downvotePostRequest, upvotePostRequest } from "../../store/posts";
 
 const SubredditPage = () => {
@@ -61,7 +61,21 @@ const SubredditPage = () => {
           return (
             <div className="subredditBanner">
               <img src={subreddit.banner_img}></img>
-              <div className="subredditTitle"></div>
+              <div className="subredditTitle">
+                <div className="innerSubredditTitleDiv">
+                  <div className="titleDivContent">
+                    <div className="iconBackground"></div>
+                    <img
+                      className="subredditIcon"
+                      src={subreddit.icon_url}
+                    ></img>
+                    <div className="subredditNameDiv">
+                      <div className="bigSubredditName">{subreddit.name}</div>
+                      <div className="littleSubredditName">r/{subreddit.name}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               {/* <div>{subreddit.name}</div> */}
               {/* <div>{subreddit.created_at}</div>
               <div>{subreddit.description}</div>
