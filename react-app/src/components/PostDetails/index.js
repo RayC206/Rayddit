@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { getSubredditRequest } from "../../store/subreddits";
+import PostCard from "../PostCard";
 import "./PostDetails.css";
 import {
   TiArrowUpOutline,
@@ -82,67 +83,7 @@ const PostDetails = () => {
           {postLoaded ? (
             post.length ? (
               post.map((post) => {
-                return (
-                  <div
-                    className="outerPostContainer outerPostDetailContainer"
-                    key={post.id}
-                  >
-                    <div className="voteDiv">
-                      <TiArrowUpThick
-                        className="thickUpvote"
-                        onClick={() => upvotePost(post.id)}
-                      />
-                      {post.total_votes}
-                      <TiArrowDownThick
-                        className="thickDownvote"
-                        onClick={() => downvotePost(post.id)}
-                      />
-                    </div>
-                    <div
-                      className="postDetailContainer"
-                      // onClick={(e) => postDetailPage(post.id)}
-                    >
-                      <div className="postTopDescription">
-                        <div className="postSubredditName">
-                          r/{post.subreddit_name}
-                        </div>
-                        <div
-                          className="postUsername"
-                          onClick={(e) => usersProfilePage(post.user_id)}
-                        >
-                          u/{post.username}
-                        </div>
-                        <div className="postTimeago">
-                          {post.created_at_timeago}
-                        </div>
-                      </div>
-                      <div className="postTitle">{post.title}</div>
-                      <div
-                        className="postContent"
-                        // onClick={(e) => postDetailPage(post.id)}
-                      >
-                        {(() => {
-                          if (post.post_type_id === POST_TYPE_TEXT) {
-                            return <div className="postText">{post.text}</div>;
-                          } else if (post.post_type_id === POST_TYPE_IMAGE) {
-                            return (
-                              <img
-                                className="postImage postDetailImage"
-                                src={post.img_url}
-                              />
-                            );
-                          } else if (post.post_type_id === POST_TYPE_LINK) {
-                            return (
-                              <a className="postLinkurl" href={post.link_url}>
-                                {post.link_url}
-                              </a>
-                            );
-                          }
-                        })()}
-                      </div>
-                    </div>
-                  </div>
-                );
+                return <PostCard post={post} />;
               })
             ) : (
               <div>No posts yet</div>
