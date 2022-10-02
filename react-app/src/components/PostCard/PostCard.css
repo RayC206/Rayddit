@@ -1,0 +1,65 @@
+/* Upvotes */
+.thickUpvote {
+  color:  rgba(255, 140, 0, 0.998);
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.25;
+}
+
+.thickUpvote:hover {
+  cursor: pointer;
+}
+
+.thickUpvoteNormal {
+  color: rgba(255, 140, 0, 0.142);
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.25;
+}
+
+
+.thickUpvoteNormal:hover {
+  color: rgba(255, 140, 0, 0.434);
+  cursor: pointer;
+}
+
+.upvotedTotalCount {
+  color: rgba(255, 140, 0, 0.998);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+
+ /* Downvotes */
+.thickDownvote {
+  color: rgba(0, 0, 255, 0.772);
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.25;
+}
+
+.thickDownvote:hover {
+  cursor: pointer;
+}
+
+.thickDownvoteNormal {
+  color: rgba(0, 0, 255, 0.201);
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.25;
+}
+
+.thickDownvoteNormal:hover {
+  color: rgba(0, 0, 255, 0.379);
+  cursor: pointer;
+}
+
+.downvotedTotalCount {
+  color: rgba(0, 0, 255, 0.772);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.unvotedTotalCount {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

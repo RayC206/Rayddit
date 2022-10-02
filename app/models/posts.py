@@ -41,6 +41,7 @@ class Post(db.Model):
           "text": self.text,
           "link_url": self.link_url,
           "total_votes": self.total_votes(),
+          "votes": [vote.to_dict() for vote in self.votes],
           "created_at": self.created_at,
           "created_at_timeago": self.post_timeago(),
           "updated_at": self.updated_at,

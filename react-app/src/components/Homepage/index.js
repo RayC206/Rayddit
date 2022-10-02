@@ -3,25 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getAllSubredditsRequest } from "../../store/subreddits";
 import createIcon from "./createIcon.png";
-import {
-  TiArrowUpOutline,
-  TiArrowUpThick,
-  TiArrowDownOutline,
-  TiArrowDownThick,
-} from "react-icons/ti";
-import "./Homepage.css";
 
-import {
-  downvotePostRequest,
-  getAllPostsRequest,
-  upvotePostRequest,
-} from "../../store/posts";
+import "./Homepage.css";
+import PostCard from "../PostCard";
+
+import { getAllPostsRequest } from "../../store/posts";
 
 const Homepage = () => {
-  const POST_TYPE_TEXT = 1;
-  const POST_TYPE_IMAGE = 2;
-  const POST_TYPE_LINK = 3;
-
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
@@ -29,6 +17,8 @@ const Homepage = () => {
   const posts = useSelector((state) => Object.values(state.posts));
   console.log("HERE___");
   console.log(subredditInfo);
+  console.log("POSTS");
+  console.log(posts);
 
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [subredditLoaded, setSubredditLoaded] = useState(false);
@@ -42,14 +32,6 @@ const Homepage = () => {
     });
   }, [dispatch]);
 
-  const upvotePost = (postId) => {
-    dispatch(upvotePostRequest(postId));
-  };
-
-  const downvotePost = (postId) => {
-    dispatch(downvotePostRequest(postId));
-  };
-
   const createPostPage = () => {
     let path = `/submit`;
     history.push(path);
@@ -57,16 +39,6 @@ const Homepage = () => {
 
   const createSubredditPage = () => {
     let path = `/create-subreddit`;
-    history.push(path);
-  };
-
-  const postDetailPage = (postId) => {
-    let path = `/posts/${postId}`;
-    history.push(path);
-  };
-
-  const usersProfilePage = (userId) => {
-    let path = `/user/${userId}`;
     history.push(path);
   };
 
@@ -95,59 +67,7 @@ const Homepage = () => {
           {postsLoaded ? (
             posts.length ? (
               posts.map((post) => {
-                return (
-                  <div className="outerPostContainer" key={post.id}>
-                    <div className="voteDiv">
-                      <TiArrowUpThick
-                        className="thickUpvote"
-                        onClick={() => upvotePost(post.id)}
-                      />
-
-                      {post.total_votes}
-                      <TiArrowDownThick
-                        className="thickDownvote"
-                        onClick={() => downvotePost(post.id)}
-                      />
-                    </div>
-                    <div className="postContainer">
-                      <div className="postTopDescription">
-                        <div className="postSubredditName">
-                          r/{post.subreddit_name}
-                        </div>
-                        <div
-                          className="postUsername"
-                          onClick={(e) => usersProfilePage(post.user_id)}
-                        >
-                          u/{post.username}
-                        </div>
-                        <div className="postTimeago">
-                          {post.created_at_timeago}
-                        </div>
-                      </div>
-                      <div className="postTitle">{post.title}</div>
-                      <div
-                        className="postContent"
-                        onClick={(e) => postDetailPage(post.id)}
-                      >
-                        {(() => {
-                          if (post.post_type_id === POST_TYPE_TEXT) {
-                            return <div className="postText">{post.text}</div>;
-                          } else if (post.post_type_id === POST_TYPE_IMAGE) {
-                            return (
-                              <img className="postImage" src={post.img_url} />
-                            );
-                          } else if (post.post_type_id === POST_TYPE_LINK) {
-                            return (
-                              <a className="postLinkurl" href={post.link_url}>
-                                {post.link_url}
-                              </a>
-                            );
-                          }
-                        })()}
-                      </div>
-                    </div>
-                  </div>
-                );
+                return <PostCard post={post} />;
               })
             ) : (
               <div>No posts yet</div>
@@ -162,29 +82,32 @@ const Homepage = () => {
               <span>Recommended Communities</span>
             </div>
             <div className="homepageSubredditContent">
-            {subredditLoaded &&
-              subredditInfo.map((subreddit) => {
-                return (
-                  <>
-                    <div
-                      className="homepageSubredditDescriptionDiv"
-                      onClick={(e) => subredditsPage(subreddit.id)}
+              {subredditLoaded &&
+                subredditInfo.map((subreddit) => {
+                  return (
+                    <>
+                      <div
+                        className="homepageSubredditDescriptionDiv"
+                        onClick={(e) => subredditsPage(subreddit.id)}
                       >
-                      <div className="homepageSubredditDescription">
-                        <div className="homeSubredditIcon">
-                          <img src={subreddit.icon_url}></img>
-                        </div>
-                        <div className="homeSubredditName">
-                          {subreddit.name}
+                        <div className="homepageSubredditDescription">
+                          <div className="homeSubredditIcon">
+                            <img src={subreddit.icon_url}></img>
+                          </div>
+                          <div className="homeSubredditName">
+                            {subreddit.name}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </>
-                );
-              })}
-              </div>
+                    </>
+                  );
+                })}
+            </div>
             <div className="subredditCreateDiv">
-              <a className="createSubredditButton" onClick={createSubredditPage}>
+              <a
+                className="createSubredditButton"
+                onClick={createSubredditPage}
+              >
                 {" "}
                 Create a Subreddit
               </a>
