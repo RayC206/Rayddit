@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
+import { getSubredditRequest } from "../../store/subreddits";
 import "./PostDetails.css";
 import {
   TiArrowUpOutline,
@@ -22,15 +23,23 @@ const PostDetails = () => {
 
   let { postId } = useParams();
   postId = Number(postId);
+  let { subredditId } = useParams();
+  subredditId = Number(subredditId);
   const dispatch = useDispatch();
   const history = useHistory();
+  const subredditInfo = useSelector((state) => Object.values(state.subreddits));
   const post = useSelector((state) => Object.values(state.posts));
   console.log("POST");
-  console.log(post);
+  console.log(post[0]);
 
+  const [subredditLoaded, setSubredditLoaded] = useState(false);
   const [postLoaded, setPostLoaded] = useState(false);
 
   useEffect(() => {
+    dispatch(getSubredditRequest(subredditId)).then(() => {
+
+      setSubredditLoaded(true);
+    });
     dispatch(getPostRequest(postId)).then(() => {
       setPostLoaded(true);
     });
@@ -48,6 +57,12 @@ const PostDetails = () => {
     let path = `/user/${userId}`;
     history.push(path);
   };
+
+  const createPostPage = () => {
+    let path = `/submit`;
+    history.push(path);
+  };
+
 
   return (
     <div className="pageContainer">
@@ -136,8 +151,26 @@ const PostDetails = () => {
           )}
         </div>
         <div className="rowTwo">
-          <div className="subredditSuggestions"></div>
-          <div className="createSubreddit"></div>
+        {postLoaded &&
+            post.map((subreddit) => {
+              return (
+                <>
+                  <div className="subredditInformation">
+                    <div className="aboutSubreddit">
+                      <span>About Community</span>
+                    </div>
+                    <div className="subredditDescriptionDiv">
+                      <div className="subredditDescription">{subreddit.description}</div>
+                      {/* <div className="subredditBornDate">{subreddit.created_at}</div> */}
+                    </div>
+                      <div className="subredditCreatePostDiv">
+                        <a className="createSubredditPost" onClick={createPostPage}> create post</a>
+                      </div>
+                  </div>
+                  {/* <div className="createSubreddit"></div> */}
+                </>
+              );
+            })}
         </div>
       </div>
     </div>

@@ -30,6 +30,7 @@ const ProfilePage = () => {
 
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [userOwnsProfile, setUserOwnsProfile] = useState(false);
+  const [users, setUsers] = useState([]);
   console.log(userOwnsProfile);
 
   useEffect(() => {
@@ -37,6 +38,16 @@ const ProfilePage = () => {
       setPostsLoaded(true);
     });
   }, [dispatch, userId]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('/api/users/');
+      const responseData = await response.json();
+      setUsers(responseData.users);
+    }
+    fetchData();
+  }, []);
+
 
   useEffect(() => {
     setUserOwnsProfile(sessionUser.id === userId);
@@ -155,13 +166,17 @@ const ProfilePage = () => {
           )}
         </div>
         <div className="rowTwo">
-          {}
-          <div className="userProfileInfo">
-            <div className="userProfileBanner"></div>
-            <div className="profileInfodDiv">
 
-            </div>
+          {/* {users.map((user)=>{
+            return (
+          <div className="userProfileInfo">
+            <div>{user.name}</div>
+            <div className="userProfileBanner"></div>
+            <div className="profileInfodDiv"></div>
           </div>
+
+            )
+          })} */}
         </div>
       </div>
     </div>

@@ -23,6 +23,7 @@
   border: 1px solid rgb(206, 195, 195);
   margin-bottom: 1.5rem;
   background-color: #f2f4f5;
+  border-radius: 2px;
 }
 
 .outerPostContainer:hover {
@@ -39,6 +40,7 @@
   border: 1px solid rgb(206, 195, 195);
   margin-bottom: 1.5rem;
   background-color:#f2f4f5;
+  border-radius: 2px;
 }
 
 .createIcon  {
@@ -101,6 +103,11 @@
   font-size: 12px;
   font-family: verdana,sans-serif;
   color: rgb(43, 40, 40);
+  padding-top: 5px;
+}
+
+.postContent {
+  padding-bottom: 5px;
 }
 
 .postUsername {
@@ -200,6 +207,7 @@
   height: 500px;
   border: 1px solid rgb(206, 195, 195);
   background-color:  #f2f4f5;
+  border-radius: 4px;
 }
 
 .homeSubredditIcon > img {

@@ -42,8 +42,8 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <nav className="profileDropdownDiv">
-        <div className="profileDropdown" onClick={openMenu}>
+      <nav className="profileDropdownDiv" onClick={openMenu}>
+        <div className="profileDropdown" >
           <div className="menu_drop">
             <div className="user_icon">
               <img src={user.profile_image}></img>
@@ -53,7 +53,7 @@ function ProfileButton({ user }) {
         </div>
         {showMenu && (
           <div id="menu">
-            <div className="loggedInUser"> {`Hello, ${user.username}`}</div>
+            <div className="loggedInUser"> {`Greetings, ${user.username}`}</div>
             {/* <div className="dividerDropdown"></div> */}
             <Link
               className="profilePageDropdown"

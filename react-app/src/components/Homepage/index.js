@@ -97,20 +97,14 @@ const Homepage = () => {
                         className="thickUpvote"
                         onClick={() => upvotePost(post.id)}
                       />
-                      {/* <button onClick={() => upvotePost(post.id)}>Up</button> */}
+
                       {post.total_votes}
                       <TiArrowDownThick
                         className="thickDownvote"
                         onClick={() => downvotePost(post.id)}
                       />
-                      {/* <button onClick={() => downvotePost(post.id)}>
-                        Down
-                      </button> */}
                     </div>
-                    <div
-                      className="postContainer"
-                      // onClick={(e) => postDetailPage(post.id)}
-                    >
+                    <div className="postContainer">
                       <div className="postTopDescription">
                         <div className="postSubredditName">
                           r/{post.subreddit_name}
@@ -166,10 +160,17 @@ const Homepage = () => {
               subredditInfo.map((subreddit) => {
                 return (
                   <>
-                    <div className="homepageSubredditDescriptionDiv" onClick={(e) => subredditsPage(subreddit.id)}>
-                      <div className="homepageSubredditDescription" >
-                        <div className="homeSubredditIcon"><img src={subreddit.icon_url}></img></div>
-                        <div className="homeSubredditName">{subreddit.name}</div>
+                    <div
+                      className="homepageSubredditDescriptionDiv"
+                      onClick={(e) => subredditsPage(subreddit.id)}
+                    >
+                      <div className="homepageSubredditDescription">
+                        <div className="homeSubredditIcon">
+                          <img src={subreddit.icon_url}></img>
+                        </div>
+                        <div className="homeSubredditName">
+                          {subreddit.name}
+                        </div>
                       </div>
                     </div>
                   </>
