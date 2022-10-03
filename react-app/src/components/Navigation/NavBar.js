@@ -35,7 +35,7 @@ const NavBar = ({ isLoaded }) => {
           modalToggle={setLoginFormModalIsOpen}
         /> */}
         <button className="signUpButton">
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/sign-up">Sign Up</Link>
         </button>
       </div>
     );

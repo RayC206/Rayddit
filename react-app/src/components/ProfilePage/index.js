@@ -33,7 +33,7 @@ const ProfilePage = () => {
       console.log(user);
     }
     fetchData();
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     setUserOwnsProfile(sessionUser.id === userId);
