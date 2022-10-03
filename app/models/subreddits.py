@@ -1,3 +1,4 @@
+from email.policy import default
 from .db import db
 from sqlalchemy.sql import func
 import datetime, timeago
@@ -10,7 +11,7 @@ class Subreddit(db.Model):
   owner_id = db.Column(db.Integer, db.ForeignKey("users.id"))
   description = db.Column(db.String(255))
   icon_url = db.Column(db.String, nullable=False)
-  banner_img = db.Column(db.String, nullable=False)
+  banner_img = db.Column(db.String)
   created_at = db.Column(db.DateTime, server_default=func.now())
   updated_at = db.Column(db.DateTime, onupdate=func.now())
 

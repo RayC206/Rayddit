@@ -10,4 +10,4 @@ class SubredditForm(FlaskForm):
   name = StringField("name", validators=[DataRequired()])
   description = StringField("description")
   icon_url = StringField("icon_url", validators=[DataRequired()])
-  banner_img = StringField("banner_img", validators=[DataRequired()])
+  banner_img = StringField("banner_img")

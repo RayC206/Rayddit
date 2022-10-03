@@ -9,8 +9,7 @@ function LoginFormModal({ isOpen, modalToggle }) {
     <>
       {isOpen && (
         <Modal onClose={() => modalToggle(false)}>
-          <div>jdhfkahkhf</div>
-          <LoginForm modalToggle={modalToggle} />
+          <LoginForm />
         </Modal>
       )}
     </>

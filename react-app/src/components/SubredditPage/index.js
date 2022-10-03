@@ -9,6 +9,7 @@ import {
 import { getAllSubredditsPostsRequest } from "../../store/posts";
 import createIcon from "../Homepage/createIcon.png";
 import PostCard from "../PostCard";
+import LoginFormModal from "../LoginFormModal";
 
 import "./Subreddit.css";
 
@@ -22,6 +23,7 @@ const SubredditPage = () => {
   const posts = useSelector((state) => Object.values(state.posts));
   const sessionUser = useSelector((state) => state.session.user);
 
+  const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
   const [subredditLoaded, setSubredditLoaded] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [userOwnsSubreddit, setUserOwnsSubreddit] = useState(false);
@@ -67,12 +69,20 @@ const SubredditPage = () => {
   };
 
   const joinSubreddit = () => {
-    dispatch(subscribeToSubredditRequest(subredditId));
-    setUserJoinedSubreddit(!userJoinedSubreddit);
+    if (!sessionUser) {
+      setIsLoginFormModalIsOpen(true);
+    } else {
+      dispatch(subscribeToSubredditRequest(subredditId));
+      setUserJoinedSubreddit(!userJoinedSubreddit);
+    }
   };
 
   return (
     <div className="pageContainer">
+      <LoginFormModal
+        isOpen={loginFormModalIsOpen}
+        modalToggle={setIsLoginFormModalIsOpen}
+      />
       {subredditLoaded &&
         subredditInfo.map((subreddit) => {
           return (
