@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
+import { getSubredditRequest } from "../../store/subreddits";
+import PostCard from "../PostCard";
 import "./PostDetails.css";
+import {
+  TiArrowUpOutline,
+  TiArrowUpThick,
+  TiArrowDownOutline,
+  TiArrowDownThick,
+} from "react-icons/ti";
 
 import {
   downvotePostRequest,
@@ -16,19 +24,29 @@ const PostDetails = () => {
 
   let { postId } = useParams();
   postId = Number(postId);
+  let subredditId;
+  // subredditId = Number(subredditId);
   const dispatch = useDispatch();
   const history = useHistory();
+  const subredditInfo = useSelector((state) => Object.values(state.subreddits));
   const post = useSelector((state) => Object.values(state.posts));
-  console.log("POST");
-  console.log(post);
 
+  if (post && post.length) {
+    subredditId = post[0].subreddit_id;
+  }
+
+  const [subredditLoaded, setSubredditLoaded] = useState(false);
   const [postLoaded, setPostLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(getPostRequest(postId)).then(() => {
       setPostLoaded(true);
+      subredditId &&
+        dispatch(getSubredditRequest(subredditId)).then(() => {
+          setSubredditLoaded(true);
+        });
     });
-  }, [dispatch]);
+  }, [dispatch, subredditId]);
 
   const upvotePost = (postId) => {
     dispatch(upvotePostRequest(postId));
@@ -38,58 +56,73 @@ const PostDetails = () => {
     dispatch(downvotePostRequest(postId));
   };
 
+  const usersProfilePage = (userId) => {
+    let path = `/user/${userId}`;
+    history.push(path);
+  };
+
+  const createPostPage = () => {
+    let path = `/submit`;
+    history.push(path);
+  };
+
   return (
-    <div className="detailPageContainer">
-      {postLoaded ? (
-        post.length ? (
-          post.map((post) => {
-            return (
-              <div className="outerPostDetailContainer" key={post.id}>
-                <div className="voteDiv">
-                  <button onClick={() => upvotePost(post.id)}>Up</button>
-                  {post.total_votes}
-                  <button onClick={() => downvotePost(post.id)}>Down</button>
-                </div>
-                <div className="postDetailContainer">
-                  <div className="postDetailTopDescription">
-                    <div className="postDetailSubredditName">
-                      r/{post.subreddit_name}
+    <div className="pageContainer">
+      <div className="homePageDiv">
+        <div className="rowOne">
+          {/* <div className="createPostDiv">
+          <div className="createInputContainer">
+            <input
+              type="text"
+              placeholder="Create Post"
+              className="inputBox"
+              onClick={createPostPage}
+            />
+          </div>
+        </div> */}
+          {postLoaded ? (
+            post.length ? (
+              post.map((post) => {
+                return <PostCard post={post} />;
+              })
+            ) : (
+              <div>No posts yet</div>
+            )
+          ) : (
+            <div>Loading...</div>
+          )}
+        </div>
+        <div className="rowTwo">
+          {subredditLoaded &&
+            subredditInfo.map((subreddit) => {
+              return (
+                <>
+                  <div className="subredditInformation">
+                    <div className="aboutSubreddit">
+                      <span>About Community</span>
                     </div>
-                    <div className="postDetailUsername">u/{post.username}</div>
-                    <div className="postDetailTimeago">
-                      {post.created_at_timeago}
+                    <div className="subredditDescriptionDiv">
+                      <div className="subredditDescription">
+                        {subreddit.description}
+                      </div>
+                      {/* <div className="subredditBornDate">{subreddit.created_at}</div> */}
+                    </div>
+                    <div className="subredditCreatePostDiv">
+                      <a
+                        className="createSubredditPost"
+                        onClick={createPostPage}
+                      >
+                        {" "}
+                        create post
+                      </a>
                     </div>
                   </div>
-                  <div className="postDetailTitle">{post.title}</div>
-                  <div className="postDetailContent">
-                    {(() => {
-                      if (post.post_type_id === POST_TYPE_TEXT) {
-                        return (
-                          <div className="postDetailText">{post.text}</div>
-                        );
-                      } else if (post.post_type_id === POST_TYPE_IMAGE) {
-                        return (
-                          <img className="postDetailImage" src={post.img_url} />
-                        );
-                      } else if (post.post_type_id === POST_TYPE_LINK) {
-                        return (
-                          <a className="postLinkurl" href={post.link_url}>
-                            {post.link_url}
-                          </a>
-                        );
-                      }
-                    })()}
-                  </div>
-                </div>
-              </div>
-            );
-          })
-        ) : (
-          <div>Post does not exist</div>
-        )
-      ) : (
-        <div>Loading...</div>
-      )}
+                  {/* <div className="createSubreddit"></div> */}
+                </>
+              );
+            })}
+        </div>
+      </div>
     </div>
   );
 };

@@ -27,7 +27,7 @@ def get_all_subreddits():
 @subreddit_routes.route('/<int:subreddit_id>')
 def get_subreddit(subreddit_id):
   subreddit = Subreddit.query.get_or_404(subreddit_id)
-  print(subreddit)
+
   return subreddit.to_dict()
 
 
@@ -58,6 +58,15 @@ def create_subreddit():
     )
     db.session.add(new_subreddit)
     db.session.commit()
+
+    # automatically subscribe user to the subreddit they created
+    new_subscription = Subscription(
+      user_id = current_user.id,
+      subreddit_id = new_subreddit.id
+    )
+    db.session.add(new_subscription)
+    db.session.commit()
+
 
     new_subreddit = new_subreddit.to_dict()
     return new_subreddit

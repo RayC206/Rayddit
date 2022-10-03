@@ -1,45 +1,59 @@
-
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import LogoutButton from '../auth/LogoutButton';
+import LogoutButton from "../auth/LogoutButton";
+import ProfileButton from "./ProfileButton";
+import LoginFormModal from "../LoginFormModal";
+import "./NavBar.css";
+import logo from "./logo.png";
 
-const NavBar = () => {
+const NavBar = ({ isLoaded }) => {
   const sessionUser = useSelector((state) => state.session.user);
+  const [loginFormModalIsOpen, setLoginFormModalIsOpen] = useState(false);
+
+  let sessionLinks;
+  if (sessionUser) {
+    sessionLinks = (
+      <>
+        <div id="rightNav">
+          {/* <NavLink className="hostSpot" to="/spots/create">
+            Become a Host
+          </NavLink> */}
+          <ProfileButton user={sessionUser} />
+        </div>
+      </>
+    );
+  } else {
+    sessionLinks = (
+      <div id="rightNav">
+        <button onClick={() => setLoginFormModalIsOpen(true)}>
+          <Link to="/login">Log in</Link>
+          {/* Log in */}
+        </button>
+        {/* <LoginFormModal
+          isOpen={loginFormModalIsOpen}
+          modalToggle={setLoginFormModalIsOpen}
+        /> */}
+        <button className="signUpButton">
+          <Link to="/signup">Sign Up</Link>
+        </button>
+      </div>
+    );
+  }
   return (
     <nav>
-      <ul>
-        <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={`/user/${sessionUser?.id}`} exact={true} activeClassName='active'>
-            Profile
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/login' exact={true} activeClassName='active'>
-            Login
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
-          </NavLink>
-        </li>
-        <li>
-          <LogoutButton />
-        </li>
-      </ul>
+      <div id="navBarContainer">
+        <div id="navBar">
+          <div id="logo_div">
+            <NavLink exact to="/">
+              <img src={logo} alt="rayddit"></img>
+            </NavLink>
+          </div>
+          {isLoaded && sessionLinks}
+        </div>
+      </div>
     </nav>
   );
-}
+};
 
 export default NavBar;

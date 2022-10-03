@@ -4,6 +4,7 @@ const GET_ALL_SUBREDDITS = "subreddit/getAll";
 const GET_ALL_USERS_SUBREDDITS = "subreddit/getallUsersSubreddits";
 const EDIT_SUBREDDIT = "subreddit/edit";
 const DELETE_SUBREDDIT = "subreddit/delete";
+const SUBSCRIBE_TO_SUBREDDIT = "subreddit/subscribe";
 
 //Action Creators
 const createSubreddit = (subreddit) => {
@@ -45,6 +46,13 @@ const deleteSubreddit = (deletedSubredditId) => {
   return {
     type: DELETE_SUBREDDIT,
     deletedSubredditId,
+  };
+};
+
+const subscribeToSubreddit = (subredditId) => {
+  return {
+    type: SUBSCRIBE_TO_SUBREDDIT,
+    subredditId,
   };
 };
 
@@ -132,6 +140,19 @@ export const deleteSubredditRequest = (subredditId) => async (dispatch) => {
   return res;
 };
 
+// Subscribe to Subreddit
+export const subscribeToSubredditRequest =
+  (subredditId) => async (dispatch) => {
+    const res = await fetch(`/api/subreddits/${subredditId}/subscribe`, {
+      method: "POST",
+    });
+    if (res.ok) {
+      dispatch(subscribeToSubreddit(subredditId));
+      return subredditId;
+    }
+    return res;
+  };
+
 //Initial State
 let initialState = {};
 
@@ -144,12 +165,12 @@ const subredditReducer = (state = initialState, action) => {
       newState[action.subreddit.id] = action.subreddit;
       return newState;
     }
-    // case GET_ALL_SUBREDDITS:{
-    //   action.subreddits.forEach((subreddit)=>{
-    //     newState[subreddit.id] = subreddit;
-    //   });
-    //   return { ...newState }
-    // }
+    case GET_ALL_SUBREDDITS: {
+      action.subreddits.forEach((subreddit) => {
+        newState[subreddit.id] = subreddit;
+      });
+      return { ...newState };
+    }
     case GET_SUBREDDIT: {
       newState = {};
       newState[action.subreddit.id] = action.subreddit;
@@ -170,6 +191,9 @@ const subredditReducer = (state = initialState, action) => {
       newState = { ...state };
       delete newState[action.deletedSubredditId];
       return newState;
+    }
+    case SUBSCRIBE_TO_SUBREDDIT: {
+      newState = { ...state };
     }
     default:
       return state;

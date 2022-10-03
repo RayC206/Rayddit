@@ -1,45 +1,86 @@
+.homePageDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+}
 
-.homePageContainer {
+.rowOne {
   display: flex;
   flex-direction: column;
-  width: 100% ;
-  margin: auto;
+  margin-top: 5rem;
+
 }
 
 .outerPostContainer {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   width: 600px;
   align-items: start;
-  margin: auto;
-  border: 1px solid lightgray;
-  margin-top: 1.5rem;
+  /* margin: auto; */
+  border: 1px solid rgb(206, 195, 195);
   margin-bottom: 1.5rem;
+  background-color: rgb(247, 247, 252);
+  border-radius: 2px;
+}
+
+.outerPostContainer:hover {
+  border: 1px solid rgb(64, 59, 59);
 }
 
 .createPostDiv {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 500px;
+  flex-direction: row;
+  width: 600px;
   align-items: center;
-  margin: auto;
+  /* margin: auto; */
+  height: 55px;
+  border: 1px solid rgb(206, 195, 195);
+  margin-bottom: 1.5rem;
+  background-color: #f2f4f5;
+  border-radius: 2px;
 }
 
-.createPostDiv > input {
+.createIcon {
   display: flex;
+  align-items: center;
+  height: 50px;
+  width: 40px;
+}
+
+.createIcon>img {
+  border-radius: 50%;
+  height: 38px;
+  width: 45px;
+  background-color: rgba(123, 121, 129, 0.467);
+  margin-left: 10px;
+}
+
+.inputBox:hover {
+  border: 1px solid rgb(64, 59, 59);
+}
+
+.createInputContainer>input {
+  display: flex;
+  align-items: center;
+  text-indent: 20px;
   flex-direction: row;
-  width: 399px;
+  background-color: rgb(232, 232, 249);
+  border-style: none;
+  border-radius: 4px;
+  width: 500px;
   height: 38px;
   align-items: center;
   margin-left: 20px;
 }
 
-.createPostDiv > input:hover {
+
+.createPostDiv>input:hover {
   cursor: text;
 }
 
-.voteDiv{
+.voteDiv {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,18 +92,36 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
-  margin: auto;
+  width: 100%;
+  /* align-items: center; */
+  padding-left: 20px;
+  background-color: white;
   /* border: 1px solid lightgray; */
 }
 
 .postTopDescription {
   display: flex;
+  font-size: 12px;
+  font-family: verdana, sans-serif;
+  color: rgb(43, 40, 40);
+  padding-top: 5px;
+}
+
+.postContent {
+  padding-bottom: 5px;
 }
 
 .postUsername {
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.postTitle {
+  font-size: 18px;
+  font-family: verdana, sans-serif;
+  color: rgb(43, 40, 40);
+  padding-top: 5px;
+  padding-bottom: 20px;
 }
 
 .postUsername:hover {
@@ -72,4 +131,111 @@
 .postImage {
   width: 500px;
   height: 500px;
+}
+
+
+.rowTwo {
+  display: flex;
+  width: 310px;
+  flex-direction: column;
+  align-content: flex-end;
+  margin-top: 5rem;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.subredditSuggestions {
+  display: flex;
+  border: 1px solid red;
+  background-color: #f2f4f5;
+  height: 430px;
+  width: 310px;
+}
+
+.createSubreddit {
+  display: flex;
+  border: 1px solid red;
+  background-color: #f2f4f5;
+  margin-top: 20px;
+  height: 150px;
+  width: 310px;
+}
+
+
+
+.homepageSubredditDescriptionDiv {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  /* border: 1px solid red; */
+  height: 40px;
+  width: 288=7px;
+  padding: 12px;
+}
+
+.homepageSubredditDescriptionDiv:hover {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  cursor: pointer;
+}
+
+.homepageSubredditDescription {
+  display: flex;
+  align-content: center;
+  height: 50px;
+}
+
+.homePageSubredditInfo {
+  height: 500px;
+  border: 1px solid rgb(206, 195, 195);
+  background-color: #f2f4f5;
+  border-radius: 4px;
+  overflow-y: scroll hidden;
+}
+
+.homeSubredditIcon>img {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+
+.homeSubredditName {
+  padding-left: 15px;
+  align-self: center;
+  font-size: 15px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.subredditCreateDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid red; */
+  height: 100px;
+}
+
+.createSubredditButton {
+  display: flex;
+  align-items: center;
+  font-family: verdana, sans-serif;
+  font-size: 14px;
+  justify-content: center;
+  /* border: 1px solid red; */
+  border-radius: 9999px;
+  width: 290px;
+  height: 40px;
+  color: #f2f4f5;
+  background-color: rgb(161, 162, 180);
+}
+
+.createSubredditButton:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  background-color: rgb(152, 153, 193);
+  cursor: pointer;
+}
+
+
+.homepageSubredditContent {
+  overflow-y: scroll;
+  height: 350px;
 }

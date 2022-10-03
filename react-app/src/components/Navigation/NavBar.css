@@ -1,0 +1,137 @@
+#navBar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500px;
+  height: 60px;
+  border-bottom: 1px solid rgb(216, 203, 203);
+  /* margin-bottom: 2rem; */
+}
+
+#navBarContainer {
+  position: fixed;
+  top: 0px;
+  background-color: #f2f4f5;
+  width: 100%;
+  z-index: 2;
+  /* margin-left: 8%;
+  margin-right: 8%; */
+}
+
+
+#rightNav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 20%;
+  height: 100%;
+  position: relative;
+}
+
+#logo_div {
+  height: 100%;
+  width: 12%;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  /* justify-content: center; */
+
+}
+
+#logo_div>a>img {
+  height: 50px;
+  width: 55px;
+}
+
+.user_icon>img {
+  width: 35px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.menu_drop > span {
+  padding-left: 10px;
+  font-size: 14px;
+  font-family: verdana, sans-serif;
+  color: rgb(43, 40, 40);
+  align-items: center;
+}
+
+.profileDropdownDiv {
+  display: flex;
+  justify-content:flex-start;
+  align-items: center;
+  padding: 5px;
+  margin-right: 5px;
+  border-radius: 2px;
+}
+
+.profileDropdownDiv:hover {
+  cursor: pointer;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+}
+
+.profileDropdown {
+  display: flex;
+  flex-direction: row;
+  width: 10%;
+  height: 35px;
+  align-items: center;
+  margin-right: 3rem;
+}
+
+
+.menu_drop {
+  display: flex;
+  margin: auto;
+  align-items: center;
+  color: #595959;
+  font-size: 17px;
+  padding-left: 5px;
+  margin-top: 4px;
+}
+
+
+#menu {
+  cursor: pointer;
+  position: absolute;
+  font-family: verdana,sans-serif;
+  z-index: 2;
+  top: 60px;
+  right: 20px;
+  width: 200px;
+  height: 165px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+
+#menu>* {
+  padding: 15px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  letter-spacing: .5px;
+}
+
+#menu>*:hover:not(.loggedInUser) {
+  text-shadow: 2px 2px 4px #5c5757;
+}
+
+.profilePageDropdown {
+  text-decoration: none;
+  color: black;
+}
+
+.loggedInUser {
+  border-bottom: .2px solid #5959593a;
+}
+.loggedInUser:hover {
+  cursor: default;
+}

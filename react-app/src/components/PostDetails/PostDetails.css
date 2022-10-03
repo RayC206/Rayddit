@@ -1,45 +1,18 @@
-.detailPageContainer {
-  display: flex;
-  flex-direction: column;
-  width: 60%;
-  margin: auto;
-}
-
-
 .outerPostDetailContainer {
-  display: flex;
-  flex-direction:row;
-  width: 700px;
-  align-items: start;
-  margin: auto;
+  width: 850px;
 
-  border: 1px solid lightgray;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
 }
 
-.voteDiv{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-
-.postDetailContainer{
+.postDetailContainer {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
-  margin: auto;
+  /* align-items: center; */
   /* border: 1px solid lightgray; */
 }
 
-.postDetailTopDescription {
-  display: flex;
-}
-
-.postDetailImage {
-  width: 500px;
-  height: 500px;
+.postDetailImage{
+  width: 750px;
+  height: 630px;
+  padding-bottom: 2rem;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import { createPostRequest } from "../../store/posts";
 import { getAllUsersSubredditsRequest } from "../../store/subreddits";
 import "./CreatePost.css";
@@ -12,19 +12,21 @@ const CreatePost = () => {
 
   const dispatch = useDispatch();
   const subreddits = useSelector((state) => Object.values(state.subreddits));
+  const urlParams = new URLSearchParams(window.location.search);
+  const subredditId = Number(urlParams.get("subreddit_id"));
+  console.log("SUBREDDIT ID");
+  console.log(subredditId);
 
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState(null);
   const [linkUrl, setLinkUrl] = useState(null);
   const [text, setText] = useState(null);
-  const [subreddit, setSubreddit] = useState(1);
+  const [subreddit, setSubreddit] = useState(subredditId);
   const [postType, setPostType] = useState(1);
   const [errors, setErrors] = useState([]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const [subredditsLoaded, setSubredditsLoaded] = useState(false);
-  console.log("SUBREDDITS");
-  console.log(subreddits);
 
   useEffect(() => {
     dispatch(getAllUsersSubredditsRequest()).then(() => {
@@ -41,7 +43,6 @@ const CreatePost = () => {
   };
 
   const handleSubredditChange = (e) => {
-    console.log(e.target.value);
     setSubreddit(e.target.value);
   };
 
@@ -79,7 +80,14 @@ const CreatePost = () => {
         <select onChange={handleSubredditChange}>
           {subredditsLoaded &&
             subreddits.map((subreddit) => {
-              return <option value={subreddit.id}>{subreddit.name}</option>;
+              return (
+                <option
+                  value={subreddit.id}
+                  selected={subreddit.id === subredditId}
+                >
+                  {subreddit.name}
+                </option>
+              );
             })}
         </select>
       </div>
