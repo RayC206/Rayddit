@@ -6,6 +6,7 @@ import createIcon from "./createIcon.png";
 
 import "./Homepage.css";
 import PostCard from "../PostCard";
+import LoginFormModal from "../LoginFormModal";
 
 import { getAllPostsRequest } from "../../store/posts";
 
@@ -20,6 +21,7 @@ const Homepage = () => {
   console.log("POSTS");
   console.log(posts);
 
+  const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [subredditLoaded, setSubredditLoaded] = useState(false);
 
@@ -39,10 +41,11 @@ const Homepage = () => {
 
   const createSubredditPage = () => {
     if (!sessionUser) {
-      return <Redirect to="/login" />;
+      setIsLoginFormModalIsOpen(true);
+    } else {
+      let path = `/create-subreddit`;
+      history.push(path);
     }
-    let path = `/create-subreddit`;
-    history.push(path);
   };
 
   const subredditsPage = (subredditId) => {
@@ -52,6 +55,10 @@ const Homepage = () => {
 
   return (
     <div className="pageContainer">
+      <LoginFormModal
+        isOpen={loginFormModalIsOpen}
+        modalToggle={setIsLoginFormModalIsOpen}
+      />
       <div className="homePageDiv">
         <div className="rowOne">
           <div className="createPostDiv">
@@ -70,7 +77,12 @@ const Homepage = () => {
           {postsLoaded ? (
             posts.length ? (
               posts.map((post) => {
-                return <PostCard post={post} />;
+                return (
+                  <PostCard
+                    post={post}
+                    modalToggle={setIsLoginFormModalIsOpen}
+                  />
+                );
               })
             ) : (
               <div>No posts yet</div>

@@ -27,13 +27,13 @@ const NavBar = ({ isLoaded }) => {
     sessionLinks = (
       <div id="rightNav">
         <button onClick={() => setLoginFormModalIsOpen(true)}>
-          <Link to="/login">Log in</Link>
-          {/* Log in */}
+          {/* <Link to="/login">Log in</Link> */}
+          Log in
         </button>
-        {/* <LoginFormModal
+        <LoginFormModal
           isOpen={loginFormModalIsOpen}
           modalToggle={setLoginFormModalIsOpen}
-        /> */}
+        />
         <button className="signUpButton">
           <Link to="/sign-up">Sign Up</Link>
         </button>

@@ -39,9 +39,9 @@ function App() {
       <NavBar isLoaded={loaded} />
       <Switch>
         <Route path="/login" exact={true}>
-          {/* <LoginFormModal isOpen={true} modalToggle={() => {}} /> */}
+          <LoginFormModal isOpen={true} modalToggle={() => {}} />
 
-          <LoginForm />
+          {/* <LoginForm /> */}
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
@@ -74,7 +74,7 @@ function App() {
           <EditSubreddit />
         </ProtectedRoute>
         <Route>
-          <ErrorPage/>
+          <ErrorPage />
         </Route>
       </Switch>
     </BrowserRouter>

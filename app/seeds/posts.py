@@ -68,7 +68,7 @@ def seed_posts():
     )
     post9 = Post(
         user_id= 1,
-        subreddit_id = 4,
+        subreddit_id = 1,
         post_type_id = 1,
         title = 'Why did the programmer quit his job?',
         text = "Because he didn't get arrays.",

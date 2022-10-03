@@ -12,7 +12,7 @@ import {
   TiArrowDownThick,
 } from "react-icons/ti";
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, modalToggle }) => {
   const POST_TYPE_TEXT = 1;
   const POST_TYPE_IMAGE = 2;
   const POST_TYPE_LINK = 3;
@@ -39,20 +39,22 @@ const PostCard = ({ post }) => {
 
   const upvotePost = (postId) => {
     if (!sessionUser) {
-      return <Redirect to="/login" />;
+      modalToggle(true);
+    } else {
+      dispatch(upvotePostRequest(postId));
+      setIsUpvotedByUser(!isUpvotedByUser);
+      setIsDownvotedByUser(false);
     }
-    dispatch(upvotePostRequest(postId));
-    setIsUpvotedByUser(!isUpvotedByUser);
-    setIsDownvotedByUser(false);
   };
 
   const downvotePost = (postId) => {
     if (!sessionUser) {
-      return <Redirect to="/login" />;
+      modalToggle(true);
+    } else {
+      dispatch(downvotePostRequest(postId));
+      setIsDownvotedByUser(!isDownvotedByUser);
+      setIsUpvotedByUser(false);
     }
-    dispatch(downvotePostRequest(postId));
-    setIsDownvotedByUser(!isDownvotedByUser);
-    setIsUpvotedByUser(false);
   };
 
   const postDetailPage = (postId) => {
