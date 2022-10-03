@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { createPostRequest } from "../../store/posts";
-import { getAllUsersSubredditsRequest, getAllSubredditsRequest } from "../../store/subreddits";
+import {
+  getAllUsersSubredditsRequest,
+  getAllSubredditsRequest,
+} from "../../store/subreddits";
 import "./CreatePost.css";
 
 const CreatePost = () => {
@@ -12,16 +15,15 @@ const CreatePost = () => {
 
   const dispatch = useDispatch();
   const subreddits = useSelector((state) => Object.values(state.subreddits));
-  const urlParams = new URLSearchParams(window.location.search);
-  const subredditId = Number(urlParams.get("subreddit_id"));
-  console.log("SUBREDDIT ID");
-  console.log(subredditId);
+  // const urlParams = new URLSearchParams(window.location.search);
+  // let subredditId = Number(urlParams.get("subreddit_id"));
+  // subredditId = subredditId > 0 ? subredditId : 1;
 
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState(null);
   const [linkUrl, setLinkUrl] = useState(null);
   const [text, setText] = useState(null);
-  const [subreddit, setSubreddit] = useState(subredditId);
+  const [subreddit, setSubreddit] = useState(1);
   const [postType, setPostType] = useState(1);
   const [errors, setErrors] = useState([]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -47,6 +49,7 @@ const CreatePost = () => {
 
   const handleSubredditChange = (e) => {
     setSubreddit(e.target.value);
+    console.log(subreddit);
   };
 
   const handleSubmit = (e) => {
@@ -60,6 +63,7 @@ const CreatePost = () => {
       subreddit_id: subreddit,
       post_type_id: postType,
     };
+    console.log(newPostData);
     return dispatch(createPostRequest(newPostData)).then(async (res) => {
       if (!res.errors) {
         setSubmitSuccess(true);
@@ -71,26 +75,19 @@ const CreatePost = () => {
 
   return (
     <div className="formContainer">
-      <ul>
-        {errors.map((error, idx) => (
-          <li className="createPost_li" key={idx}>
-            {error}
-          </li>
-        ))}
-      </ul>
-      <h1 className="createPostTitle">Create Post</h1>
+          <h1 className="createPostTitle">Create Post</h1>
+        <ul>
+          {errors.map((error,idx) =>(
+            <li key={idx}>
+              {error}
+            </li>
+          ))}
+        </ul>
       <div>
         <select onChange={handleSubredditChange}>
           {subredditsLoaded &&
             subreddits.map((subreddit) => {
-              return (
-                <option
-                  value={subreddit.id}
-                  selected={subreddit.id === subredditId}
-                >
-                  {subreddit.name}
-                </option>
-              );
+              return <option key={subreddit.id} value={subreddit.id}>{subreddit.name}</option>;
             })}
         </select>
       </div>
