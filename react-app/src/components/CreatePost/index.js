@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { createPostRequest } from "../../store/posts";
-import { getAllUsersSubredditsRequest } from "../../store/subreddits";
+import { getAllUsersSubredditsRequest, getAllSubredditsRequest } from "../../store/subreddits";
 import "./CreatePost.css";
 
 const CreatePost = () => {
@@ -29,7 +29,10 @@ const CreatePost = () => {
   const [subredditsLoaded, setSubredditsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllUsersSubredditsRequest()).then(() => {
+    // dispatch(getAllUsersSubredditsRequest()).then(() => {
+    //   setSubredditsLoaded(true);
+    // });
+    dispatch(getAllSubredditsRequest()).then(() => {
       setSubredditsLoaded(true);
     });
   }, [dispatch]);
