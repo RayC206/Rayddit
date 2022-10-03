@@ -6,6 +6,8 @@ from wtforms.fields import (
     BooleanField, SelectField, DateField, StringField, PasswordField, SubmitField, TextAreaField, TimeField, IntegerField, TextAreaField, RadioField
 )
 
+# from app.forms.create_subreddit import image_url_check
+
 # if post_type_id is 1 (Text), text should not be null
 # if post_type_id is 2 (Image), img_url should not be null
 # if post_type_id is 3 (Link), link_url should not be null
@@ -22,12 +24,24 @@ def type_check(form, field):
   elif post_type_id == 3 and not link_url:
     raise ValidationError('Link URL is required for Link post type')
 
+def image_url_check(form,field):
+  validUrls = (".png", ".jpg", ".jpeg")
+  imageUrl = field.data
+  if not imageUrl.endswith(validUrls):
+    raise ValidationError('Image URLs must be a valid type (.png, .jpg, jpeg)')
+
+def link_url_check(form, field):
+  validUrl = ("http://", "https://")
+  linkUrl = field.data
+  if not linkUrl.startswith(validUrl):
+    raise ValidationError('Link URL invalid, must begin with "http://" or "https://"')
+
 
 class PostForm(FlaskForm):
   # subreddit
   title = StringField("title", validators=[DataRequired()])
-  img_url = StringField("img_url")
-  link_url = StringField("link_url")
+  img_url = StringField("img_url", validators=[image_url_check])
+  link_url = StringField("link_url", validators=[link_url_check])
   text = StringField("text")
   subreddit_id =IntegerField("subreddit_id")
   post_type_id = IntegerField("post_type", validators=[DataRequired(), type_check])

@@ -15,8 +15,14 @@ def subreddit_exists(form,field):
   if subreddits:
     raise ValidationError('Subreddit Name Already taken, Choose another name')
 
+def image_url_check(form,field):
+  validUrls = (".png", ".jpg", ".jpeg")
+  imageUrl = field.data
+  if not imageUrl.endswith(validUrls):
+    raise ValidationError('Image URLs must be a valid type (.png, .jpg, jpeg)')
+
 class SubredditForm(FlaskForm):
-  name = StringField("name", validators=[DataRequired(), subreddit_exists])
+  name = StringField("name", validators=[DataRequired()])
   description = StringField("description")
-  icon_url = StringField("icon_url", validators=[DataRequired()])
-  banner_img = StringField("banner_img")
+  icon_url = StringField("icon_url", validators=[DataRequired(), image_url_check])
+  banner_img = StringField("banner_img", validators=[image_url_check])
