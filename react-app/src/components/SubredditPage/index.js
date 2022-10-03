@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import {
   getSubredditRequest,
   subscribeToSubredditRequest,
+  deleteSubredditRequest,
 } from "../../store/subreddits";
 import { getAllSubredditsPostsRequest } from "../../store/posts";
 import createIcon from "../Homepage/createIcon.png";
@@ -23,6 +24,7 @@ const SubredditPage = () => {
 
   const [subredditLoaded, setSubredditLoaded] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
+  const [userOwnsSubreddit, setUserOwnsSubreddit] = useState(false);
   const [userJoinedSubreddit, setUserJoinedSubreddit] = useState(false);
 
   useEffect(() => {
@@ -35,18 +37,30 @@ const SubredditPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (subredditLoaded) {
+    if (subredditLoaded && subredditInfo[0]) {
       subredditInfo[0].subscriptions.forEach((subscription) => {
         if (subscription.user_id === sessionUser.id) {
           setUserJoinedSubreddit(true);
         }
       });
+      setUserOwnsSubreddit(sessionUser.id === subredditInfo[0].owner_id);
     }
   }, [subredditInfo]);
 
   const createPostPage = () => {
-    let path = `/submit`;
+    let path = `/submit?subreddit_id=${subredditId}`;
     history.push(path);
+  };
+
+  const editSubredditPage = (subredditId) => {
+    let path = `/r/${subredditId}/edit`;
+    history.push(path);
+  };
+
+  const deleteSubreddit = async (subredditId) => {
+    await dispatch(deleteSubredditRequest(subredditId)).then(() => {
+      history.push(`/`);
+    });
   };
 
   const joinSubreddit = () => {
@@ -70,17 +84,39 @@ const SubredditPage = () => {
                       src={subreddit.icon_url}
                     ></img>
                     <div className="subredditNameDiv">
-                      <div className="bigSubredditName">{subreddit.name}
-                      {/* <div className="joinToggleSubreddit"> */}
-                        {userJoinedSubreddit ? (
-                          <button className="joinToggleSubredditButton" onClick={() => joinSubreddit()}>
+                      <div className="bigSubredditName">
+                        {subreddit.name}
+                        {/* <div className="joinToggleSubreddit"> */}
+                        {userOwnsSubreddit ? (
+                          <>
+                            <button
+                              onClick={() => editSubredditPage(subreddit.id)}
+                            >
+                              Edit subreddit
+                            </button>
+                            <button
+                              onClick={() => deleteSubreddit(subreddit.id)}
+                            >
+                              Delete subreddit
+                            </button>
+                          </>
+                        ) : userJoinedSubreddit ? (
+                          <button
+                            className="joinToggleSubredditButton"
+                            onClick={() => joinSubreddit()}
+                          >
                             Joined
                           </button>
                         ) : (
-                          <button className="joinToggleSubredditButton" onClick={() => joinSubreddit()}>Join</button>
+                          <button
+                            className="joinToggleSubredditButton"
+                            onClick={() => joinSubreddit()}
+                          >
+                            Join
+                          </button>
                         )}
-                      {/* </div> */}
 
+                        {/* </div> */}
                       </div>
                       <div className="littleSubredditName">
                         r/{subreddit.name}

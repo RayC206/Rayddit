@@ -59,6 +59,15 @@ def create_subreddit():
     db.session.add(new_subreddit)
     db.session.commit()
 
+    # automatically subscribe user to the subreddit they created
+    new_subscription = Subscription(
+      user_id = current_user.id,
+      subreddit_id = new_subreddit.id
+    )
+    db.session.add(new_subscription)
+    db.session.commit()
+
+
     new_subreddit = new_subreddit.to_dict()
     return new_subreddit
   else: # error handling

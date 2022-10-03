@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory, Redirect } from "react-router-dom";
 import { editPostRequest, getPostRequest } from "../../store/posts";
-import "./EditPost.css"
+import "./EditPost.css";
 
 const EditPost = () => {
   let { postId } = useParams();
@@ -21,7 +21,6 @@ const EditPost = () => {
   const [postType, setPostType] = useState(1);
   const [errors, setErrors] = useState([]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-
 
   useEffect(() => {
     if (post.title) {

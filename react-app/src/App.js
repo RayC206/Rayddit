@@ -40,7 +40,7 @@ function App() {
         <Route path="/login" exact={true}>
           {/* <LoginFormModal isOpen={true} modalToggle={() => {}} /> */}
 
-           <LoginForm/>
+          <LoginForm />
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm />

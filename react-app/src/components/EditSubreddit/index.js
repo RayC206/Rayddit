@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Redirect } from "react-router-dom";
 import {
   editSubredditRequest,
   getSubredditRequest,
@@ -35,6 +35,10 @@ const EditSubreddit = () => {
       setSubredditLoaded(true);
     });
   }, [dispatch]);
+
+  if (submitSuccess) {
+    return <Redirect to={`/r/${subreddit.id}`} />;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
