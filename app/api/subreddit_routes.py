@@ -27,7 +27,7 @@ def get_all_subreddits():
 @subreddit_routes.route('/<int:subreddit_id>')
 def get_subreddit(subreddit_id):
   subreddit = Subreddit.query.get_or_404(subreddit_id)
-  print(subreddit)
+
   return subreddit.to_dict()
 
 

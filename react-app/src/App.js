@@ -16,6 +16,7 @@ import ProfilePage from "./components/ProfilePage";
 import CreateSubreddit from "./components/CreateSubreddit";
 import SubredditPage from "./components/SubredditPage";
 import LoginFormModal from "./components/LoginFormModal";
+import EditSubreddit from "./components/EditSubreddit";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -67,6 +68,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/create-subreddit" exact={true}>
           <CreateSubreddit />
+        </ProtectedRoute>
+        <ProtectedRoute path="/r/:subredditId/edit" exact={true}>
+          <EditSubreddit />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

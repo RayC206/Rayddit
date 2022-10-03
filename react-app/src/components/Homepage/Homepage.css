@@ -34,7 +34,7 @@
   flex-direction: row;
   width: 600px;
   align-items: center;
-  margin: auto;
+  /* margin: auto; */
   height: 55px;
   border: 1px solid rgb(206, 195, 195);
   margin-bottom: 1.5rem;

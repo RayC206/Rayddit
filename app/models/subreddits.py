@@ -32,6 +32,7 @@ class Subreddit(db.Model):
           "description": self.description,
           "icon_url": self.icon_url,
           "banner_img": self.banner_img,
+          "subscriptions": [subscription.to_dict() for subscription in self.subscriptions],
           "created_at": self.created_at,
           "updated_at": self.updated_at,
       }

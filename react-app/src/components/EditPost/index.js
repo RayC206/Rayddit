@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Redirect } from "react-router-dom";
 import { editPostRequest, getPostRequest } from "../../store/posts";
+import "./EditPost.css"
 
 const EditPost = () => {
   let { postId } = useParams();
@@ -10,6 +11,7 @@ const EditPost = () => {
   let post = useSelector((state) => Object.values(state.posts));
   post = post[0] ? post[0] : post;
 
+  const sessionUser = useSelector((state) => state.session.user);
   const [postLoaded, setPostLoaded] = useState(false);
   const [title, setTitle] = useState(post.title);
   const [imageUrl, setImageUrl] = useState(post.img_url);
@@ -19,6 +21,7 @@ const EditPost = () => {
   const [postType, setPostType] = useState(1);
   const [errors, setErrors] = useState([]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
 
   useEffect(() => {
     if (post.title) {
@@ -35,8 +38,11 @@ const EditPost = () => {
     dispatch(getPostRequest(postId)).then(() => {
       setPostLoaded(true);
     });
-  }, [dispatch]);
+  }, [dispatch, postId]);
 
+  if (submitSuccess) {
+    return <Redirect to={`/user/${sessionUser.id}`} />;
+  }
   const handleSubmit = (e) => {
     console.log("SUBMIT");
     e.preventDefault();
