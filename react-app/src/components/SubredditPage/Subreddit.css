@@ -50,7 +50,7 @@
   /* border: 1px solid red; */
   position: absolute;
   height: 80px;
-  width: 350px;
+  width: 414px;
   margin-bottom: 14px;
   top: 11.5rem;
 }
@@ -81,7 +81,7 @@
   padding-left: 16px;
   /* border: 1px solid red; */
   height: 80px;
-  width: 369px;
+  width: 450px;
 }
 
 .bigSubredditName {
@@ -164,4 +164,8 @@
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
   background-color: rgb(152, 153, 193);
   cursor: pointer;
+}
+
+.joinToggleSubredditButton {
+  margin-left: 15px;
 }

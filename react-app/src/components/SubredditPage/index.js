@@ -70,16 +70,22 @@ const SubredditPage = () => {
                       src={subreddit.icon_url}
                     ></img>
                     <div className="subredditNameDiv">
-                      <div className="bigSubredditName">{subreddit.name}</div>
+                      <div className="bigSubredditName">{subreddit.name}
+                      {/* <div className="joinToggleSubreddit"> */}
+                        {userJoinedSubreddit ? (
+                          <button className="joinToggleSubredditButton" onClick={() => joinSubreddit()}>
+                            Joined
+                          </button>
+                        ) : (
+                          <button className="joinToggleSubredditButton" onClick={() => joinSubreddit()}>Join</button>
+                        )}
+                      {/* </div> */}
+
+                      </div>
                       <div className="littleSubredditName">
                         r/{subreddit.name}
                       </div>
                     </div>
-                    {userJoinedSubreddit ? (
-                      <button onClick={() => joinSubreddit()}>Joined</button>
-                    ) : (
-                      <button onClick={() => joinSubreddit()}>Join</button>
-                    )}
                   </div>
                 </div>
               </div>
