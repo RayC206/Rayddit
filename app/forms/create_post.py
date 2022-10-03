@@ -13,6 +13,8 @@ from wtforms.fields import (
 # if post_type_id is 3 (Link), link_url should not be null
 
 def type_check(form, field):
+  validImageUrls = (".png", ".jpg", ".jpeg")
+  validUrl = ("http://", "https://")
   post_type_id = field.data
   text = form.data['text']
   img_url = form.data['img_url']
@@ -24,16 +26,10 @@ def type_check(form, field):
   elif post_type_id == 3 and not link_url:
     raise ValidationError('Link URL is required for Link post type')
 
-def image_url_check(form,field):
-  validUrls = (".png", ".jpg", ".jpeg")
-  imageUrl = field.data
-  if not imageUrl.endswith(validUrls):
+  if post_type_id == 2 and not img_url.endswith(validImageUrls):
     raise ValidationError('Image URLs must be a valid type (.png, .jpg, jpeg)')
 
-def link_url_check(form, field):
-  validUrl = ("http://", "https://")
-  linkUrl = field.data
-  if not linkUrl.startswith(validUrl):
+  elif post_type_id == 3 and not link_url.endswith(validUrl):
     raise ValidationError('Link URL invalid, must begin with "http://" or "https://"')
 
 
