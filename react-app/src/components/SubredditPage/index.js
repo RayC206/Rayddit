@@ -37,7 +37,7 @@ const SubredditPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (subredditLoaded && subredditInfo[0]) {
+    if (sessionUser && subredditLoaded && subredditInfo[0]) {
       subredditInfo[0].subscriptions.forEach((subscription) => {
         if (subscription.user_id === sessionUser.id) {
           setUserJoinedSubreddit(true);
@@ -48,6 +48,9 @@ const SubredditPage = () => {
   }, [subredditInfo]);
 
   const createPostPage = () => {
+    if (!sessionUser) {
+      return <Redirect to="/login" />;
+    }
     let path = `/submit?subreddit_id=${subredditId}`;
     history.push(path);
   };

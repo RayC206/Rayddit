@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import "./PostCard.css";
 
 import { downvotePostRequest, upvotePostRequest } from "../../store/posts";
@@ -26,7 +26,7 @@ const PostCard = ({ post }) => {
 
   useEffect(() => {
     post.votes.forEach((vote) => {
-      if (sessionUser.id === vote.user_id) {
+      if (sessionUser && sessionUser.id === vote.user_id) {
         if (vote.value === 1) {
           setIsUpvotedByUser(true);
         } else if (vote.value === -1) {
@@ -38,12 +38,18 @@ const PostCard = ({ post }) => {
   }, [post]);
 
   const upvotePost = (postId) => {
+    if (!sessionUser) {
+      return <Redirect to="/login" />;
+    }
     dispatch(upvotePostRequest(postId));
     setIsUpvotedByUser(!isUpvotedByUser);
     setIsDownvotedByUser(false);
   };
 
   const downvotePost = (postId) => {
+    if (!sessionUser) {
+      return <Redirect to="/login" />;
+    }
     dispatch(downvotePostRequest(postId));
     setIsDownvotedByUser(!isDownvotedByUser);
     setIsUpvotedByUser(false);

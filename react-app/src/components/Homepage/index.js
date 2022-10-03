@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Redirect } from "react-router-dom";
 import { getAllSubredditsRequest } from "../../store/subreddits";
 import createIcon from "./createIcon.png";
 
@@ -38,6 +38,9 @@ const Homepage = () => {
   };
 
   const createSubredditPage = () => {
+    if (!sessionUser) {
+      return <Redirect to="/login" />;
+    }
     let path = `/create-subreddit`;
     history.push(path);
   };
