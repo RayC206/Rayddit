@@ -40,8 +40,8 @@ def link_url_check(form, field):
 class PostForm(FlaskForm):
   # subreddit
   title = StringField("title", validators=[DataRequired()])
-  img_url = StringField("img_url", validators=[image_url_check])
-  link_url = StringField("link_url", validators=[link_url_check])
+  img_url = StringField("img_url")
+  link_url = StringField("link_url")
   text = StringField("text")
   subreddit_id =IntegerField("subreddit_id")
   post_type_id = IntegerField("post_type", validators=[DataRequired(), type_check])
