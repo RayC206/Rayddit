@@ -69,3 +69,11 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
+.postTitle > span {
+  cursor: pointer;
+}
+
+.postContent:hover {
+  cursor: pointer;
+}

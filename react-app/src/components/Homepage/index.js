@@ -77,6 +77,8 @@ const Homepage = () => {
           {postsLoaded ? (
             posts.length ? (
               posts.map((post) => {
+                console.log("herreeee")
+                console.log(post)
                 return (
                   <PostCard
                     post={post}

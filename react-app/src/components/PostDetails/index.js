@@ -48,16 +48,8 @@ const PostDetails = () => {
     });
   }, [dispatch, subredditId]);
 
-  const upvotePost = (postId) => {
-    dispatch(upvotePostRequest(postId));
-  };
-
-  const downvotePost = (postId) => {
-    dispatch(downvotePostRequest(postId));
-  };
-
-  const usersProfilePage = (userId) => {
-    let path = `/user/${userId}`;
+  const subredditPage = (subredditId) => {
+    let path = `/r/${subredditId}`;
     history.push(path);
   };
 
@@ -98,8 +90,18 @@ const PostDetails = () => {
               return (
                 <>
                   <div className="subredditInformation">
-                    <div className="aboutSubreddit">
-                      <span>About Community</span>
+                    <div className="postPageAboutSubreddit">
+                      <img src={subreddit.banner_img}></img>
+                    </div>
+                    <div
+                      className="postDescriptionSubredditLogo"
+                      onClick={(e) => subredditPage(subreddit.id)}
+                    >
+                      <img
+                        className="subredditLgo"
+                        src={subreddit.icon_url}
+                      ></img>
+                      <span>r/{subreddit.name}</span>
                     </div>
                     <div className="subredditDescriptionDiv">
                       <div className="subredditDescription">

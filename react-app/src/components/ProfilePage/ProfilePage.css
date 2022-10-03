@@ -5,6 +5,7 @@
   background-color: #f2f4f5;
   height: 380px;
   width: 320px;
+  margin-top: 1.34rem;
 }
 
 .userProfileBanner {
@@ -18,7 +19,7 @@
   border: 1px solid rgb(242, 234, 234);
   height: 100px;
   width: 105px;
-  top: 7rem;
+  top: 8rem;
   margin-left: 20px;
   background-color:  #f2f4f5;
   position: absolute;
