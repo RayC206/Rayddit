@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import "./ProfilePage.css";
 import PostCard from "../PostCard";
 
-import { deletePostRequest,getUserPostsRequest } from "../../store/posts";
+import { deletePostRequest, getUserPostsRequest } from "../../store/posts";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -90,7 +90,9 @@ const ProfilePage = () => {
                 );
               })
             ) : (
-              <div>No posts yet</div>
+              <div className="noPostsYetDiv">
+                <span>No posts yet</span>
+              </div>
             )
           ) : (
             <div>Loading...</div>

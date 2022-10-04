@@ -7,7 +7,7 @@ class Subreddit(db.Model):
   __tablename__ = "subreddits"
 
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(50), nullable=False)
+  name = db.Column(db.String(50), nullable=False, unique=True)
   owner_id = db.Column(db.Integer, db.ForeignKey("users.id"))
   description = db.Column(db.String(255))
   icon_url = db.Column(db.String, nullable=False)

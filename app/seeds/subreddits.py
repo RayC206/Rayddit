@@ -19,22 +19,22 @@ def seed_subreddits():
     name = "Funny",
     owner_id = 5,
     description = "Welcome to r/Funny, Reddit's largest humour depository.",
-    icon_url = "https://static.wikia.nocookie.net/emile/images/e/eb/Pietro_HHD.png/revision/latest?cb=20171009204529",
-    banner_img = "https://t4.ftcdn.net/jpg/04/67/96/13/360_F_467961350_LlpfNFYVGUwkofWQzB4uptbSxl12rWps.jpg"
+    icon_url = "https://static.wikia.nocookie.net/emile/images/e/eb/Pietro_HHD.png/",
+    banner_img = "https://imgur.com/bc745470-5040-4f8b-8786-896c7d7a64d3"
   )
   Food = Subreddit (
     name = "Travel",
     owner_id = 8,
     description = "r/travel is a community about exploring the world. Your pictures, questions, stories, or any good content is welcome.",
     icon_url = "https://styles.redditmedia.com/t5_2qh41/styles/communityIcon_x4pa3xf5z4d11.jpg?width=256&format=pjpg&s=59e0f9a8925784fbc8fe0af30e583a48019bc2a7",
-    banner_img = "hhttps://www.solidbackgrounds.com/images/950x350/950x350-sea-blue-solid-color-background.jpg"
+    banner_img = "https://i.imgur.com/VZFdEFb.png.jpg"
   )
   Houseplants = Subreddit (
     name = "Houseplants",
     owner_id = 10,
     description = "A community focused on the discussion, care, and well-being of houseplants!",
     icon_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Animal_Crossing_Leaf.svg/504px-Animal_Crossing_Leaf.svg.png",
-    banner_img = "https://preview.redd.it/52uunejr99s41.jpg?auto=webp&s=9040d78c64fd78c9f7d7bbf799453b5edab1f69f"
+    banner_img = "https://images.hdqwalls.com/wallpapers/small-plants-in-white-pots-im.jpg"
   )
 
   db.session.add(ProgrammerHumor)

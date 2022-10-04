@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { createPostRequest } from "../../store/posts";
+import icon from './icon.png'
 import {
   getAllUsersSubredditsRequest,
   getAllSubredditsRequest,
@@ -74,134 +75,151 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="formContainer">
-          <h1 className="createPostTitle">Create Post</h1>
+    <div className="formPageContainer">
+      <div className="formContainer">
+        <div className="createPostTitle">Create a Post</div>
         <ul>
-          {errors.map((error,idx) =>(
-            <li key={idx}>
-              {error}
-            </li>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
           ))}
         </ul>
-      <div>
-        <select onChange={handleSubredditChange}>
-          {subredditsLoaded &&
-            subreddits.map((subreddit) => {
-              return <option key={subreddit.id} value={subreddit.id}>{subreddit.name}</option>;
-            })}
-        </select>
-      </div>
-      {/* post type radio buttons */}
-      <div>
-        <div className="createPostType">
-          <button
-            onClick={() => {
-              selectPostType(POST_TYPE_TEXT);
-            }}
-          >
-            Text
-          </button>
-          <button
-            onClick={() => {
-              selectPostType(POST_TYPE_IMAGE);
-            }}
-          >
-            Image
-          </button>
-          <button
-            onClick={() => {
-              selectPostType(POST_TYPE_LINK);
-            }}
-          >
-            Link
-          </button>
+        <div className="subredditDropdownDiv">
+          <select className="subredditDropdownSelect"onChange={handleSubredditChange}>
+            {subredditsLoaded &&
+              subreddits.map((subreddit) => {
+                return (
+                  <option key={subreddit.id} value={subreddit.id}>
+                   r/{subreddit.name}
+                  </option>
+                );
+              })}
+          </select>
         </div>
-      </div>
-      <br />
+        {/* post type radio buttons */}
+        <div className="mainFormContainer">
+          <div>
+            <div className="createPostType">
+              <button
+              className="createButtonText"
 
-      {postType === POST_TYPE_TEXT && (
-        <form className="postsCreate" onSubmit={handleSubmit}>
-          <label className="createTitle">
-            <span>Title:</span>
-            <input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </label>
-          <label className="createTitle">
-            <span>Text:</span>
-            <input
-              type="text"
-              placeholder="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
-          </label>
+                onClick={() => {
+                  selectPostType(POST_TYPE_TEXT);
+                }}
+              >
+                Text
+              </button>
+              <button
+              className="createButtonImage"
+                onClick={() => {
+                  selectPostType(POST_TYPE_IMAGE);
+                }}
+              >
+                Image
+              </button>
+              <button
+                className="createButtonLink"
+                onClick={() => {
+                  selectPostType(POST_TYPE_LINK);
+                }}
+              >
+                Link
+              </button>
+            </div>
+          </div>
+          <br />
+          <div className="createInputBoxes">
+            {postType === POST_TYPE_TEXT && (
+              <form className="postsCreate" onSubmit={handleSubmit}>
+                <div>
+                  <label className="createTitle">
+                    <input
+                      className="createTitleInputBox"
+                      type="text"
+                      placeholder="Title"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                      required
+                    />
+                  </label>
+                </div>
+                <div>
+                  <label className="createTitle">
+                    <textarea
+                      className="createTextInputBox"
+                      type="text"
+                      placeholder="text"
+                      value={text}
+                      onChange={(e) => setText(e.target.value)}
+                    />
+                  </label>
+                </div>
+                <div className="createPostButtonDiv">
+                  <button className="createPostButton" type="submit">
+                    Create new post
+                  </button>
+                </div>
+              </form>
+            )}
 
-          <button className="createPostButton" type="submit">
-            Create new post
-          </button>
-        </form>
-      )}
+            {postType === POST_TYPE_IMAGE && (
+              <form className="postsCreate" onSubmit={handleSubmit}>
+                <label className="createTitle">
+                  <input
+                    className="createTitleInputBox"
+                    type="textarea"
+                    placeholder="Title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                  />
+                </label>
+                <label className="createTitle">
+                  <input
+                    className="createTitleInputBox"
+                    type="text"
+                    placeholder="Image URL"
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                  />
+                </label>
+                <div className="createPostButtonDiv">
+                  <button className="createPostButton" type="submit">
+                    Create new post
+                  </button>
+                </div>
+              </form>
+            )}
 
-      {postType === POST_TYPE_IMAGE && (
-        <form className="postsCreate" onSubmit={handleSubmit}>
-          <label className="createTitle">
-            <span>Title:</span>
-            <input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </label>
-          <label className="createTitle">
-            <span>Image URL:</span>
-            <input
-              type="text"
-              placeholder="Image URL"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-            />
-          </label>
-          <button className="createPostButton" type="submit">
-            Create new post
-          </button>
-        </form>
-      )}
-
-      {postType === POST_TYPE_LINK && (
-        <form className="postsCreate" onSubmit={handleSubmit}>
-          <label className="createTitle">
-            <span>Title:</span>
-            <input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </label>
-          <label className="createTitle">
-            <span>Link URL:</span>
-            <input
-              type="text"
-              placeholder="Link URL"
-              value={linkUrl}
-              onChange={(e) => setLinkUrl(e.target.value)}
-            />
-          </label>
-          <button className="createPostButton" type="submit">
-            Create new post
-          </button>
-        </form>
-      )}
-
-      {/* <label className="createSubreddit">
+            {postType === POST_TYPE_LINK && (
+              <form className="postsCreate" onSubmit={handleSubmit}>
+                <label className="createTitle">
+                  <input
+                    className="createTitleInputBox"
+                    type="text"
+                    placeholder="Title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                  />
+                </label>
+                <label className="createTitle">
+                  <input
+                    className="createTitleInputBox"
+                    type="text"
+                    placeholder="Link URL"
+                    value={linkUrl}
+                    onChange={(e) => setLinkUrl(e.target.value)}
+                  />
+                </label>
+                <div className="createPostButtonDiv">
+                  <button className="createPostButton" type="submit">
+                    Create new post
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+          {/* <label className="createSubreddit">
           <span>Subreddit:</span>
           <input
             type="text"
@@ -210,6 +228,21 @@ const CreatePost = () => {
             // onChange={(e) => setPreviewImage(e.target.value)}
           />
         </label> */}
+        </div>
+      </div>
+      <div className="sideCreateContainer">
+        <div className="postingRules">
+        <img src={icon}></img>
+        <span>Posting to Rayddit</span>
+        </div>
+        <ol >
+          <li className="ruleList">Remember the human</li>
+          <li className="ruleList">Behave like you would in real life</li>
+          <li className="ruleList">Look for the original source of content</li>
+          <li className="ruleList">Search for duplicates before posting</li>
+          <li className="ruleList">Report any bugs to the delevoper</li>
+        </ol>
+      </div>
     </div>
   );
 };

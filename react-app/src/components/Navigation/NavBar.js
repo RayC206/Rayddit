@@ -6,6 +6,7 @@ import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
 import "./NavBar.css";
 import logo from "./logo.png";
+import raydittLogo from "./raydditlogo.png"
 
 const NavBar = ({ isLoaded }) => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -46,7 +47,8 @@ const NavBar = ({ isLoaded }) => {
         <div id="navBar">
           <div id="logo_div">
             <NavLink exact to="/">
-              <img src={logo} alt="rayddit"></img>
+              {/* <img src={logo} alt="rayddit"></img> */}
+              <img className='raydditLogo'src={raydittLogo}></img>
             </NavLink>
           </div>
           {isLoaded && sessionLinks}

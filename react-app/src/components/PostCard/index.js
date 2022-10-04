@@ -122,7 +122,9 @@ const PostCard = ({ post, modalToggle }) => {
           </div>
           <div className="postTimeago">{post.created_at_timeago}</div>
         </div>
-        <div className="postTitle">{post.title}</div>
+        <div className="postTitle" onClick={(e) => postDetailPage(post.id)}>
+         <span className="postTitleSpan" onClick={(e) => postDetailPage(post.id)}>{post.title}</span>
+        </div>
         <div className="postContent" onClick={(e) => postDetailPage(post.id)}>
           {(() => {
             if (post.post_type_id === POST_TYPE_TEXT) {

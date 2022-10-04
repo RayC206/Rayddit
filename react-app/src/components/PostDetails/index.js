@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { getSubredditRequest } from "../../store/subreddits";
 import PostCard from "../PostCard";
+import LoginFormModal from "../LoginFormModal";
 import "./PostDetails.css";
 import {
   TiArrowUpOutline,
@@ -30,6 +31,8 @@ const PostDetails = () => {
   const history = useHistory();
   const subredditInfo = useSelector((state) => Object.values(state.subreddits));
   const post = useSelector((state) => Object.values(state.posts));
+  const sessionUser = useSelector((state) => state.session.user);
+  const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
 
   if (post && post.length) {
     subredditId = post[0].subreddit_id;
@@ -48,26 +51,26 @@ const PostDetails = () => {
     });
   }, [dispatch, subredditId]);
 
-  const upvotePost = (postId) => {
-    dispatch(upvotePostRequest(postId));
-  };
-
-  const downvotePost = (postId) => {
-    dispatch(downvotePostRequest(postId));
-  };
-
-  const usersProfilePage = (userId) => {
-    let path = `/user/${userId}`;
+  const subredditPage = (subredditId) => {
+    let path = `/r/${subredditId}`;
     history.push(path);
   };
 
   const createPostPage = () => {
-    let path = `/submit`;
-    history.push(path);
+    if (!sessionUser) {
+      setIsLoginFormModalIsOpen(true);
+    } else {
+      let path = `/submit`;
+      history.push(path);
+    }
   };
 
   return (
     <div className="pageContainer">
+      <LoginFormModal
+        isOpen={loginFormModalIsOpen}
+        modalToggle={setIsLoginFormModalIsOpen}
+      />
       <div className="homePageDiv">
         <div className="rowOne">
           {/* <div className="createPostDiv">
@@ -98,8 +101,18 @@ const PostDetails = () => {
               return (
                 <>
                   <div className="subredditInformation">
-                    <div className="aboutSubreddit">
-                      <span>About Community</span>
+                    <div className="postPageAboutSubreddit">
+                      <img src={subreddit.banner_img}></img>
+                    </div>
+                    <div
+                      className="postDescriptionSubredditLogo"
+                      onClick={(e) => subredditPage(subreddit.id)}
+                    >
+                      <img
+                        className="subredditLgo"
+                        src={subreddit.icon_url}
+                      ></img>
+                      <span>r/{subreddit.name}</span>
                     </div>
                     <div className="subredditDescriptionDiv">
                       <div className="subredditDescription">

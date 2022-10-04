@@ -9,11 +9,11 @@ from wtforms.fields import (
 from app.models.subreddits import Subreddit
 
 
-def subreddit_exists(form,field):
-  subreddit = field.data
-  subreddits = Subreddit.query.filter(Subreddit.name == subreddit).first()
-  if subreddits:
-    raise ValidationError('Subreddit Name Already taken, Choose another name')
+# def subreddit_exists(form,field):
+#   subreddit = field.data
+#   subreddits = Subreddit.query.filter(Subreddit.name == subreddit).first()
+#   if subreddits:
+#     raise ValidationError('Subreddit Name Already taken, Choose another name')
 
 def image_url_check(form,field):
   validUrls = (".png", ".jpg", ".jpeg")

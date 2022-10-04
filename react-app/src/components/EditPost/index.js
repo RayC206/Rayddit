@@ -5,6 +5,10 @@ import { editPostRequest, getPostRequest } from "../../store/posts";
 import "./EditPost.css";
 
 const EditPost = () => {
+  const POST_TYPE_TEXT = 1;
+  const POST_TYPE_IMAGE = 2;
+  const POST_TYPE_LINK = 3;
+
   let { postId } = useParams();
   postId = Number(postId);
   const dispatch = useDispatch();
@@ -89,33 +93,41 @@ const EditPost = () => {
               required
             />
           </label>
-          <label>
-            <span>Image URL:</span>
-            <input
-              type="text"
-              placeholder="Image URL"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-            />
-          </label>
-          <label>
-            <span>Link URL:</span>
-            <input
-              type="text"
-              placeholder="Link URL"
-              value={linkUrl}
-              onChange={(e) => setLinkUrl(e.target.value)}
-            />
-          </label>
-          <label>
-            <span>Text:</span>
-            <input
-              type="text"
-              placeholder="Text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
-          </label>
+          {postType === POST_TYPE_IMAGE && (
+            <label>
+              <span>Image URL:</span>
+              <input
+                type="text"
+                placeholder="Image URL"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+              />
+            </label>
+          )}
+
+          {postType === POST_TYPE_LINK && (
+            <label>
+              <span>Link URL:</span>
+              <input
+                type="text"
+                placeholder="Link URL"
+                value={linkUrl}
+                onChange={(e) => setLinkUrl(e.target.value)}
+              />
+            </label>
+          )}
+          {postType === POST_TYPE_TEXT && (
+            <label>
+              <span>Text:</span>
+              <input
+                type="text"
+                placeholder="Text"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+            </label>
+          )}
+
           <div className="editProfileButton">
             <button className="editProfileButton" type="submit">
               Edit Post

@@ -51,10 +51,11 @@ const SubredditPage = () => {
 
   const createPostPage = () => {
     if (!sessionUser) {
-      return <Redirect to="/login" />;
+      setIsLoginFormModalIsOpen(true);
+    } else {
+      let path = `/submit?subreddit_id=${subredditId}`;
+      history.push(path);
     }
-    let path = `/submit?subreddit_id=${subredditId}`;
-    history.push(path);
   };
 
   const editSubredditPage = (subredditId) => {
@@ -87,14 +88,22 @@ const SubredditPage = () => {
         subredditInfo.map((subreddit) => {
           return (
             <div className="subredditBanner">
-              <img src={subreddit.banner_img}></img>
+              <img
+                src={subreddit?.banner_img}
+                onError={(e) => {
+                  e.currentTarget.src = "https://i.imgur.com/ymEibzq.png";
+                }}
+              ></img>
               <div className="subredditTitle">
                 <div className="innerSubredditTitleDiv">
                   <div className="titleDivContent">
                     <div className="iconBackground"></div>
                     <img
                       className="subredditIcon"
-                      src={subreddit.icon_url}
+                      src={subreddit?.icon_url}
+                      onError={(e) => {
+                        e.currentTarget.src = "https://i.imgur.com/hkMSod3.png";
+                      }}
                     ></img>
                     <div className="subredditNameDiv">
                       <div className="bigSubredditName">

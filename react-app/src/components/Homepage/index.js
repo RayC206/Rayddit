@@ -35,8 +35,12 @@ const Homepage = () => {
   }, [dispatch]);
 
   const createPostPage = () => {
-    let path = `/submit`;
-    history.push(path);
+    if (!sessionUser) {
+      setIsLoginFormModalIsOpen(true);
+    } else {
+      let path = `/submit`;
+      history.push(path);
+    }
   };
 
   const createSubredditPage = () => {
@@ -77,6 +81,8 @@ const Homepage = () => {
           {postsLoaded ? (
             posts.length ? (
               posts.map((post) => {
+                console.log("herreeee");
+                console.log(post);
                 return (
                   <PostCard
                     post={post}
@@ -107,7 +113,13 @@ const Homepage = () => {
                       >
                         <div className="homepageSubredditDescription">
                           <div className="homeSubredditIcon">
-                            <img src={subreddit.icon_url}></img>
+                            <img
+                              src={subreddit.icon_url}
+                              onError={(e) => {
+                                e.currentTarget.src =
+                                  "https://i.imgur.com/hkMSod3.png";
+                              }}
+                            ></img>
                           </div>
                           <div className="homeSubredditName">
                             {subreddit.name}

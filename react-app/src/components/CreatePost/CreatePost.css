@@ -1,0 +1,195 @@
+.formPageContainer {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  justify-content: center;
+  width: 80%;
+  max-width: 1100px;
+  margin: auto;
+  margin-top: 7rem;
+  padding: 20px;
+  border: 1px solid rgb(206, 195, 195);
+  background-color:  white;
+}
+
+.createPostTitle {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.321);;
+  padding: 12px;
+  width: 70%;
+  font-size: 22px;
+  color: #131111;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.formContainer {
+  display: flex;
+  padding: 20px;
+  margin-top: 5rem;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  margin: auto;
+  width: 80%;
+}
+
+.mainFormContainer {
+  /* border: 1px solid red; */
+  height: 400px;
+  width: 100%;
+  background-color: white;
+  border: 1px solid rgb(206, 195, 195);
+
+}
+
+.createPostType > button {
+  height: 45px;
+  width: 15%;
+  outline: none;
+  border-style: solid;
+  padding: 15px 17px;
+  border-width: 0 1px 1px 0;
+  background-color: white ;
+  border-color: rgba(128, 128, 128, 0.528);
+  cursor: pointer;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.createInputBoxes{
+  margin: auto;
+  /* border: 1px solid red; */
+  width: 95%;
+  height: 62%;
+  padding: 16px
+}
+
+.createTitleInputBox {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 35px;
+  width: 95%;
+  margin-bottom: 10px;
+  border-color: rgba(128, 128, 128, 0.528);
+  outline: none;
+  border-style: solid;
+  border-width: 1px;
+
+}
+
+.createTextInputBox {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  text-align: start;
+  width: 95%;
+  height: 140px;
+  border-color: rgba(128, 128, 128, 0.528);
+  outline: none;
+  border-style: solid;
+  border-width: 1px
+}
+
+.createPostButtonDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 5px;
+  width: 95%;
+  /* border: 1px solid red; */
+  height: 35px;
+}
+
+.createPostButtonDiv > button:hover {
+  background-color: #393939;
+}
+
+.createButtonText:focus{
+  font-weight: 400px;
+  border-bottom: 3px solid   #6b9abc3e;
+  background-color: #6b9abc3e;
+}
+.createButtonText:hover {
+  background-color: #6b9abc3e;
+}
+
+.createButtonImage:focus {
+  font-weight: 400px;
+  border-bottom: 3px solid   #6b9abc3e;
+  background-color: #6b9abc3e;
+}
+
+.createButtonImage:hover {
+  background-color: #6b9abc3e;
+}
+
+.createButtonLink:focus {
+  font-weight: 400px;
+  border-bottom: 3px solid   #6b9abc3e;
+  background-color: #6b9abc3e;
+}
+
+.createButtonLink:hover{
+  background-color: #6b9abc3e;
+}
+
+
+.subredditDropdownDiv {
+  position: relative;
+  box-sizing: border-box;
+  min-width: 300px;
+  margin-bottom: 10px;
+  height: 40px;
+
+}
+
+.subredditDropdownSelect {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 35px;
+  width: 300px;
+  border-color: rgba(128, 128, 128, 0.528);
+  outline: none;
+  border-style: solid;
+  border-width: 1px
+}
+
+.sideCreateContainer {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  border: 1px solid rgb(206, 195, 195);
+  height: 300px;
+  width: 280px;
+  margin-top: 4.5rem;
+  background-color: white;
+  padding: 12px
+}
+
+.postingRules {
+  display: flex;
+  align-items: center;
+  /* border: 1px solid red; */
+  height: 60px;
+  width: 260px;
+  margin: auto;
+}
+
+.postingRules > img {
+  width: 45px;
+  height: 40px;
+  margin-left: 10px;
+}
+
+.postingRules > span {
+  padding-left: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.sideCreateContainer > ol {
+  padding: 5px 20px;
+  margin: auto
+}
+
+.ruleList  {
+  width: 260px;
+  font-size: 15px;
+  padding: 10px 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
