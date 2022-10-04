@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { createPostRequest } from "../../store/posts";
+import icon from './icon.png'
 import {
   getAllUsersSubredditsRequest,
   getAllSubredditsRequest,
@@ -229,7 +230,19 @@ const CreatePost = () => {
         </label> */}
         </div>
       </div>
-      <div className="sideCreateContainer"></div>
+      <div className="sideCreateContainer">
+        <div className="postingRules">
+        <img src={icon}></img>
+        <span>Posting to Rayddit</span>
+        </div>
+        <ol >
+          <li className="ruleList">Remember the human</li>
+          <li className="ruleList">Behave like you would in real life</li>
+          <li className="ruleList">Look for the original source of content</li>
+          <li className="ruleList">Search for duplicates before posting</li>
+          <li className="ruleList">Report any bugs to the delevoper</li>
+        </ol>
+      </div>
     </div>
   );
 };

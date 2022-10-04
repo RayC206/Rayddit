@@ -10,26 +10,18 @@
   margin-top: 7rem;
   padding: 20px;
   border: 1px solid rgb(206, 195, 195);
-  background-color:  #12343b3f;;
+  background-color:  white;
 }
 
 .createPostTitle {
   border-bottom: 1px solid rgba(128, 128, 128, 0.321);;
   padding: 12px;
   width: 70%;
-  font-size: 18px;
-  color: whitesmoke;
+  font-size: 22px;
+  color: #131111;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.sideCreateContainer {
-  border: 1px solid red;
-  height: 300px;
-  width: 400px;
-  margin-top: 2rem;
-  background-color: white;
-
-}
 
 .formContainer {
   display: flex;
@@ -45,7 +37,7 @@
   /* border: 1px solid red; */
   height: 400px;
   width: 100%;
-  background-color: #12343b3f;
+  background-color: white;
   border: 1px solid rgb(206, 195, 195);
 
 }
@@ -103,26 +95,42 @@
   width: 95%;
   /* border: 1px solid red; */
   height: 35px;
+}
 
+.createPostButtonDiv > button:hover {
+  background-color: #393939;
 }
 
 .createButtonText:focus{
-  color: rgb(0, 0, 255);
   font-weight: 400px;
-  border-bottom: 2px solid rgba(0, 0, 255, 0.594);
+  border-bottom: 3px solid   #6b9abc3e;
+  background-color: #6b9abc3e;
+}
+.createButtonText:hover {
+  background-color: #6b9abc3e;
 }
 
 .createButtonImage:focus {
-  color: rgb(0, 0, 255);
   font-weight: 400px;
-  border-bottom: 2px solid rgba(0, 0, 255, 0.594);
+  border-bottom: 3px solid   #6b9abc3e;
+  background-color: #6b9abc3e;
+}
+
+.createButtonImage:hover {
+  background-color: #6b9abc3e;
 }
 
 .createButtonLink:focus {
-  color: rgb(0, 0, 255);
   font-weight: 400px;
-  border-bottom: 2px solid rgba(0, 0, 255, 0.594);
+  border-bottom: 3px solid   #6b9abc3e;
+  background-color: #6b9abc3e;
 }
+
+.createButtonLink:hover{
+  background-color: #6b9abc3e;
+}
+
+
 .subredditDropdownDiv {
   position: relative;
   box-sizing: border-box;
@@ -140,4 +148,48 @@
   outline: none;
   border-style: solid;
   border-width: 1px
+}
+
+.sideCreateContainer {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  border: 1px solid rgb(206, 195, 195);
+  height: 300px;
+  width: 280px;
+  margin-top: 4.5rem;
+  background-color: white;
+  padding: 12px
+}
+
+.postingRules {
+  display: flex;
+  align-items: center;
+  /* border: 1px solid red; */
+  height: 60px;
+  width: 260px;
+  margin: auto;
+}
+
+.postingRules > img {
+  width: 45px;
+  height: 40px;
+  margin-left: 10px;
+}
+
+.postingRules > span {
+  padding-left: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.sideCreateContainer > ol {
+  padding: 5px 20px;
+  margin: auto
+}
+
+.ruleList  {
+  width: 260px;
+  font-size: 15px;
+  padding: 10px 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
