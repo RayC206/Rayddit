@@ -90,7 +90,9 @@ const ProfilePage = () => {
                 );
               })
             ) : (
-              <div>No posts yet</div>
+              <div className="noPostsYetDiv">
+                <span>No posts yet</span>
+              </div>
             )
           ) : (
             <div>Loading...</div>

@@ -51,10 +51,11 @@ const SubredditPage = () => {
 
   const createPostPage = () => {
     if (!sessionUser) {
-      return <Redirect to="/login" />;
+      setIsLoginFormModalIsOpen(true);
+    } else {
+      let path = `/submit?subreddit_id=${subredditId}`;
+      history.push(path);
     }
-    let path = `/submit?subreddit_id=${subredditId}`;
-    history.push(path);
   };
 
   const editSubredditPage = (subredditId) => {

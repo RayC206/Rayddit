@@ -35,3 +35,24 @@
   font-size: 14px;
   margin-left: 5px;
 }
+
+.noPostsYetDiv {
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  align-items: start;
+  justify-content: center;
+
+  border: 1px solid rgb(206, 195, 195);
+  margin-bottom: 1.5rem;
+  background-color: rgb(247, 247, 252);
+  border-radius: 2px;
+  margin-top: 1.23rem;
+}
+
+.noPostsYetDiv > span {
+  font-size: 22px;
+  padding: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}

@@ -35,8 +35,12 @@ const Homepage = () => {
   }, [dispatch]);
 
   const createPostPage = () => {
-    let path = `/submit`;
-    history.push(path);
+    if (!sessionUser) {
+      setIsLoginFormModalIsOpen(true);
+    } else {
+      let path = `/submit`;
+      history.push(path);
+    }
   };
 
   const createSubredditPage = () => {

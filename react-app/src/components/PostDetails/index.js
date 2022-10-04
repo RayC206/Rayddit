@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { getSubredditRequest } from "../../store/subreddits";
 import PostCard from "../PostCard";
+import LoginFormModal from "../LoginFormModal";
 import "./PostDetails.css";
 import {
   TiArrowUpOutline,
@@ -30,6 +31,8 @@ const PostDetails = () => {
   const history = useHistory();
   const subredditInfo = useSelector((state) => Object.values(state.subreddits));
   const post = useSelector((state) => Object.values(state.posts));
+  const sessionUser = useSelector((state) => state.session.user);
+  const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
 
   if (post && post.length) {
     subredditId = post[0].subreddit_id;
@@ -54,12 +57,20 @@ const PostDetails = () => {
   };
 
   const createPostPage = () => {
-    let path = `/submit`;
-    history.push(path);
+    if (!sessionUser) {
+      setIsLoginFormModalIsOpen(true);
+    } else {
+      let path = `/submit`;
+      history.push(path);
+    }
   };
 
   return (
     <div className="pageContainer">
+      <LoginFormModal
+        isOpen={loginFormModalIsOpen}
+        modalToggle={setIsLoginFormModalIsOpen}
+      />
       <div className="homePageDiv">
         <div className="rowOne">
           {/* <div className="createPostDiv">
