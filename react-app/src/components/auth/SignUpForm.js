@@ -23,6 +23,10 @@ const SignUpForm = () => {
     } else {
       setErrors(["Passwords do not match"]);
     }
+
+    if (!email.includes("@")) {
+      setErrors(['Email is not a valid address'])
+    }
   };
 
   const updateUsername = (e) => {
