@@ -10,7 +10,7 @@ const CreateSubreddit = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [iconUrl, setIconUrl] = useState("");
-  const [bannerImage, setBannerImage] = useState("" || "https://www.redditinc.com/assets/images/blog/_1000x483_crop_center-center_none/upvoted_banner-green-plain_2021-08-25-191050_tsgv.jpg");
+  const [bannerImage, setBannerImage] = useState("");
   const [errors, setErrors] = useState([]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
