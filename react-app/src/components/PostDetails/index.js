@@ -102,7 +102,13 @@ const PostDetails = () => {
                 <>
                   <div className="subredditInformation">
                     <div className="postPageAboutSubreddit">
-                      <img src={subreddit.banner_img}></img>
+                      <img
+                        src={subreddit.banner_img}
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            "https://i.imgur.com/ymEibzq.png";
+                        }}
+                      ></img>
                     </div>
                     <div
                       className="postDescriptionSubredditLogo"
