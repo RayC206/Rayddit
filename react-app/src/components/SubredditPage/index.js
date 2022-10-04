@@ -39,6 +39,7 @@ const SubredditPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    console.log("---");
     if (sessionUser && subredditLoaded && subredditInfo[0]) {
       subredditInfo[0].subscriptions.forEach((subscription) => {
         if (subscription.user_id === sessionUser.id) {
@@ -47,7 +48,7 @@ const SubredditPage = () => {
       });
       setUserOwnsSubreddit(sessionUser.id === subredditInfo[0].owner_id);
     }
-  }, [subredditInfo]);
+  }, [subredditLoaded]);
 
   const createPostPage = () => {
     if (!sessionUser) {
@@ -74,7 +75,7 @@ const SubredditPage = () => {
       setIsLoginFormModalIsOpen(true);
     } else {
       dispatch(subscribeToSubredditRequest(subredditId));
-      setUserJoinedSubreddit(!userJoinedSubreddit);
+      setUserJoinedSubreddit((userJoinedSubreddit) => !userJoinedSubreddit);
     }
   };
 
