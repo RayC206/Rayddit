@@ -72,7 +72,6 @@ const CreateSubreddit = () => {
             placeholder = "Icon Url"
             value={iconUrl}
             onChange={(e) => setIconUrl(e.target.value)}
-            required
           />
         </label>
         <label>

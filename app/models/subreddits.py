@@ -10,7 +10,7 @@ class Subreddit(db.Model):
   name = db.Column(db.String(50), nullable=False, unique=True)
   owner_id = db.Column(db.Integer, db.ForeignKey("users.id"))
   description = db.Column(db.String(255))
-  icon_url = db.Column(db.String, nullable=False)
+  icon_url = db.Column(db.String)
   banner_img = db.Column(db.String)
   created_at = db.Column(db.DateTime, server_default=func.now())
   updated_at = db.Column(db.DateTime, onupdate=func.now())
