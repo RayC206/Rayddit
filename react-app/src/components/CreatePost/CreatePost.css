@@ -5,16 +5,20 @@
   /* align-items: center; */
   justify-content: center;
   width: 80%;
+  max-width: 1100px;
   margin: auto;
-  margin-top: 5rem;
+  margin-top: 7rem;
   padding: 20px;
+  border: 1px solid rgb(206, 195, 195);
+  background-color:  #12343b3f;;
 }
 
 .createPostTitle {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.321);;
   padding: 12px;
-  width: 90%;
+  width: 70%;
   font-size: 18px;
+  color: whitesmoke;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -23,6 +27,7 @@
   height: 300px;
   width: 400px;
   margin-top: 2rem;
+  background-color: white;
 
 }
 
@@ -40,7 +45,9 @@
   /* border: 1px solid red; */
   height: 400px;
   width: 100%;
-  background-color: white;
+  background-color: #12343b3f;
+  border: 1px solid rgb(206, 195, 195);
+
 }
 
 .createPostType > button {
@@ -69,6 +76,11 @@
   height: 35px;
   width: 95%;
   margin-bottom: 10px;
+  border-color: rgba(128, 128, 128, 0.528);
+  outline: none;
+  border-style: solid;
+  border-width: 1px;
+
 }
 
 .createTextInputBox {
@@ -77,6 +89,10 @@
   text-align: start;
   width: 95%;
   height: 140px;
+  border-color: rgba(128, 128, 128, 0.528);
+  outline: none;
+  border-style: solid;
+  border-width: 1px
 }
 
 .createPostButtonDiv {
@@ -87,6 +103,7 @@
   width: 95%;
   /* border: 1px solid red; */
   height: 35px;
+
 }
 
 .createButtonText:focus{
@@ -112,11 +129,15 @@
   min-width: 300px;
   margin-bottom: 10px;
   height: 40px;
-  
+
 }
 
 .subredditDropdownSelect {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   height: 35px;
-  width: 300px
+  width: 300px;
+  border-color: rgba(128, 128, 128, 0.528);
+  outline: none;
+  border-style: solid;
+  border-width: 1px
 }
