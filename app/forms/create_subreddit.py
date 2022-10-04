@@ -9,11 +9,11 @@ from wtforms.fields import (
 from app.models.subreddits import Subreddit
 
 
-# def subreddit_exists(form,field):
-#   subreddit = field.data
-#   subreddits = Subreddit.query.filter(Subreddit.name == subreddit).first()
-#   if subreddits:
-#     raise ValidationError('Subreddit Name Already taken, Choose another name')
+def subreddit_exists(form,field):
+  subreddit = field.data
+  subreddits = Subreddit.query.filter(Subreddit.name == subreddit).first()
+  if subreddits:
+    raise ValidationError('Subreddit Name Already taken, Choose another name')
 
 def image_url_check(form,field):
   validUrls = (".png", ".jpg", ".jpeg")
@@ -22,7 +22,7 @@ def image_url_check(form,field):
     raise ValidationError('Image URLs must be a valid type (.png, .jpg, jpeg)')
 
 class SubredditForm(FlaskForm):
-  name = StringField("name", validators=[DataRequired()])
+  name = StringField("name", validators=[DataRequired(), subreddit_exists])
   description = StringField("description")
   icon_url = StringField("icon_url", validators=[DataRequired(), image_url_check])
   banner_img = StringField("banner_img", validators=[image_url_check])

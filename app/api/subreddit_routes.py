@@ -1,6 +1,7 @@
 from re import sub
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
+from app.forms.edit_subreddit import EditSubredditForm
 
 from app.models.subreddits import Subreddit
 
@@ -80,7 +81,7 @@ def create_subreddit():
 @subreddit_routes.route("/<int:subreddit_id>", methods=["PUT"])
 @login_required
 def edit_subreddit(subreddit_id):
-  form = SubredditForm()
+  form = EditSubredditForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   edited_subreddit = Subreddit.query.get_or_404(subreddit_id)
   if current_user.id != edited_subreddit.owner_id:
