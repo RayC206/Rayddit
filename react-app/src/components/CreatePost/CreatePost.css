@@ -1,0 +1,122 @@
+.formPageContainer {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  justify-content: center;
+  width: 80%;
+  margin: auto;
+  margin-top: 5rem;
+  padding: 20px;
+}
+
+.createPostTitle {
+  border-bottom: 1px solid white;
+  padding: 12px;
+  width: 90%;
+  font-size: 18px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.sideCreateContainer {
+  border: 1px solid red;
+  height: 300px;
+  width: 400px;
+  margin-top: 2rem;
+
+}
+
+.formContainer {
+  display: flex;
+  padding: 20px;
+  margin-top: 5rem;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  margin: auto;
+  width: 80%;
+}
+
+.mainFormContainer {
+  /* border: 1px solid red; */
+  height: 400px;
+  width: 100%;
+  background-color: white;
+}
+
+.createPostType > button {
+  height: 45px;
+  width: 15%;
+  outline: none;
+  border-style: solid;
+  padding: 15px 17px;
+  border-width: 0 1px 1px 0;
+  background-color: white ;
+  border-color: rgba(128, 128, 128, 0.528);
+  cursor: pointer;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.createInputBoxes{
+  margin: auto;
+  /* border: 1px solid red; */
+  width: 95%;
+  height: 62%;
+  padding: 16px
+}
+
+.createTitleInputBox {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 35px;
+  width: 95%;
+  margin-bottom: 10px;
+}
+
+.createTextInputBox {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  text-align: start;
+  width: 95%;
+  height: 140px;
+}
+
+.createPostButtonDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 5px;
+  width: 95%;
+  /* border: 1px solid red; */
+  height: 35px;
+}
+
+.createButtonText:focus{
+  color: rgb(0, 0, 255);
+  font-weight: 400px;
+  border-bottom: 2px solid rgba(0, 0, 255, 0.594);
+}
+
+.createButtonImage:focus {
+  color: rgb(0, 0, 255);
+  font-weight: 400px;
+  border-bottom: 2px solid rgba(0, 0, 255, 0.594);
+}
+
+.createButtonLink:focus {
+  color: rgb(0, 0, 255);
+  font-weight: 400px;
+  border-bottom: 2px solid rgba(0, 0, 255, 0.594);
+}
+.subredditDropdownDiv {
+  position: relative;
+  box-sizing: border-box;
+  min-width: 300px;
+  margin-bottom: 10px;
+  height: 40px;
+  
+}
+
+.subredditDropdownSelect {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 35px;
+  width: 300px
+}

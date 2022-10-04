@@ -38,6 +38,6 @@ class PostForm(FlaskForm):
   title = StringField("title", validators=[DataRequired()])
   img_url = StringField("img_url")
   link_url = StringField("link_url")
-  text = StringField("text")
+  text = TextAreaField("text")
   subreddit_id =IntegerField("subreddit_id")
   post_type_id = IntegerField("post_type", validators=[DataRequired(), type_check])
