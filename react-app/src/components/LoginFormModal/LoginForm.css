@@ -1,7 +1,83 @@
-.loginContainer {
+.loginFormContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 255px;
-  width: 500px;
+  height: 500px;
+  width: 350px;
+  padding:12px;
+
+}
+
+.loginLogoDiv {
+  /* border: 1px solid red; */
+  margin: auto;
+}
+
+.loginWelcome {
+  /* border: 1px solid red; */
+  margin-bottom: 20px;
+}
+
+.loginWelcome > span {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18px;
+}
+
+.innerLoginFormContainer {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  padding: 12px;
+  margin: auto;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+
+.loginEmailDiv {
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 30px;
+  margin-bottom: 12px;
+}
+
+.loginEmailInput {
+  width: 90%;
+}
+
+.loginPasswordDiv {
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 30px;
+  margin-bottom: 12px;
+}
+
+.loginPasswordInput {
+  width: 90%;
+}
+
+.loginButtonDiv{
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 55%;
+}
+
+.loginButtonDiv > button {
+  height: 100%;
+  width: 40%;
+}
+
+.demoButton {
+  margin-top: 12px;
 }

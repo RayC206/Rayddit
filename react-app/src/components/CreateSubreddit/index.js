@@ -37,7 +37,9 @@ const CreateSubreddit = () => {
   };
 
   return (
+    <div className="subredditFormPageContainer">
     <div className="subredditFormContainer">
+    <div className="createSubredditTitle">Create a Subreddit</div>
       <form className="subredditForm" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error,idx) =>(
@@ -49,8 +51,9 @@ const CreateSubreddit = () => {
         <label>
           <span>Name:</span>
           <input
+            className="createSubredditInput"
             type = "text"
-            placeholder = "name"
+            placeholder = "Subreddit name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -58,9 +61,10 @@ const CreateSubreddit = () => {
         </label>
         <label>
           <span>Description:</span>
-          <input
+          <textarea
+            className="createSubredditDescriptionInput"
             type = "text"
-            placeholder = "Description"
+            placeholder = "Description (Optional)"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
@@ -68,8 +72,9 @@ const CreateSubreddit = () => {
         <label>
           <span>Icon URL:</span>
           <input
+          className="createSubredditInput"
             type = "text"
-            placeholder = "Icon Url"
+            placeholder = "Icon URL (Optional, Default Icon will be given)"
             value={iconUrl}
             onChange={(e) => setIconUrl(e.target.value)}
           />
@@ -77,16 +82,20 @@ const CreateSubreddit = () => {
         <label>
           <span>Banner Image URL:</span>
           <input
+          className="createSubredditInput"
             type = "text"
-            placeholder = "Banner Image URL"
+            placeholder = "Banner Image URL (Optional, Default Banner will be given)"
             value={bannerImage}
             onChange={(e) => setBannerImage(e.target.value)}
           />
         </label>
-        <button className="createSubredditButton" type="submit">
-            Create new Subreddit
-          </button>
+        <div className="createPostButtonDiv">
+                  <button className="createPostButton" type="submit">
+                    Create New Subreddit
+                  </button>
+                </div>
       </form>
+    </div>
     </div>
   )
 }
