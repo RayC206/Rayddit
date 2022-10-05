@@ -148,7 +148,7 @@ const EditPost = () => {
         </div>
         <div className="editPreviewContainer">
           <div className="editPreviewSpanDiv">
-            <span>Edit Preview:</span>
+            <span>Live Edit Preview:</span>
           </div>
           {postType === POST_TYPE_TEXT && (
             <div className="editPreviewContent">
