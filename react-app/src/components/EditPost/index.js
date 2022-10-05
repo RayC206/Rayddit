@@ -82,7 +82,7 @@ const EditPost = () => {
             <form className="postEditForm" onSubmit={handleSubmit}>
               <ul>
                 {errors.map((error, idx) => (
-                  <li className="editPost_li" key={idx}>
+                  <li className="errorDiv" key={idx}>
                     {error}
                   </li>
                 ))}

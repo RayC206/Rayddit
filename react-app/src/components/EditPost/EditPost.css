@@ -109,6 +109,7 @@
 
 .editPreviewText {
   display: flex;
+  justify-content: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding: 10px;
   word-break: break-all;

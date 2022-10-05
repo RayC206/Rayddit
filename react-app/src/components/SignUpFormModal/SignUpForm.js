@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
 import "./SignUpForm.css";
+import signUpLogo from "./signUpLogo.png";
 
 const SignUpForm = ({ onClose }) => {
   const [errors, setErrors] = useState([]);
@@ -19,14 +20,17 @@ const SignUpForm = ({ onClose }) => {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
         setErrors(data);
+      } else {
+        onClose();
       }
     } else {
       setErrors(["Passwords do not match"]);
     }
-
-    if (!errors.length) {
-      onClose();
-    }
+    // console.log("ERROR")
+    // console.log(errors)
+    // if (!errors.length) {
+    //   onClose();
+    // }
 
     // if (!email.includes("@")) {
     //   setErrors(['Email is not a valid address'])
@@ -54,51 +58,68 @@ const SignUpForm = ({ onClose }) => {
   }
 
   return (
-    <form onSubmit={onSignUp} className="signUpForm">
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+    <div className="signUpFormContainer">
+      <div className="signUpLogoDiv">
+        <img src={signUpLogo}></img>
+        <span className="registerSpan">Create your Account</span>
       </div>
-      <div>
-        <label>Username</label>
-        <input
-          type="text"
-          name="username"
-          onChange={updateUsername}
-          value={username}
-        ></input>
+      <div className="innerSignUpFormContainer">
+        <form onSubmit={onSignUp} className="signUpForm">
+          <div className="errorDiv">
+            {errors.map((error, ind) => (
+              <div className="errorDiv" key={ind}>
+                {" "}
+                - {error}
+              </div>
+            ))}
+          </div>
+          <div className="signUpUsernameDiv">
+            <label>Username</label>
+            <input
+              className="signUpFormInput"
+              type="text"
+              name="username"
+              onChange={updateUsername}
+              value={username}
+            ></input>
+          </div>
+          <div className="signUpEmailDiv">
+            <label>Email</label>
+            <input
+              className="signUpFormInput"
+              type="text"
+              name="email"
+              onChange={updateEmail}
+              value={email}
+            ></input>
+          </div>
+          <div className="signUpPasswordDiv">
+            <label>Password</label>
+            <input
+              className="signUpFormInput"
+              type="password"
+              name="password"
+              onChange={updatePassword}
+              value={password}
+            ></input>
+          </div>
+          <div className="signUpPasswordRepeat">
+            <label>Repeat Password</label>
+            <input
+              className="signUpFormInput"
+              type="password"
+              name="repeat_password"
+              onChange={updateRepeatPassword}
+              value={repeatPassword}
+              required={true}
+            ></input>
+          </div>
+          <div className="createAccountDiv">
+            <button type="submit">Create Account</button>
+          </div>
+        </form>
       </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="text"
-          name="email"
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type="password"
-          name="repeat_password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type="submit">Sign Up</button>
-    </form>
+    </div>
   );
 };
 

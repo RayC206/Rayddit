@@ -16,6 +16,7 @@ const ProfilePage = () => {
 
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [userOwnsProfile, setUserOwnsProfile] = useState(false);
+  const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
   const [user, setUser] = useState([]);
 
   useEffect(() => {
@@ -46,6 +47,15 @@ const ProfilePage = () => {
 
   const deletePost = (postId) => {
     dispatch(deletePostRequest(postId));
+  };
+
+    const createPostPage = () => {
+    if (!sessionUser) {
+      setIsLoginFormModalIsOpen(true);
+    } else {
+      let path = `/submit`;
+      history.push(path);
+    }
   };
 
   return (
@@ -102,9 +112,20 @@ const ProfilePage = () => {
           {user && (
             <div className="userProfileInfo">
               <div className="userProfileBanner"></div>
+                <div className="innerProfileInfoDiv">
+                <div className="profileCreatePostDiv">
+                      <a
+                        className="createSubredditPost"
+                        onClick={createPostPage}
+                      >
+                        {" "}
+                        create post
+                      </a>
+                    </div>
               <div className="profileInfodDiv">
                 <img src={user.profile_image}></img>
                 <span>u/{user.username}</span>
+                    </div>
               </div>
             </div>
           )}

@@ -9,9 +9,47 @@ html {
   /* background-color: #393f4d; */
 }
 
+body {
+  font-family: Avenir Next, Avenir, SegoeUI, sans-serif;
+}
+
 body{
   width: 100%;
   margin: 0px;
   padding: 0px;
   overflow-x: hidden;
+}
+
+
+.field {
+  display: flex;
+  margin-bottom: 1em;
+  flex-flow: column-reverse;
+}
+
+label {
+  text-transform: uppercase;
+}
+
+label, input {
+  transition: all 0.2s;
+  touch-action: manipulation;
+  letter-spacing: 0.05em;
+  font-size: 16px;
+}
+
+input {
+  border: 0;
+  font-family: inherit;
+  /* -webkit-appearance: none; */
+  padding: 0;
+  cursor: text;
+  font-size: 1.2em;
+  border-radius: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+input:focus {
+  border-bottom: 1px solid #666;
+  outline: 0;
 }
