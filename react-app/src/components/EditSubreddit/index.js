@@ -6,9 +6,9 @@ import {
   getSubredditRequest,
 } from "../../store/subreddits";
 
-import './EditSubreddit.css'
+import "./EditSubreddit.css";
 
-const EditSubreddit = ({onClose}) => {
+const EditSubreddit = ({ onClose }) => {
   let { subredditId } = useParams();
   subredditId = Number(subredditId);
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const EditSubreddit = ({onClose}) => {
   }, [dispatch]);
 
   if (submitSuccess) {
-    onClose()
+    onClose();
     // return <Redirect to={`/r/${subreddit.id}`} />;
   }
 
@@ -66,50 +66,80 @@ const EditSubreddit = ({onClose}) => {
     return (
       <div className="editSubredditFormContainer">
         <div className="innerEditSubredditFormContainer">
-        <form className="subredditEditForm" onSubmit={handleSubmit}>
-            <div className="editSubredditFormTitle"><span>Edit Subreddit:</span></div>
-          <ul>
-            {errors.map((error, idx) => (
-              <li className="errorDiv" key={idx}>
-                {error}
-              </li>
-            ))}
-          </ul>
-          <div className="editFormInputContainer">
-            <span>Description:</span>
-          <label>
-            <textarea
-              type="text"
-              placeholder="Description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </label>
-            <span>Icon URL:</span>
-          <label>
-            <input
-              type="text"
-              placeholder="Icon image URL"
-              value={iconUrl}
-              onChange={(e) => setIconUrl(e.target.value)}
-            />
-          </label>
-            <span>Banner Image URL:</span>
-          <label>
-            <input
-              type="text"
-              placeholder="Banner Image URL"
-              value={bannerImage}
-              onChange={(e) => setBannerImage(e.target.value)}
-            />
-          </label>
+          <form className="subredditEditForm" onSubmit={handleSubmit}>
+            <div className="editSubredditFormTitle">
+              <span>Edit Subreddit:</span>
+            </div>
+            <ul>
+              {errors.map((error, idx) => (
+                <li className="errorDiv" key={idx}>
+                  {error}
+                </li>
+              ))}
+            </ul>
+            <div className="editFormInputContainer">
+              <span>Description:</span>
+              <label>
+                <textarea
+                  type="text"
+                  placeholder="Description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </label>
+              <span>Icon URL:</span>
+              <label>
+                <input
+                  type="text"
+                  placeholder="(Optional)"
+                  value={iconUrl}
+                  onChange={(e) => setIconUrl(e.target.value)}
+                />
+              </label>
+              <span>Banner Image URL:</span>
+              <label>
+                <input
+                  type="text"
+                  placeholder="(Optional)"
+                  value={bannerImage}
+                  onChange={(e) => setBannerImage(e.target.value)}
+                />
+              </label>
+            </div>
+            <div className="editSubredditButtonDiv">
+              <button className="editSubredditButton" type="submit">
+                Edit Post
+              </button>
+            </div>
+          </form>
+        </div>
+        <div className="outerEditSubredditPreview">
+        <div className="editSubredditPreviewTitle">
+              <span>Live Edit Preview:</span>
           </div>
-          <div className="editSubredditButtonDiv">
-            <button className="editSubredditButton" type="submit">
-              Edit Post
-            </button>
+        <div className="editSubredditPreview">
+          <div className="innerSubredditPreview">
+            <div className="editBannerPreview">
+              <img
+                src={bannerImage}
+                onError={(e) => {
+                  e.currentTarget.src = "https://i.imgur.com/ymEibzq.png";
+                }}
+              ></img>
+            </div>
+            <div className="editSubredditIconPreview">
+                <div className="editIconBackground">
+                    <img src={iconUrl}                       onError={(e) => {
+                        e.currentTarget.src = "https://i.imgur.com/hkMSod3.png";
+                      }}></img>
+                </div>
+            </div>
           </div>
-        </form>
+        </div>
+          <div className="editSubredditPreviewNote">
+              <span>*Empty / Broken images will recieve a default icon and banner</span>
+          </div>
+
         </div>
       </div>
     );

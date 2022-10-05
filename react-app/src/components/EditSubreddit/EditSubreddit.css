@@ -1,13 +1,14 @@
 .editSubredditFormContainer {
   display: flex;
-  flex-direction: column;
-  width: 400px;
+  flex-direction: row;
+  width: 600px;
   height: 450px;
 }
 
 .editSubredditFormTitle {
   /* border: 1px solid red; */
-  margin: auto;
+  /* margin: auto; */
+  margin-left: 25px;
 }
 
 .editSubredditFormTitle span {
@@ -51,4 +52,82 @@
   margin-top: 12px;
   height: 35px;
   width: 80px;
+}
+
+.editSubredditPreview {
+  display: flex;
+  /* border: 1px solid red; */
+  border: 1px solid rgb(209, 199, 199);
+  width: 90%;
+  height: 100px;
+  margin: auto;
+  margin-bottom: 0px;
+}
+
+.innerSubredditPreview{
+  width: 100%;
+}
+
+.editBannerPreview img {
+  width: 100%;
+}
+
+.editSubredditIconPreview {
+  /* border: 1px solid red; */
+  position: absolute ;
+  display: flex;
+  width: 20%;
+  height: 10%;
+  margin-left: 12px;
+  top: 13.5rem;
+}
+
+.editIconBackground{
+  border-radius: 50%;
+  position: absolute;
+  /* border: 1px solid red; */
+  height: 30px;
+  width: 35px;
+  background-color:white ;
+}
+
+.editIconBackground img {
+  border-radius: 50% ;
+  height: 29px;
+  width: 34px;
+  top: .1rem;
+  margin-left: .4px;
+  position: absolute;
+  z-index: 2;
+}
+
+
+.outerEditSubredditPreview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 1px solid red; */
+  border: 1px solid rgb(209, 199, 199);
+  width: 80%;
+  height: 230px;
+  margin: auto;
+  margin-right: 20px;
+}
+
+.editSubredditPreviewTitle span {
+  margin-left: 10px;
+  text-decoration: underline;
+}
+
+.editSubredditPreviewNote {
+  /* border: 1px solid red; */
+  height: 25px;
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.editSubredditPreviewNote span {
+  font-size: 12px;
+  font-weight: bold;
 }
