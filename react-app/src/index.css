@@ -41,7 +41,6 @@ label, input {
 input {
   border: 0;
   font-family: inherit;
-  /* -webkit-appearance: none; */
   padding: 0;
   cursor: text;
   font-size: 1.2em;
