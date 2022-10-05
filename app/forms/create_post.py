@@ -1,7 +1,7 @@
 from xml.dom import ValidationErr
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.validators import DataRequired, url, ValidationError
+from wtforms.validators import DataRequired, url, ValidationError, Length
 from wtforms.fields import (
     BooleanField, SelectField, DateField, StringField, PasswordField, SubmitField, TextAreaField, TimeField, IntegerField, TextAreaField, RadioField
 )
@@ -29,13 +29,13 @@ def type_check(form, field):
   if post_type_id == 2 and not img_url.endswith(validImageUrls):
     raise ValidationError('Image URLs must be a valid type (.png, .jpg, jpeg)')
 
-  elif post_type_id == 3 and not link_url.endswith(validUrl):
+  elif post_type_id == 3 and not link_url.startswith(validUrl):
     raise ValidationError('Link URL invalid, must begin with "http://" or "https://"')
 
 
 class PostForm(FlaskForm):
   # subreddit
-  title = StringField("title", validators=[DataRequired()])
+  title = StringField("title", validators=[DataRequired(), Length(min=3, max=130, message="Post title should be between 3 and 130 characters long!")])
   img_url = StringField("img_url")
   link_url = StringField("link_url")
   text = TextAreaField("text")
