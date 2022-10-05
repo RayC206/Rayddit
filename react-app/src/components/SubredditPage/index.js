@@ -95,7 +95,7 @@ const SubredditPage = () => {
               <img
                 src={subreddit?.banner_img}
                 onError={(e) => {
-                  e.currentTarget.src = "https://i.imgur.com/ymEibzq.png";
+                  e.currentTarget.src = "https://i.imgur.com/aQxmKOg.png";
                 }}
               ></img>
               <div className="subredditTitle">
@@ -116,20 +116,22 @@ const SubredditPage = () => {
                         {userOwnsSubreddit ? (
                           <div className="subredditButtonDiv">
                             <button
+                            className="editSubredditButton"
                               onClick={() =>
                                 setIsEditSubredditFormModalIsOpen(true)
                               }
                             >
-                              Edit subreddit
+                              Edit
                             </button>
                             <EditSubredditModal
                               isOpen={editSubredditFormModalIsOpen}
                               modalToggle={setIsEditSubredditFormModalIsOpen}
                             />
                             <button
+                            className="deleteSubredditButton"
                               onClick={() => deleteSubreddit(subreddit.id)}
                             >
-                              Delete subreddit
+                              Delete
                             </button>
                           </div>
                         ) : userJoinedSubreddit ? (

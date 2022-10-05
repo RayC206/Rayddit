@@ -23,6 +23,34 @@
   margin-left: 10px;
 }
 
+.subredditButtonDiv button {
+  width: 70px;
+  border-radius: 9999px;
+  border-style:none ;
+  color: white;
+  margin-left: 10px;
+}
+
+.editSubredditButton {
+  background-color: rgb(0,121,211);
+}
+
+.editSubredditButton:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
+  background-color: rgb(5, 83, 142);
+  cursor: pointer;
+}
+
+.deleteSubredditButton {
+  background-color: rgb(222, 47, 47);
+}
+
+.deleteSubredditButton:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
+  background-color: rgb(156, 20, 20);
+  cursor: pointer;
+}
+
 .subredditBanner {
   display: flex;
   flex-direction: column;
@@ -121,7 +149,7 @@
   /* border: 1px solid red; */
   height: 50px;
   width: 310px;
-  background-color: rgb(161, 162, 180);
+  background-color: rgb(0,121,211);
   border-radius: 2px;
 }
 
@@ -169,15 +197,30 @@
   width: 290px;
   height: 40px;
   color: #f2f4f5;
-  background-color: rgb(161, 162, 180);
+  background-color: rgb(0,121,211);
 }
 
 .createSubredditPost:hover {
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
-  background-color: rgb(152, 153, 193);
+  background-color: rgb(5, 83, 142);
   cursor: pointer;
 }
 
 .joinToggleSubredditButton {
+  border-radius: 9999px;
   margin-left: 15px;
+  display: flex;
+  align-items: center;
+  font-family: verdana, sans-serif;
+  font-size: 14px;
+  justify-content: center;
+  color: #f2f4f5;
+  border-style: none;
+  background-color: rgb(0,121,211);
+}
+
+.joinToggleSubredditButton:hover{
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
+  background-color: rgb(5, 83, 142);
+  cursor: pointer;
 }

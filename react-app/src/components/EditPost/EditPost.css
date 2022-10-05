@@ -31,7 +31,7 @@
 }
 
 .editFormTitle {
-  font-size: 22px;
+  font-size: 18px;
   font-family: Avenir Next, Avenir, SegoeUI, sans-serif;
   border-bottom: .5 solid lightgrey ;
 }
@@ -48,14 +48,23 @@
 
 .innerPostEditContainer span {
   font-size: 15px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Avenir Next, Avenir, SegoeUI, sans-serif;
   color: rgba(0, 0, 0, 0.565);
 }
 
-.editProfileButton {
+.editPostFormButton {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-right: 10px;
+}
+
+.editPostFormButton button {
+  color: white;
+  background-color: rgb(0,121,211);
+  border-style: none;
+  height: 30px;
+  border-radius: 9999px;
+  width: 90px;
 }
 
 .createTitleInputBox {

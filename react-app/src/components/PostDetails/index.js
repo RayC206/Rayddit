@@ -106,7 +106,7 @@ const PostDetails = () => {
                         src={subreddit.banner_img}
                         onError={(e) => {
                           e.currentTarget.src =
-                            "https://i.imgur.com/ymEibzq.png";
+                            "https://i.imgur.com/aQxmKOg.png";
                         }}
                       ></img>
                     </div>

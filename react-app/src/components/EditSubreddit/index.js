@@ -123,7 +123,7 @@ const EditSubreddit = ({ onClose }) => {
               <img
                 src={bannerImage}
                 onError={(e) => {
-                  e.currentTarget.src = "https://i.imgur.com/ymEibzq.png";
+                  e.currentTarget.src = "https://i.imgur.com/aQxmKOg.png";
                 }}
               ></img>
             </div>

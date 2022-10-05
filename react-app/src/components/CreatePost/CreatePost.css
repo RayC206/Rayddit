@@ -103,7 +103,8 @@
 
 .createButtonText:focus{
   font-weight: 400px;
-  border-bottom: 3px solid   #6b9abc3e;
+  color: rgb(0,121,211);
+  border-bottom: 3px solid rgb(0,121,211);
   background-color: #6b9abc3e;
 }
 .createButtonText:hover {
@@ -112,7 +113,8 @@
 
 .createButtonImage:focus {
   font-weight: 400px;
-  border-bottom: 3px solid   #6b9abc3e;
+  color:rgb(0,121,211);
+  border-bottom: 3px solid   rgb(0,121,211);
   background-color: #6b9abc3e;
 }
 
@@ -122,7 +124,8 @@
 
 .createButtonLink:focus {
   font-weight: 400px;
-  border-bottom: 3px solid   #6b9abc3e;
+  color: rgb(0,121,211);
+  border-bottom: 3px solid   rgb(0,121,211);
   background-color: #6b9abc3e;
 }
 

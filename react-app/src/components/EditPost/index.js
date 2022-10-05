@@ -137,8 +137,8 @@ const EditPost = () => {
                   </label>
                 )}
 
-                <div className="editProfileButton">
-                  <button className="editProfileButton" type="submit">
+                <div className="editPostFormButton">
+                  <button type="submit">
                     Edit Post
                   </button>
                 </div>

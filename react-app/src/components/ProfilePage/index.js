@@ -78,8 +78,9 @@ const ProfilePage = () => {
                 return (
                   <>
                     {userOwnsProfile && (
-                      <div>
+                      <div className="editDeletePostButtonDiv">
                         <button
+                        className="editPostButton"
                           onClick={() => {
                             editPost(post.id);
                           }}
@@ -87,6 +88,7 @@ const ProfilePage = () => {
                           Edit
                         </button>
                         <button
+                          className="deletePostButton"
                           onClick={() => {
                             deletePost(post.id);
                           }}
