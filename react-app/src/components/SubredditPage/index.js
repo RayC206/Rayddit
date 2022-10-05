@@ -114,7 +114,7 @@ const SubredditPage = () => {
                         {subreddit.name}
                         {/* <div className="joinToggleSubreddit"> */}
                         {userOwnsSubreddit ? (
-                          <>
+                          <div className="subredditButtonDiv">
                             <button
                               onClick={() =>
                                 setIsEditSubredditFormModalIsOpen(true)
@@ -131,7 +131,7 @@ const SubredditPage = () => {
                             >
                               Delete subreddit
                             </button>
-                          </>
+                          </div>
                         ) : userJoinedSubreddit ? (
                           <button
                             className="joinToggleSubredditButton"

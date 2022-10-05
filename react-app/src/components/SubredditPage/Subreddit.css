@@ -16,6 +16,13 @@
   margin-right: 10px;
   border-radius: 4px;
 }
+
+.subredditButtonDiv {
+  /* border: 1px solid red; */
+  display: flex;
+  margin-left: 10px;
+}
+
 .subredditBanner {
   display: flex;
   flex-direction: column;
@@ -85,6 +92,10 @@
 }
 
 .bigSubredditName {
+  /* border: 1px solid red; */
+  display: flex;
+  width: 1px;
+  justify-content: space-between;
   font-family: verdana,sans-serif;
   font-size: 24px;
   padding-bottom: 5px;
