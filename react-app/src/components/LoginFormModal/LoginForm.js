@@ -4,19 +4,23 @@ import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
 import "./LoginForm.css";
 import logo from "../Navigation/logo.png";
+import SignUpFormModal from "../SignUpFormModal";
 
-const LoginForm = () => {
+const LoginForm = ({ onClose }) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  const [signUpFormModalIsOpen, setSignUpFormModalIsOpen] = useState(false);
 
-  const onLogin = async (e) => {
+  const onLogin = async (e, isDemoUser = false) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
+    } else {
+      onClose();
     }
   };
 
@@ -44,11 +48,14 @@ const LoginForm = () => {
         <form onSubmit={onLogin} className="loginForm">
           <div>
             {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
+              <div className="errorDiv" key={ind}>
+                {" "}
+                - {error}
+              </div>
             ))}
           </div>
-          <div className="loginEmailDiv">
-            {/* <label htmlFor="email">Email</label> */}
+          <div className="loginEmailDiv field">
+            {/* <label>Email</label> */}
             <input
               className="loginEmailInput"
               name="email"
@@ -58,7 +65,7 @@ const LoginForm = () => {
               onChange={updateEmail}
             />
           </div>
-          <div className="loginPasswordDiv">
+          <div className="loginPasswordDiv field">
             {/* <label htmlFor="password">Password</label> */}
             <input
               className="loginPasswordInput"
@@ -69,19 +76,37 @@ const LoginForm = () => {
               onChange={updatePassword}
             />
           </div>
-          <div className="loginButtonDiv">
-            <button type="submit">Login</button>
-            <button
-                  className="demoButton"
-                  type="submit"
-                  onClick={() => {
-                    setEmail("demo@aa.io");
-                    setPassword("password");
-                  }}
-                >
-                  {" "}
-                  Demo User {" "}
-                </button>
+          <div className="loginButtonsDiv">
+            <div className="loginDemoButtons">
+              <button type="submit">Login</button>
+
+              <button
+                className="demoButton"
+                type="submit"
+                onClick={() => {
+                  setEmail("demo@aa.io");
+                  setPassword("password");
+                }}
+              >
+                {" "}
+                Demo User{" "}
+              </button>
+            </div>
+            <div className="loginSignUpDiv">
+              <div>
+                <span>Need an Account?</span>
+              </div>
+              <button
+                className="loginSignUpButton"
+                onClick={() => setSignUpFormModalIsOpen(true)}
+              >
+                Sign Up
+              </button>
+              <SignUpFormModal
+                isOpen={signUpFormModalIsOpen}
+                modalToggle={setSignUpFormModalIsOpen}
+              />
+            </div>
           </div>
         </form>
       </div>

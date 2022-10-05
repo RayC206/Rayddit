@@ -25,6 +25,7 @@ const PostCard = ({ post, modalToggle }) => {
   const [isDownvotedByUser, setIsDownvotedByUser] = useState(false);
 
   useEffect(() => {
+    setIsUpvotedByUser(false);
     post.votes.forEach((vote) => {
       if (sessionUser && sessionUser.id === vote.user_id) {
         if (vote.value === 1) {
@@ -35,7 +36,7 @@ const PostCard = ({ post, modalToggle }) => {
         return;
       }
     });
-  }, [post]);
+  }, [post, sessionUser]);
 
   const upvotePost = (postId) => {
     if (!sessionUser) {
@@ -123,7 +124,12 @@ const PostCard = ({ post, modalToggle }) => {
           <div className="postTimeago">{post.created_at_timeago}</div>
         </div>
         <div className="postTitle" onClick={(e) => postDetailPage(post.id)}>
-         <span className="postTitleSpan" onClick={(e) => postDetailPage(post.id)}>{post.title}</span>
+          <span
+            className="postTitleSpan"
+            onClick={(e) => postDetailPage(post.id)}
+          >
+            {post.title}
+          </span>
         </div>
         <div className="postContent" onClick={(e) => postDetailPage(post.id)}>
           {(() => {

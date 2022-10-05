@@ -54,5 +54,22 @@
   font-size: 22px;
   padding: 10px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.innerProfileInfoDiv {
+  display: flex;
+  flex-direction: column-reverse;
 
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid red; */
+}
+
+.profileCreatePostDiv {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  width: 100%;
+  align-items: center;
+  margin-bottom: 2rem;
+  /* margin: auto; */
 }

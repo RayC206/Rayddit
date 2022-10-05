@@ -43,7 +43,7 @@ const CreateSubreddit = () => {
       <form className="subredditForm" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error,idx) =>(
-            <li key={idx}>
+            <li className="errorDiv" key={idx}>
               {error}
             </li>
           ))}
@@ -74,7 +74,7 @@ const CreateSubreddit = () => {
           <input
           className="createSubredditInput"
             type = "text"
-            placeholder = "Icon URL (Optional, Default Icon will be given)"
+            placeholder = "Icon URL (Optional)"
             value={iconUrl}
             onChange={(e) => setIconUrl(e.target.value)}
           />
@@ -84,7 +84,7 @@ const CreateSubreddit = () => {
           <input
           className="createSubredditInput"
             type = "text"
-            placeholder = "Banner Image URL (Optional, Default Banner will be given)"
+            placeholder = "Banner Image URL (Optional)"
             value={bannerImage}
             onChange={(e) => setBannerImage(e.target.value)}
           />

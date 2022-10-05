@@ -80,7 +80,7 @@ const CreatePost = () => {
         <div className="createPostTitle">Create a Post</div>
         <ul>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li className="errorDiv"key={idx}>{error}</li>
           ))}
         </ul>
         <div className="subredditDropdownDiv">

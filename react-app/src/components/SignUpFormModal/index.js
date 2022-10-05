@@ -1,17 +1,17 @@
 import React from "react";
 import { Modal } from "../../context/Modal";
-import LoginForm from "./LoginForm";
+import SignUpForm from "./SignUpForm";
 
-function LoginFormModal({ isOpen, modalToggle }) {
+function SignUpFormModal({ isOpen, modalToggle }) {
   return (
     <>
       {isOpen && (
         <Modal onClose={() => modalToggle(false)}>
-          <LoginForm onClose={() => modalToggle(false)}/>
+          <SignUpForm onClose={() => modalToggle(false)} />
         </Modal>
       )}
     </>
   );
 }
 
-export default LoginFormModal;
+export default SignUpFormModal;

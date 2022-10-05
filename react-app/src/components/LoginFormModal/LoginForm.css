@@ -42,6 +42,7 @@
 .loginEmailDiv {
   display: flex;
   justify-content: center;
+  margin-left: 10px;
   /* border: 1px solid red; */
   width: 100%;
   height: 30px;
@@ -55,6 +56,7 @@
 .loginPasswordDiv {
   display: flex;
   justify-content: center;
+  margin-left: 10px;
   /* border: 1px solid red; */
   width: 100%;
   height: 30px;
@@ -65,7 +67,7 @@
   width: 90%;
 }
 
-.loginButtonDiv{
+.loginButtonsDiv{
   /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
@@ -73,11 +75,45 @@
   height: 55%;
 }
 
-.loginButtonDiv > button {
+.loginDemoButtons {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+}
+
+.loginDemoButtons > button {
   height: 100%;
   width: 40%;
 }
 
-.demoButton {
-  margin-top: 12px;
+.loginSignUpDiv {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  /* border: 1px solid red; */
+  margin-top: 25px;
+  align-items: center;
+}
+
+.loginSignUpDiv span {
+  font-size: 13px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.loginSignUpButton {
+  margin-top: 5px;
+  width: 80px;
+  border-radius: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.loginSignUpButton{
+  border-color: #3498db;
+  color: #fff;
+  box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+}
+.loginSignUpButton:active {
+  box-shadow:  rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
