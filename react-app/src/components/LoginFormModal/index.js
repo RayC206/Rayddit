@@ -7,7 +7,7 @@ function LoginFormModal({ isOpen, modalToggle }) {
     <>
       {isOpen && (
         <Modal onClose={() => modalToggle(false)}>
-          <LoginForm />
+          <LoginForm onClose={() => modalToggle(false)}/>
         </Modal>
       )}
     </>

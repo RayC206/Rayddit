@@ -5,18 +5,20 @@ import { login } from "../../store/session";
 import "./LoginForm.css";
 import logo from "../Navigation/logo.png";
 
-const LoginForm = () => {
+const LoginForm = ({ onClose }) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
-  const onLogin = async (e) => {
+  const onLogin = async (e, isDemoUser = false) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
+    } else {
+      onClose();
     }
   };
 
@@ -72,16 +74,16 @@ const LoginForm = () => {
           <div className="loginButtonDiv">
             <button type="submit">Login</button>
             <button
-                  className="demoButton"
-                  type="submit"
-                  onClick={() => {
-                    setEmail("demo@aa.io");
-                    setPassword("password");
-                  }}
-                >
-                  {" "}
-                  Demo User {" "}
-                </button>
+              className="demoButton"
+              type="submit"
+              onClick={() => {
+                setEmail("demo@aa.io");
+                setPassword("password");
+              }}
+            >
+              {" "}
+              Demo User{" "}
+            </button>
           </div>
         </form>
       </div>
