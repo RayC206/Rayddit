@@ -110,7 +110,7 @@
 .postContent {
   padding-bottom: 5px;
   word-break: break-all;
-  
+
 }
 
 .postUsername {
@@ -205,8 +205,8 @@
 .homeSubredditName {
   padding-left: 15px;
   align-self: center;
-  font-size: 15px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 17px;
+  font-family: Avenir Next, Avenir, SegoeUI, sans-serif;
 }
 
 
