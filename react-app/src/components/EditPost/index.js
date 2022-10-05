@@ -73,67 +73,114 @@ const EditPost = () => {
 
   if (postLoaded) {
     return (
-      <div className="editPostFormContainer">
-        <form className="postEditForm" onSubmit={handleSubmit}>
-          <ul>
-            <div className="editPostFormTitle"> Edit Post:</div>
-            {errors.map((error, idx) => (
-              <li className="editPost_li" key={idx}>
-                {error}
-              </li>
-            ))}
-          </ul>
-          <label>
-            <span>title:</span>
-            <input
-              type="text"
-              placeholder="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </label>
-          {postType === POST_TYPE_IMAGE && (
-            <label>
-              <span>Image URL:</span>
-              <input
-                type="text"
-                placeholder="Image URL"
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
-              />
-            </label>
-          )}
+      <div className="editPostFormPageContainer">
+        <div className="innerEditPostFormPageContainer">
+          <div className="editPostFormContainer">
+            <div className="editPostFormTitle">
+              <span className="editFormTitle">Edit Post:</span>
+            </div>
+            <form className="postEditForm" onSubmit={handleSubmit}>
+              <ul>
+                {errors.map((error, idx) => (
+                  <li className="editPost_li" key={idx}>
+                    {error}
+                  </li>
+                ))}
+              </ul>
+              <div className="innerPostEditContainer">
+                <label>
+                  <span className="editFormTitleSpan">Title:</span>
+                  <input
+                    className="createTitleInputBox"
+                    type="text"
+                    placeholder="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                  />
+                </label>
+                {postType === POST_TYPE_IMAGE && (
+                  <label>
+                    <span className="editFormTitleSpan">Image:</span>
+                    <input
+                      className="createTitleInputBox"
+                      type="text"
+                      placeholder="Image URL"
+                      value={imageUrl}
+                      onChange={(e) => setImageUrl(e.target.value)}
+                    />
+                  </label>
+                )}
 
-          {postType === POST_TYPE_LINK && (
-            <label>
-              <span>Link URL:</span>
-              <input
-                type="text"
-                placeholder="Link URL"
-                value={linkUrl}
-                onChange={(e) => setLinkUrl(e.target.value)}
-              />
-            </label>
-          )}
-          {postType === POST_TYPE_TEXT && (
-            <label>
-              <span>Text:</span>
-              <input
-                type="text"
-                placeholder="Text"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-              />
-            </label>
-          )}
+                {postType === POST_TYPE_LINK && (
+                  <label>
+                    <span className="editFormTitleSpan">Link URL:</span>
+                    <input
+                      className="createTitleInputBox"
+                      type="text"
+                      placeholder="Link URL"
+                      value={linkUrl}
+                      onChange={(e) => setLinkUrl(e.target.value)}
+                    />
+                  </label>
+                )}
+                {postType === POST_TYPE_TEXT && (
+                  <label>
+                    <span className="editFormTitleSpan">Text:</span>
+                    <textarea
+                      className="createTextInputBox"
+                      type="text"
+                      placeholder="Text"
+                      value={text}
+                      onChange={(e) => setText(e.target.value)}
+                    />
+                  </label>
+                )}
 
-          <div className="editProfileButton">
-            <button className="editProfileButton" type="submit">
-              Edit Post
-            </button>
+                <div className="editProfileButton">
+                  <button className="editProfileButton" type="submit">
+                    Edit Post
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
+        <div className="editPreviewContainer">
+          <div className="editPreviewSpanDiv">
+            <span>Edit Preview:</span>
+          </div>
+          {postType === POST_TYPE_TEXT && (
+            <div className="editPreviewContent">
+              <div className="editPreviewTitle">
+                <span>"{title}"</span>
+              </div>
+              <div className="editPreviewText">
+                <span>"{text}"</span>
+              </div>
+            </div>
+          )}
+          {postType === POST_TYPE_IMAGE && (
+            <div className="editPreviewContent">
+              <div className="editPreviewTitle">
+                <span>"{title}"</span>
+              </div>
+              <div className="editPreviewImage">
+                <img src={imageUrl}></img>
+              </div>
+            </div>
+          )}
+          {postType === POST_TYPE_LINK && (
+            <div className="editPreviewContent">
+              <div className="editPreviewTitle">
+                <span>"{title}"</span>
+              </div>
+              <div className="editPreviewLink">
+                <a href={linkUrl}>{linkUrl}</a>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     );
   } else {
