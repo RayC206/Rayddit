@@ -10,6 +10,7 @@ import { getAllSubredditsPostsRequest } from "../../store/posts";
 import createIcon from "../Homepage/createIcon.png";
 import PostCard from "../PostCard";
 import LoginFormModal from "../LoginFormModal";
+import EditSubredditModal from "../EditSubreddit/EditSubredditModal";
 
 import "./Subreddit.css";
 
@@ -24,6 +25,8 @@ const SubredditPage = () => {
   const sessionUser = useSelector((state) => state.session.user);
 
   const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
+  const [editSubredditFormModalIsOpen, setIsEditSubredditFormModalIsOpen] =
+    useState(false);
   const [subredditLoaded, setSubredditLoaded] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [userOwnsSubreddit, setUserOwnsSubreddit] = useState(false);
@@ -113,10 +116,16 @@ const SubredditPage = () => {
                         {userOwnsSubreddit ? (
                           <>
                             <button
-                              onClick={() => editSubredditPage(subreddit.id)}
+                              onClick={() =>
+                                setIsEditSubredditFormModalIsOpen(true)
+                              }
                             >
                               Edit subreddit
                             </button>
+                            <EditSubredditModal
+                              isOpen={editSubredditFormModalIsOpen}
+                              modalToggle={setIsEditSubredditFormModalIsOpen}
+                            />
                             <button
                               onClick={() => deleteSubreddit(subreddit.id)}
                             >

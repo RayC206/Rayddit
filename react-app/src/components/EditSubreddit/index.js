@@ -8,7 +8,7 @@ import {
 
 import './EditSubreddit.css'
 
-const EditSubreddit = () => {
+const EditSubreddit = ({onClose}) => {
   let { subredditId } = useParams();
   subredditId = Number(subredditId);
   const dispatch = useDispatch();
@@ -37,7 +37,8 @@ const EditSubreddit = () => {
   }, [dispatch]);
 
   if (submitSuccess) {
-    return <Redirect to={`/r/${subreddit.id}`} />;
+    onClose()
+    // return <Redirect to={`/r/${subreddit.id}`} />;
   }
 
   const handleSubmit = (e) => {
@@ -64,26 +65,28 @@ const EditSubreddit = () => {
   if (subredditLoaded) {
     return (
       <div className="editSubredditFormContainer">
+        <div className="innerEditSubredditFormContainer">
         <form className="subredditEditForm" onSubmit={handleSubmit}>
+            <div className="editSubredditFormTitle"><span>Edit Subreddit:</span></div>
           <ul>
-            <div className="editSubredditFormTitle">Edit Subreddit</div>
             {errors.map((error, idx) => (
-              <li className="editPost_li" key={idx}>
+              <li className="errorDiv" key={idx}>
                 {error}
               </li>
             ))}
           </ul>
-          <label>
+          <div className="editFormInputContainer">
             <span>Description:</span>
-            <input
+          <label>
+            <textarea
               type="text"
               placeholder="Description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </label>
-          <label>
             <span>Icon URL:</span>
+          <label>
             <input
               type="text"
               placeholder="Icon image URL"
@@ -91,8 +94,8 @@ const EditSubreddit = () => {
               onChange={(e) => setIconUrl(e.target.value)}
             />
           </label>
-          <label>
             <span>Banner Image URL:</span>
+          <label>
             <input
               type="text"
               placeholder="Banner Image URL"
@@ -100,12 +103,14 @@ const EditSubreddit = () => {
               onChange={(e) => setBannerImage(e.target.value)}
             />
           </label>
-          <div className="editProfileButton">
-            <button className="editProfileButton" type="submit">
+          </div>
+          <div className="editSubredditButtonDiv">
+            <button className="editSubredditButton" type="submit">
               Edit Post
             </button>
           </div>
         </form>
+        </div>
       </div>
     );
   } else {
