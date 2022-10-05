@@ -4,13 +4,15 @@ import { useSelector } from "react-redux";
 import LogoutButton from "../auth/LogoutButton";
 import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
+import SignUpFormModal from "../SignUpFormModal";
 import "./NavBar.css";
 import logo from "./logo.png";
-import raydittLogo from "./raydditlogo.png"
+import raydittLogo from "./raydditlogo.png";
 
 const NavBar = ({ isLoaded }) => {
   const sessionUser = useSelector((state) => state.session.user);
   const [loginFormModalIsOpen, setLoginFormModalIsOpen] = useState(false);
+  const [signUpFormModalIsOpen, setSignUpFormModalIsOpen] = useState(false);
 
   let sessionLinks;
   if (sessionUser) {
@@ -35,9 +37,18 @@ const NavBar = ({ isLoaded }) => {
           isOpen={loginFormModalIsOpen}
           modalToggle={setLoginFormModalIsOpen}
         />
-        <button className="signUpButton">
-          <Link to="/sign-up">Sign Up</Link>
+        <button
+          // className="signUpButton"
+          onClick={() => setSignUpFormModalIsOpen(true)}
+        >
+          {" "}
+          Sign up
+          {/* <Link to="/sign-up">Sign Up</Link> */}
         </button>
+        <SignUpFormModal
+          isOpen={signUpFormModalIsOpen}
+          modalToggle={setSignUpFormModalIsOpen}
+        />
       </div>
     );
   }
@@ -48,7 +59,7 @@ const NavBar = ({ isLoaded }) => {
           <div id="logo_div">
             <NavLink exact to="/">
               {/* <img src={logo} alt="rayddit"></img> */}
-              <img className='raydditLogo'src={raydittLogo}></img>
+              <img className="raydditLogo" src={raydittLogo}></img>
             </NavLink>
           </div>
           {isLoaded && sessionLinks}
