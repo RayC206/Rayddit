@@ -39,7 +39,7 @@ const CreateSubreddit = () => {
   return (
     <div className="subredditFormPageContainer">
     <div className="subredditFormContainer">
-    <div className="createSubredditTitle">Create a Subreddit</div>
+    <div className="createSubredditTitle">Create a Subreddit:</div>
       <form className="subredditForm" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error,idx) =>(
@@ -49,11 +49,10 @@ const CreateSubreddit = () => {
           ))}
         </ul>
         <label>
-          <span>Name:</span>
+          <span>Subreddit Name:</span>
           <input
             className="createSubredditInput"
             type = "text"
-            placeholder = "Subreddit name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -91,7 +90,7 @@ const CreateSubreddit = () => {
         </label>
         <div className="createPostButtonDiv">
                   <button className="createPostButton" type="submit">
-                    Create New Subreddit
+                    Create
                   </button>
                 </div>
       </form>

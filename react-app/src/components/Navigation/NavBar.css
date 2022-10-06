@@ -69,7 +69,7 @@
   align-items: center;
   padding: 5px;
   margin-right: 1rem;
-  border-radius: 2px;
+  border-radius: 4px;
   height: 25px;
   /* border: 1px solid red; */
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
@@ -109,7 +109,7 @@
 #menu {
   cursor: pointer;
   position: absolute;
-  font-family: verdana,sans-serif;
+  font-family: Avenir Next, Avenir, SegoeUI, sans-serif;
   z-index: 2;
   top: 60px;
   right: 20px;
@@ -146,4 +146,53 @@
 }
 .loggedInUser:hover {
   cursor: default;
+}
+
+
+.signInButton {
+  font-family: Avenir Next, Avenir, SegoeUI, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  width: 120px;
+  height: 33px;
+  border-radius: 9999px;
+  border-style:none ;
+  color: white;
+  margin-left: 10px;
+  margin-right: 12px;
+  background-color: rgb(0,121,211);
+}
+
+.signInButton:hover{
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
+  background-color: rgb(5, 83, 142);
+  cursor: pointer;
+}
+
+.signInButton:active{
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
+  cursor: pointer;
+}
+
+.signUpButton {
+  font-family: Avenir Next, Avenir, SegoeUI, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  width: 120px;
+  height: 33px;
+  border-radius: 9999px;
+  border-style:none ;
+  color: rgb(0,121,211);
+  border: 2px solid rgb(0,121,211);
+  margin-left: 10px;
+  background-color: rgb(248,250,254);
+}
+
+.signUpButton:hover{
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
+  cursor: pointer;
+}
+
+.signUpButton:active{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }

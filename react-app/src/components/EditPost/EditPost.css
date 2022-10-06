@@ -66,6 +66,15 @@
   border-radius: 9999px;
   width: 90px;
 }
+.editPostFormButton button:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
+  background-color: rgb(5, 83, 142);
+  cursor: pointer;
+}
+
+.editPostFormButton button:active {
+  box-shadow:  rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
 
 .createTitleInputBox {
   margin-top: 5px;

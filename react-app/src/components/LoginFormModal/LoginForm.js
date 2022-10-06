@@ -78,7 +78,7 @@ const LoginForm = ({ onClose }) => {
           </div>
           <div className="loginButtonsDiv">
             <div className="loginDemoButtons">
-              <button type="submit">Login</button>
+              <button className="modalLoginButton"type="submit">Login</button>
 
               <button
                 className="demoButton"

@@ -29,16 +29,8 @@ const NavBar = ({ isLoaded }) => {
   } else {
     sessionLinks = (
       <div id="rightNav">
-        <button onClick={() => setLoginFormModalIsOpen(true)}>
-          {/* <Link to="/login">Log in</Link> */}
-          Log in
-        </button>
-        <LoginFormModal
-          isOpen={loginFormModalIsOpen}
-          modalToggle={setLoginFormModalIsOpen}
-        />
         <button
-          // className="signUpButton"
+          className="signUpButton"
           onClick={() => setSignUpFormModalIsOpen(true)}
         >
           {" "}
@@ -48,6 +40,17 @@ const NavBar = ({ isLoaded }) => {
         <SignUpFormModal
           isOpen={signUpFormModalIsOpen}
           modalToggle={setSignUpFormModalIsOpen}
+        />
+        <button
+          className="signInButton"
+          onClick={() => setLoginFormModalIsOpen(true)}
+        >
+          {/* <Link to="/login">Log in</Link> */}
+          Log In
+        </button>
+        <LoginFormModal
+          isOpen={loginFormModalIsOpen}
+          modalToggle={setLoginFormModalIsOpen}
         />
       </div>
     );
