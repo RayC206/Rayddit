@@ -139,10 +139,10 @@ const ProfilePage = () => {
                   </div>
                   <div className="cakeDay">
                     <div>
-                      <span>Cake Day:</span>
-                    </div>
+                      <span className="cakeDaySpan">Cake Day:</span>
                     <div>
-                      <span>{formatCakeDay(user.created_at)}</span>
+                      <span className="cakeDayDate">{formatCakeDay(user.created_at)}</span>
+                    </div>
                     </div>
                   </div>
                 </div>
