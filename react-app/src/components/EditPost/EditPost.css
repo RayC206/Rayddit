@@ -94,7 +94,7 @@
   font-size: 16px;
   font-family: Avenir Next, Avenir, SegoeUI, sans-serif;
   text-decoration: underline;
-  
+
 }
 .editPreviewSpanDiv {
   /* border: 1px solid red; */
@@ -126,6 +126,7 @@
   font-family: Avenir Next, Avenir, SegoeUI, sans-serif;
   word-break: break-all;
   overflow-y: scroll;
+  overflow: hidden;
 
 }
 
@@ -136,6 +137,7 @@
   padding: 10px;
   word-break: break-all;
   overflow-y: scroll;
+  overflow: hidden;
 }
 
 .editPreviewImage {

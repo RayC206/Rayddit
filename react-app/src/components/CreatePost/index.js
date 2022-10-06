@@ -240,7 +240,7 @@ const CreatePost = () => {
           <li className="ruleList">Behave like you would in real life</li>
           <li className="ruleList">Look for the original source of content</li>
           <li className="ruleList">Search for duplicates before posting</li>
-          <li className="ruleList">Report any bugs to the delevoper</li>
+          <li className="ruleList">Report any bugs to the developer</li>
         </ol>
       </div>
     </div>
