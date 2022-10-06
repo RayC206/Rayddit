@@ -28,5 +28,5 @@ def email_check(form,field):
 class SignUpForm(FlaskForm):
     username = StringField(
         'username', validators=[DataRequired(), username_exists, Length(min=4, max=12, message="Username must be length must between 4 and 12 characters!")])
-    email = StringField('email', validators=[DataRequired(), user_exists, email_check])
+    email = StringField('email', validators=[DataRequired(), user_exists, Email("Email address is not valid")])
     password = StringField('password', validators=[DataRequired(), Length(min=4, message="Password length must be greater than 4 characters")])

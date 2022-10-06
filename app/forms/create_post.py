@@ -19,9 +19,9 @@ def type_check(form, field):
   text = form.data['text']
   img_url = form.data['img_url']
   link_url = form.data['link_url']
-  if post_type_id == 1 and not text:
-    raise ValidationError('Text field is required for Text post type')
-  elif post_type_id == 2 and not img_url:
+  # if post_type_id == 1 and not text:
+  #   raise ValidationError('Text field is required for Text post type')
+  if post_type_id == 2 and not img_url:
     raise ValidationError('Image field is required for Image post type')
   elif post_type_id == 3 and not link_url:
     raise ValidationError('Link URL is required for Link post type')
@@ -35,7 +35,7 @@ def type_check(form, field):
 
 class PostForm(FlaskForm):
   # subreddit
-  title = StringField("title", validators=[DataRequired(), Length(min=3, max=130, message="Post title should be between 3 and 130 characters long!")])
+  title = StringField("title", validators=[DataRequired("Title is required!"), Length(min=3, max=130, message="Post title should be between 3 and 130 characters long!")])
   img_url = StringField("img_url")
   link_url = StringField("link_url")
   text = TextAreaField("text")

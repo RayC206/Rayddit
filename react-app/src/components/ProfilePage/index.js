@@ -82,7 +82,7 @@ const ProfilePage = () => {
     <div className="pageContainer">
       {postsLoaded ? (
         <>
-          {posts.length ? (
+          {posts.length || user ? (
             <div className="homePageDiv">
               <div className="rowOne">
                 {postsLoaded ? (
@@ -124,7 +124,7 @@ const ProfilePage = () => {
                 )}
               </div>
               <div className="rowTwo">
-                {user && (
+                {user ? (
                   <div className="userProfileInfo">
                     <div className="userProfileBanner"></div>
                     <div className="innerProfileInfoDiv">
@@ -140,20 +140,53 @@ const ProfilePage = () => {
                         </div>
                       )}
                       <div className="profileInfodDiv">
-                        <img src={user.profile_image}></img>
-                        <span>u/{user.username}</span>
+                        {user.profile_image ? (
+                          <img
+                            src={user.profile_image}
+                            alt="users pic"
+                            onError={(e) => {
+                              e.currentTarget.src =
+                                "https://i.imgur.com/n1eSrjP.jpg";
+                            }}
+                          ></img>
+                        ) : (
+                          <img
+                            src="https://i.imgur.com/n1eSrjP.jpg"
+                            alt="Error Pic"
+                          ></img>
+                        )}
+                        <span>
+                          {" "}
+                          {user.username ? (
+                            <span>r/{user.username}</span>
+                          ) : (
+                            <span>User not found!</span>
+                          )}{" "}
+                        </span>
                       </div>
                       <div className="cakeDay">
                         <div>
-                          <span className="cakeDaySpan">Cake Day:</span>
+                            {user.created_at && (
+
+                              <span className="cakeDaySpan">Cake Day:</span>
+                            )
+
+
+                          }
                           <div>
                             <span className="cakeDayDate">
                               {formatCakeDay(user.created_at)}
                             </span>
                           </div>
+
                         </div>
                       </div>
                     </div>
+                  </div>
+                ) : (
+                  <div>
+                    <ErrorPage />
+                    <h1>User Profile Does not exist</h1>
                   </div>
                 )}
                 {userOwnsProfile && (
