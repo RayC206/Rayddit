@@ -92,6 +92,8 @@ const LoginForm = ({ onClose }) => {
                 Demo User{" "}
               </button>
             </div>
+          </div>
+        </form>
             <div className="loginSignUpDiv">
               <div>
                 <span>Need an Account?</span>
@@ -107,8 +109,6 @@ const LoginForm = ({ onClose }) => {
                 modalToggle={setSignUpFormModalIsOpen}
               />
             </div>
-          </div>
-        </form>
       </div>
     </div>
   );
