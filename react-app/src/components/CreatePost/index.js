@@ -20,7 +20,7 @@ const CreatePost = () => {
   // let subredditId = Number(urlParams.get("subreddit_id"));
   // subredditId = subredditId > 0 ? subredditId : 1;
 
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [linkUrl, setLinkUrl] = useState(null);
   const [text, setText] = useState(null);
@@ -147,7 +147,7 @@ const CreatePost = () => {
                     <textarea
                       className="createTextInputBox"
                       type="text"
-                      placeholder="text"
+                      placeholder="Text (optional)"
                       value={text}
                       onChange={(e) => setText(e.target.value)}
                     />
