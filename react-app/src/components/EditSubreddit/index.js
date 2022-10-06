@@ -114,32 +114,36 @@ const EditSubreddit = ({ onClose }) => {
           </form>
         </div>
         <div className="outerEditSubredditPreview">
-        <div className="editSubredditPreviewTitle">
-              <span>Live Edit Preview:</span>
+          <div className="editSubredditPreviewTitle">
+            <span>Live Edit Preview:</span>
           </div>
-        <div className="editSubredditPreview">
-          <div className="innerSubredditPreview">
-            <div className="editBannerPreview">
-              <img
-                src={bannerImage}
-                onError={(e) => {
-                  e.currentTarget.src = "https://i.imgur.com/aQxmKOg.png";
-                }}
-              ></img>
-            </div>
-            <div className="editSubredditIconPreview">
+          <div className="editSubredditPreview">
+            <div className="innerSubredditPreview">
+              <div className="editBannerPreview">
+                <img
+                  src={bannerImage}
+                  onError={(e) => {
+                    e.currentTarget.src = "https://i.imgur.com/aQxmKOg.png";
+                  }}
+                ></img>
+              </div>
+              <div className="editSubredditIconPreview">
                 <div className="editIconBackground">
-                    <img src={iconUrl}                       onError={(e) => {
-                        e.currentTarget.src = "https://i.imgur.com/hkMSod3.png";
-                      }}></img>
+                  <img
+                    src={iconUrl}
+                    onError={(e) => {
+                      e.currentTarget.src = "https://i.imgur.com/hkMSod3.png";
+                    }}
+                  ></img>
                 </div>
+              </div>
             </div>
           </div>
-        </div>
           <div className="editSubredditPreviewNote">
-              <span>*Empty / Broken images will recieve a default icon and banner</span>
+            <span>
+              *Empty / Broken images will recieve a default icon and banner
+            </span>
           </div>
-
         </div>
       </div>
     );

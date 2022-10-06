@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Redirect } from "react-router-dom";
 import "./PostCard.css";
+import imgUrlBackup from "./brokenImageUpload.png";
 
 import { downvotePostRequest, upvotePostRequest } from "../../store/posts";
 
@@ -136,7 +137,15 @@ const PostCard = ({ post, modalToggle }) => {
             if (post.post_type_id === POST_TYPE_TEXT) {
               return <div className="postText">{post.text}</div>;
             } else if (post.post_type_id === POST_TYPE_IMAGE) {
-              return <img className="postImage" src={post.img_url} />;
+              return (
+                <img
+                  className="postImage"
+                  src={post.img_url}
+                  onError={(e) => {
+                    e.currentTarget.src = imgUrlBackup;
+                  }}
+                />
+              );
             } else if (post.post_type_id === POST_TYPE_LINK) {
               return (
                 <a className="postLinkurl" href={post.link_url}>
