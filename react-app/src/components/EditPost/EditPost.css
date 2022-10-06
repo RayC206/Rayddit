@@ -92,7 +92,9 @@
 .editPreviewSpanDiv span {
   margin-left: 3rem ;
   font-size: 16px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Avenir Next, Avenir, SegoeUI, sans-serif;
+  text-decoration: underline;
+  
 }
 .editPreviewSpanDiv {
   /* border: 1px solid red; */
