@@ -15,11 +15,18 @@ const Homepage = () => {
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const subredditInfo = useSelector((state) => Object.values(state.subreddits));
-  const posts = useSelector((state) => Object.values(state.posts));
-  console.log("HERE___");
-  console.log(subredditInfo);
-  console.log("POSTS");
-  console.log(posts);
+  const posts = useSelector((state) => {
+    let posts = Object.values(state.posts);
+    posts = posts.sort((postA, postB) =>
+      new Date(postA.created_at) < new Date(postB.created_at) ? 1 : -1
+    );
+
+    return posts;
+  });
+  // console.log("HERE___");
+  // console.log(subredditInfo);
+  // console.log("POSTS");
+  // console.log(posts);
 
   const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
@@ -81,8 +88,13 @@ const Homepage = () => {
           {postsLoaded ? (
             posts.length ? (
               posts.map((post) => {
-                console.log("herreeee");
-                console.log(post);
+                // console.log(post);
+                // console.log(
+                //   new Intl.DateTimeFormat("en", {
+                //     dateStyle: "medium",
+                //     timeStyle: "medium",
+                //   }).format(new Date(post.created_at))
+                // );
                 return (
                   <PostCard
                     post={post}

@@ -59,8 +59,8 @@ const EditPost = () => {
       subreddit_id: subreddit,
       post_type_id: postType,
     };
-    console.log("NEW POST DATA");
-    console.log(editedPostData);
+    // console.log("NEW POST DATA");
+    // console.log(editedPostData);
     return dispatch(editPostRequest(editedPostData)).then(async (res) => {
       if (!res.errors) {
         // error handling
@@ -138,9 +138,7 @@ const EditPost = () => {
                 )}
 
                 <div className="editPostFormButton">
-                  <button type="submit">
-                    Edit Post
-                  </button>
+                  <button type="submit">Edit Post</button>
                 </div>
               </div>
             </form>

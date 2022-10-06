@@ -25,6 +25,11 @@ const PostCard = ({ post, modalToggle }) => {
   const [isUpvotedByUser, setIsUpvotedByUser] = useState(false);
   const [isDownvotedByUser, setIsDownvotedByUser] = useState(false);
 
+  post.created_at = new Intl.DateTimeFormat("en", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(new Date(post.created_at));
+
   useEffect(() => {
     setIsUpvotedByUser(false);
     post.votes.forEach((vote) => {
@@ -122,7 +127,7 @@ const PostCard = ({ post, modalToggle }) => {
           >
             u/{post.username}
           </div>
-          <div className="postTimeago">{post.created_at_timeago}</div>
+          <div className="postTimeago">{post.created_at}</div>
         </div>
         <div className="postTitle" onClick={(e) => postDetailPage(post.id)}>
           <span

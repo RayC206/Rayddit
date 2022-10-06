@@ -5,6 +5,7 @@ import "./ProfilePage.css";
 import PostCard from "../PostCard";
 
 import { deletePostRequest, getUserPostsRequest } from "../../store/posts";
+import { getAllUsersSubredditsRequest } from "../../store/subreddits";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -13,15 +14,21 @@ const ProfilePage = () => {
   userId = Number(userId);
   const sessionUser = useSelector((state) => state.session.user);
   const posts = useSelector((state) => Object.values(state.posts));
+  const subreddits = useSelector((state) => Object.values(state.subreddits));
 
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [userOwnsProfile, setUserOwnsProfile] = useState(false);
   const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
   const [user, setUser] = useState([]);
+  const [userSubredditsLoaded, setUserSubredditsLoaded] = useState(false);
+  console.log(subreddits);
 
   useEffect(() => {
     dispatch(getUserPostsRequest(userId)).then(() => {
       setPostsLoaded(true);
+    });
+    dispatch(getAllUsersSubredditsRequest()).then(() => {
+      setUserSubredditsLoaded(true);
     });
   }, [dispatch, userId]);
 
@@ -49,7 +56,7 @@ const ProfilePage = () => {
     dispatch(deletePostRequest(postId));
   };
 
-    const createPostPage = () => {
+  const createPostPage = () => {
     if (!sessionUser) {
       setIsLoginFormModalIsOpen(true);
     } else {
@@ -80,7 +87,7 @@ const ProfilePage = () => {
                     {userOwnsProfile && (
                       <div className="editDeletePostButtonDiv">
                         <button
-                        className="editPostButton"
+                          className="editPostButton"
                           onClick={() => {
                             editPost(post.id);
                           }}
@@ -114,20 +121,17 @@ const ProfilePage = () => {
           {user && (
             <div className="userProfileInfo">
               <div className="userProfileBanner"></div>
-                <div className="innerProfileInfoDiv">
+              <div className="innerProfileInfoDiv">
                 <div className="profileCreatePostDiv">
-                      <a
-                        className="createSubredditPost"
-                        onClick={createPostPage}
-                      >
-                        {" "}
-                        create post
-                      </a>
-                    </div>
-              <div className="profileInfodDiv">
-                <img src={user.profile_image}></img>
-                <span>u/{user.username}</span>
-                    </div>
+                  <a className="createSubredditPost" onClick={createPostPage}>
+                    {" "}
+                    create post
+                  </a>
+                </div>
+                <div className="profileInfodDiv">
+                  <img src={user.profile_image}></img>
+                  <span>u/{user.username}</span>
+                </div>
               </div>
             </div>
           )}
