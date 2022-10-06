@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Redirect } from "react-router-dom";
 import { getAllSubredditsRequest } from "../../store/subreddits";
 import createIcon from "./createIcon.png";
+import linkedin from "./linkedin.png";
+import github from "./github.png";
 
 import "./Homepage.css";
 import PostCard from "../PostCard";
@@ -152,7 +154,25 @@ const Homepage = () => {
               </a>
             </div>
           </div>
-          {/* <div className="createSubreddit"></div> */}
+          <div className="developerInfoDiv">
+            <div className="developerInfoContent">
+              <span>Developer's Links:</span>
+            </div>
+            <div className="devLinkIcons">
+              <a className="iconContainer"  href="https://github.com/RayC206/Rayddit">
+                <div className="githubIcon">
+                  <img src={github}></img>
+                  <span>Github</span>
+                </div>
+              </a>
+              <a className="iconContainer"  href="https://www.linkedin.com/in/ray-charles-henry/">
+                <div className="linkedInIcon">
+                  <img src={linkedin}></img>
+                  <span>LinkedIn</span>
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

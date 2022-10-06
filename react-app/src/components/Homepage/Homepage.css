@@ -182,6 +182,10 @@
   cursor: pointer;
 }
 
+.homepageSubredditDescriptionDiv:active {
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
 .homepageSubredditDescription {
   display: flex;
   align-content: center;
@@ -242,4 +246,97 @@
 .homepageSubredditContent {
   overflow-y: scroll;
   height: 350px;
+}
+
+
+.developerInfoDiv {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  margin-top: 20px;
+  height: 150px;
+  width: 310px;
+}
+
+.developerInfoContent {
+  display: flex;
+  /* border: 1px solid red; */
+  color: white;
+  font-size: 12px;
+  background-color: rgb(1,121,211);
+  height: 20%;
+  width: 100%;
+  align-items: center;
+}
+
+.developerInfoContent span {
+  padding-left: 10px;
+}
+
+.devLinkIcons {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  height: 80%;
+  width: 100%;
+  /* padding: 12px; */
+}
+
+.iconContainer {
+  display: flex;
+  width: 100%;
+  /* border: 1px solid red; */
+  background-color: #f2f4f5;
+  height: 100%;
+  margin-bottom: 1px;
+  text-decoration: none;
+  color: black;
+}
+
+.iconContainer:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  cursor: pointer;
+}
+
+.iconContainer:active {
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.githubIcon {
+  display: flex;
+  flex-direction: row;
+  /* border: 1px solid red; */
+  width: 50%;
+  height: 100%;
+  margin-bottom: 10px ;
+  margin-left: 10px;
+  align-items: center;
+}
+
+.githubIcon span {
+  padding-left: 10px;
+}
+
+.githubIcon img {
+  height: 40px;
+  width: 40px;
+}
+
+.linkedInIcon{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* border: 1px solid red; */
+  width: 50%;
+  height: 100%;
+  margin-left: 10px;
+}
+
+.linkedInIcon span {
+  padding-left: 10px ;
+}
+
+.linkedInIcon img {
+  height: 40px;
+  width: 40px;
 }
