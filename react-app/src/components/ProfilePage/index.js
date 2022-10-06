@@ -23,7 +23,6 @@ const ProfilePage = () => {
   const [user, setUser] = useState([]);
   const [userSubredditsLoaded, setUserSubredditsLoaded] = useState(false);
 
-
   useEffect(() => {
     dispatch(getUserPostsRequest(userId)).then(() => {
       setPostsLoaded(true);
@@ -81,114 +80,131 @@ const ProfilePage = () => {
 
   return (
     <div className="pageContainer">
-      {postsLoaded && posts.length ? (
-        <div className="homePageDiv">
-          <div className="rowOne">
-            {postsLoaded ? (
-              posts.length ? (
-                posts.map((post) => {
-                  return (
-                    <>
-                      {userOwnsProfile && (
-                        <div className="editDeletePostButtonDiv">
-                          <button
-                            className="editPostButton"
-                            onClick={() => {
-                              editPost(post.id);
-                            }}
-                          >
-                            Edit
-                          </button>
-                          <button
-                            className="deletePostButton"
-                            onClick={() => {
-                              deletePost(post.id);
-                            }}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      )}
-                      <PostCard post={post} />
-                    </>
-                  );
-                })
-              ) : (
-                <div className="noPostsYetDiv">
-                  <span>No posts yet</span>
-                </div>
-              )
-            ) : (
-              <div>Loading...</div>
-            )}
-          </div>
-          <div className="rowTwo">
-            {user && (
-              <div className="userProfileInfo">
-                <div className="userProfileBanner"></div>
-                <div className="innerProfileInfoDiv">
-                  <div className="profileCreatePostDiv">
-                    <a className="createSubredditPost" onClick={createPostPage}>
-                      {" "}
-                      create post
-                    </a>
-                  </div>
-                  <div className="profileInfodDiv">
-                    <img src={user.profile_image}></img>
-                    <span>u/{user.username}</span>
-                  </div>
-                  <div className="cakeDay">
-                    <div>
-                      <span className="cakeDaySpan">Cake Day:</span>
-                    <div>
-                      <span className="cakeDayDate">{formatCakeDay(user.created_at)}</span>
-                    </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-            {userOwnsProfile && (
-              <div className="followedSubredditInfo">
-                <div className="aboutFollowedSubreddit">
-                  <span>Followed Subreddits</span>
-                </div>
-                <div className="followedSubredditContent">
-                  {userSubredditsLoaded &&
-                    subreddits.map((subreddit) => {
+      {postsLoaded ? (
+        <>
+          {posts.length ? (
+            <div className="homePageDiv">
+              <div className="rowOne">
+                {postsLoaded ? (
+                  posts.length ? (
+                    posts.map((post) => {
                       return (
                         <>
-                          <div
-                            className="followedSubredditDescriptionDiv"
-                            onClick={(e) => subredditsPage(subreddit.id)}
-                          >
-                            <div className="followedSubredditDescription">
-                              <div className="homeSubredditIcon">
-                                <img
-                                  src={subreddit.icon_url}
-                                  onError={(e) => {
-                                    e.currentTarget.src =
-                                      "https://i.imgur.com/hkMSod3.png";
-                                  }}
-                                ></img>
-                              </div>
-                              <div className="followedubredditName">
-                                {subreddit.name}
-                              </div>
+                          {userOwnsProfile && (
+                            <div className="editDeletePostButtonDiv">
+                              <button
+                                className="editPostButton"
+                                onClick={() => {
+                                  editPost(post.id);
+                                }}
+                              >
+                                Edit
+                              </button>
+                              <button
+                                className="deletePostButton"
+                                onClick={() => {
+                                  deletePost(post.id);
+                                }}
+                              >
+                                Delete
+                              </button>
                             </div>
-                          </div>
+                          )}
+                          <PostCard post={post} />
                         </>
                       );
-                    })}
-                </div>
+                    })
+                  ) : (
+                    <div className="noPostsYetDiv">
+                      <span>No posts yet</span>
+                    </div>
+                  )
+                ) : (
+                  <div>Loading...</div>
+                )}
               </div>
-            )}
-          </div>
-        </div>
+              <div className="rowTwo">
+                {user && (
+                  <div className="userProfileInfo">
+                    <div className="userProfileBanner"></div>
+                    <div className="innerProfileInfoDiv">
+                      {userOwnsProfile && (
+                        <div className="profileCreatePostDiv">
+                          <a
+                            className="createSubredditPost"
+                            onClick={createPostPage}
+                          >
+                            {" "}
+                            create post
+                          </a>
+                        </div>
+                      )}
+                      <div className="profileInfodDiv">
+                        <img src={user.profile_image}></img>
+                        <span>u/{user.username}</span>
+                      </div>
+                      <div className="cakeDay">
+                        <div>
+                          <span className="cakeDaySpan">Cake Day:</span>
+                          <div>
+                            <span className="cakeDayDate">
+                              {formatCakeDay(user.created_at)}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {userOwnsProfile && (
+                  <div className="followedSubredditInfo">
+                    <div className="aboutFollowedSubreddit">
+                      <span>Followed Subreddits</span>
+                    </div>
+                    <div className="followedSubredditContent">
+                      {userSubredditsLoaded &&
+                        subreddits.map((subreddit) => {
+                          return (
+                            <>
+                              <div
+                                className="followedSubredditDescriptionDiv"
+                                onClick={(e) => subredditsPage(subreddit.id)}
+                              >
+                                <div className="followedSubredditDescription">
+                                  <div className="homeSubredditIcon">
+                                    <img
+                                      src={subreddit.icon_url}
+                                      onError={(e) => {
+                                        e.currentTarget.src =
+                                          "https://i.imgur.com/hkMSod3.png";
+                                      }}
+                                    ></img>
+                                  </div>
+                                  <div className="followedubredditName">
+                                    {subreddit.name}
+                                  </div>
+                                </div>
+                              </div>
+                            </>
+                          );
+                        })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div>
+              <ErrorPage />
+              <h1>User Profile Does not exist</h1>
+            </div>
+          )}
+        </>
       ) : (
-        <div>
-          <ErrorPage />
-          <h1>User Profile Does not exist</h1>
+        <div className="loadingState">
+          <div>
+            <span>Loading...</span>
+          </div>
         </div>
       )}
     </div>

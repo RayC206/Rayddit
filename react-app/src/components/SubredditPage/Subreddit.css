@@ -224,3 +224,7 @@
   background-color: rgb(5, 83, 142);
   cursor: pointer;
 }
+
+.loadingState {
+  margin-top: 5rem;
+}
