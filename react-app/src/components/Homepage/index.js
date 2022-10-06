@@ -99,6 +99,7 @@ const Homepage = () => {
                 // );
                 return (
                   <PostCard
+                    key={post.id}
                     post={post}
                     modalToggle={setIsLoginFormModalIsOpen}
                   />
@@ -120,7 +121,7 @@ const Homepage = () => {
               {subredditLoaded &&
                 subredditInfo.map((subreddit) => {
                   return (
-                    <>
+                    <div key={subreddit.id}>
                       <div
                         className="homepageSubredditDescriptionDiv"
                         onClick={(e) => subredditsPage(subreddit.id)}
@@ -140,7 +141,7 @@ const Homepage = () => {
                           </div>
                         </div>
                       </div>
-                    </>
+                    </div>
                   );
                 })}
             </div>
