@@ -148,7 +148,7 @@
   align-content: center;
   /* border: 1px solid red; */
   height: 50px;
-  width: 310px;
+  width: 100%;
   background-color: rgb(0,121,211);
   border-radius: 2px;
 }
@@ -156,7 +156,7 @@
 .aboutSubreddit > span {
   align-self: center;
   padding-left: 15px;
-  font-family: verdana, sans-serif;
+  font-family: Avenir Next, Avenir, SegoeUI, sans-serif;
   font-weight: 500;
   color: #f2f4f5;
 }

@@ -84,15 +84,15 @@ def seed_posts():
     )
     post11 = Post(
         user_id=6,
-        subreddit_id = 5,
+        subreddit_id = 3,
         post_type_id = 2,
         title = 'Dyson enters aviation',
-        img_url = "https://preview.redd.it/cpw5pyfq8nr91.jpg",
+        img_url = "https://i.redd.it/cpw5pyfq8nr91.jpg",
         created_at = date.fromisoformat('2022-10-05')
     )
     post12 = Post(
         user_id=9,
-        subreddit_id = 5,
+        subreddit_id = 3,
         post_type_id = 2,
         title = 'Finally',
         img_url = "https://i.redd.it/95pda3ej3qm91.jpg",
@@ -100,7 +100,7 @@ def seed_posts():
     )
     post13 = Post(
         user_id=3,
-        subreddit_id = 5,
+        subreddit_id = 3,
         post_type_id = 2,
         title = 'Good luck to both of you',
         img_url = "https://i.redd.it/wld7f1cjhgn91.jpg",

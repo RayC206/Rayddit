@@ -13,6 +13,7 @@ import LoginFormModal from "../LoginFormModal";
 import EditSubredditModal from "../EditSubreddit/EditSubredditModal";
 
 import "./Subreddit.css";
+import ErrorPage from "../ErrorPage";
 
 const SubredditPage = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,8 @@ const SubredditPage = () => {
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [userOwnsSubreddit, setUserOwnsSubreddit] = useState(false);
   const [userJoinedSubreddit, setUserJoinedSubreddit] = useState(false);
+  console.log("SUBREDDITINFO");
+  console.log(subredditInfo);
 
   useEffect(() => {
     dispatch(getSubredditRequest(subredditId)).then(() => {
@@ -88,138 +91,146 @@ const SubredditPage = () => {
         isOpen={loginFormModalIsOpen}
         modalToggle={setIsLoginFormModalIsOpen}
       />
-      {subredditLoaded &&
-        subredditInfo.map((subreddit) => {
-          return (
-            <div className="subredditBanner">
-              <img
-                src={subreddit?.banner_img}
-                onError={(e) => {
-                  e.currentTarget.src = "https://i.imgur.com/aQxmKOg.png";
-                }}
-              ></img>
-              <div className="subredditTitle">
-                <div className="innerSubredditTitleDiv">
-                  <div className="titleDivContent">
-                    <div className="iconBackground"></div>
-                    <img
-                      className="subredditIcon"
-                      src={subreddit?.icon_url}
-                      onError={(e) => {
-                        e.currentTarget.src = "https://i.imgur.com/hkMSod3.png";
-                      }}
-                    ></img>
-                    <div className="subredditNameDiv">
-                      <div className="bigSubredditName">
-                        {subreddit.name}
-                        {/* <div className="joinToggleSubreddit"> */}
-                        {userOwnsSubreddit ? (
-                          <div className="subredditButtonDiv">
+      {subredditLoaded && subredditInfo[0] ? (
+        <>
+          {subredditInfo.map((subreddit) => {
+            return (
+              <div className="subredditBanner">
+                <img
+                  src={subreddit?.banner_img}
+                  onError={(e) => {
+                    e.currentTarget.src = "https://i.imgur.com/aQxmKOg.png";
+                  }}
+                ></img>
+                <div className="subredditTitle">
+                  <div className="innerSubredditTitleDiv">
+                    <div className="titleDivContent">
+                      <div className="iconBackground"></div>
+                      <img
+                        className="subredditIcon"
+                        src={subreddit?.icon_url}
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            "https://i.imgur.com/hkMSod3.png";
+                        }}
+                      ></img>
+                      <div className="subredditNameDiv">
+                        <div className="bigSubredditName">
+                          {subreddit.name}
+                          {/* <div className="joinToggleSubreddit"> */}
+                          {userOwnsSubreddit ? (
+                            <div className="subredditButtonDiv">
+                              <button
+                                className="editSubredditButton"
+                                onClick={() =>
+                                  setIsEditSubredditFormModalIsOpen(true)
+                                }
+                              >
+                                Edit
+                              </button>
+                              <EditSubredditModal
+                                isOpen={editSubredditFormModalIsOpen}
+                                modalToggle={setIsEditSubredditFormModalIsOpen}
+                              />
+                              <button
+                                className="deleteSubredditButton"
+                                onClick={() => deleteSubreddit(subreddit.id)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          ) : userJoinedSubreddit ? (
                             <button
-                            className="editSubredditButton"
-                              onClick={() =>
-                                setIsEditSubredditFormModalIsOpen(true)
-                              }
+                              className="joinToggleSubredditButton"
+                              onClick={() => joinSubreddit()}
                             >
-                              Edit
+                              Joined
                             </button>
-                            <EditSubredditModal
-                              isOpen={editSubredditFormModalIsOpen}
-                              modalToggle={setIsEditSubredditFormModalIsOpen}
-                            />
+                          ) : (
                             <button
-                            className="deleteSubredditButton"
-                              onClick={() => deleteSubreddit(subreddit.id)}
+                              className="joinToggleSubredditButton"
+                              onClick={() => joinSubreddit()}
                             >
-                              Delete
+                              Join
                             </button>
-                          </div>
-                        ) : userJoinedSubreddit ? (
-                          <button
-                            className="joinToggleSubredditButton"
-                            onClick={() => joinSubreddit()}
-                          >
-                            Joined
-                          </button>
-                        ) : (
-                          <button
-                            className="joinToggleSubredditButton"
-                            onClick={() => joinSubreddit()}
-                          >
-                            Join
-                          </button>
-                        )}
+                          )}
 
-                        {/* </div> */}
-                      </div>
-                      <div className="littleSubredditName">
-                        r/{subreddit.name}
+                          {/* </div> */}
+                        </div>
+                        <div className="littleSubredditName">
+                          r/{subreddit.name}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+            );
+          })}
+          <div className="homePageDiv">
+            <div className="rowOneSubreddit">
+              <div className="createPostDiv">
+                <div className="createIcon">
+                  <img src={createIcon}></img>
+                </div>
+                <div className="createInputContainer">
+                  <input
+                    type="text"
+                    placeholder="Create Post"
+                    className="inputBox"
+                    onClick={createPostPage}
+                  />
+                </div>
+              </div>
+              {postsLoaded ? (
+                posts.length ? (
+                  posts.map((post) => {
+                    return <PostCard post={post} />;
+                  })
+                ) : (
+                  <div>No posts yet</div>
+                )
+              ) : (
+                <div>Loading...</div>
+              )}
             </div>
-          );
-        })}
-      <div className="homePageDiv">
-        <div className="rowOneSubreddit">
-          <div className="createPostDiv">
-            <div className="createIcon">
-              <img src={createIcon}></img>
-            </div>
-            <div className="createInputContainer">
-              <input
-                type="text"
-                placeholder="Create Post"
-                className="inputBox"
-                onClick={createPostPage}
-              />
+            <div className="rowTwoSubreddit">
+              {subredditInfo.map((subreddit) => {
+                return (
+                  <>
+                    <div className="subredditInformation">
+                      <div className="aboutSubreddit">
+                        <span>About Community</span>
+                      </div>
+                      <div className="subredditDescriptionDiv">
+                        <div className="subredditDescription">
+                          {subreddit.description}
+                        </div>
+                        {/* <div className="subredditBornDate">{subreddit.created_at}</div> */}
+                      </div>
+                      <div className="subredditCreatePostDiv">
+                        <a
+                          className="createSubredditPost"
+                          onClick={createPostPage}
+                        >
+                          {" "}
+                          create post
+                        </a>
+                      </div>
+                    </div>
+                    {/* <div className="createSubreddit"></div> */}
+                  </>
+                );
+              })}
             </div>
           </div>
-          {postsLoaded ? (
-            posts.length ? (
-              posts.map((post) => {
-                return <PostCard post={post} />;
-              })
-            ) : (
-              <div>No posts yet</div>
-            )
-          ) : (
-            <div>Loading...</div>
-          )}
-        </div>
-        <div className="rowTwoSubreddit">
-          {subredditLoaded &&
-            subredditInfo.map((subreddit) => {
-              return (
-                <>
-                  <div className="subredditInformation">
-                    <div className="aboutSubreddit">
-                      <span>About Community</span>
-                    </div>
-                    <div className="subredditDescriptionDiv">
-                      <div className="subredditDescription">
-                        {subreddit.description}
-                      </div>
-                      {/* <div className="subredditBornDate">{subreddit.created_at}</div> */}
-                    </div>
-                    <div className="subredditCreatePostDiv">
-                      <a
-                        className="createSubredditPost"
-                        onClick={createPostPage}
-                      >
-                        {" "}
-                        create post
-                      </a>
-                    </div>
-                  </div>
-                  {/* <div className="createSubreddit"></div> */}
-                </>
-              );
-            })}
-        </div>
+        </>
+      ) : (
+        <div>
+        <ErrorPage />
+        <h1>Subreddit does not exist</h1>
       </div>
+      )}
     </div>
   );
 };
