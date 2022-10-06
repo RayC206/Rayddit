@@ -115,7 +115,7 @@ const SignUpForm = ({ onClose }) => {
             ></input>
           </div>
           <div className="createAccountDiv">
-            <button type="submit">Create Account</button>
+            <button className="signUpButton" type="submit">Create Account</button>
           </div>
         </form>
       </div>

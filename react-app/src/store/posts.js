@@ -218,6 +218,13 @@ const postsReducer = (state = initialState, action) => {
       action.posts.forEach((post) => {
         newState[post.id] = post;
       });
+      // console.log(newState);
+      // console.log(Object.values(newState));
+      // newState = Object.values(newState).sort(
+      //   (postA, postB) => postA.created_at > postB.created_at
+      // );
+      // console.log("NEW STATE");
+      // console.log(newState);
       return { ...newState };
     }
     case GET_ALL_SUBREDDITS_POSTS: {

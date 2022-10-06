@@ -4,7 +4,7 @@ from app.models import db, User
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password', profile_image='https://static.wikia.nocookie.net/animalcrossing/images/a/ac/Villager_SSBU.png')
+        username='Demo', email='demo@aa.io', password='password', profile_image='https://i.redd.it/vtpfvbqe54a21.png')
     raymond = User(
         username='Raymond', email='raymond@ac.io', password='password', profile_image='https://img.gamewith.net/article_tools/animal-crossing-new-horizons/gacha/c446_i.png')
     marshall = User(

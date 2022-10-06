@@ -36,9 +36,9 @@
   align-items: center;
   /* margin: auto; */
   height: 55px;
-  border: 1px solid rgb(206, 195, 195);
+  border: 1px solid rgb(205,205,205);
   margin-bottom: 1.5rem;
-  background-color: #f2f4f5;
+  background-color: rgb(255,255,255);
   border-radius: 2px;
 }
 
@@ -66,7 +66,7 @@
   align-items: center;
   text-indent: 20px;
   flex-direction: row;
-  background-color: rgb(232, 232, 249);
+  background-color: rgb(246,247,248);
   border-style: none;
   border-radius: 4px;
   width: 500px;
@@ -229,12 +229,12 @@
   width: 290px;
   height: 40px;
   color: #f2f4f5;
-  background-color: rgb(161, 162, 180);
+  background-color: rgb(0,121,211);
 }
 
 .createSubredditButton:hover {
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  background-color: rgb(152, 153, 193);
+  background-color: rgb(0, 100, 177);
   cursor: pointer;
 }
 

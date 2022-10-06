@@ -5,6 +5,8 @@ import "./ProfilePage.css";
 import PostCard from "../PostCard";
 
 import { deletePostRequest, getUserPostsRequest } from "../../store/posts";
+import { getAllUsersSubredditsRequest } from "../../store/subreddits";
+import ErrorPage from "../ErrorPage";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -13,15 +15,20 @@ const ProfilePage = () => {
   userId = Number(userId);
   const sessionUser = useSelector((state) => state.session.user);
   const posts = useSelector((state) => Object.values(state.posts));
+  const subreddits = useSelector((state) => Object.values(state.subreddits));
 
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [userOwnsProfile, setUserOwnsProfile] = useState(false);
   const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
   const [user, setUser] = useState([]);
+  const [userSubredditsLoaded, setUserSubredditsLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(getUserPostsRequest(userId)).then(() => {
       setPostsLoaded(true);
+    });
+    dispatch(getAllUsersSubredditsRequest()).then(() => {
+      setUserSubredditsLoaded(true);
     });
   }, [dispatch, userId]);
 
@@ -31,7 +38,6 @@ const ProfilePage = () => {
       const responseData = await response.json();
       console.log("USER");
       setUser(responseData);
-      console.log(user);
     }
     fetchData();
   }, [userId]);
@@ -39,6 +45,15 @@ const ProfilePage = () => {
   useEffect(() => {
     setUserOwnsProfile(sessionUser.id === userId);
   }, [sessionUser, userId]);
+
+  const formatCakeDay = (date) => {
+    if (date) {
+      return new Intl.DateTimeFormat("en", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(new Date(date));
+    }
+  };
 
   const editPost = (postId) => {
     let path = `/posts/${postId}/edit`;
@@ -49,7 +64,7 @@ const ProfilePage = () => {
     dispatch(deletePostRequest(postId));
   };
 
-    const createPostPage = () => {
+  const createPostPage = () => {
     if (!sessionUser) {
       setIsLoginFormModalIsOpen(true);
     } else {
@@ -58,79 +73,140 @@ const ProfilePage = () => {
     }
   };
 
+  const subredditsPage = (subredditId) => {
+    let path = `/r/${subredditId}`;
+    history.push(path);
+  };
+
   return (
     <div className="pageContainer">
-      <div className="homePageDiv">
-        <div className="rowOne">
-          {/* <div className="createPostDiv">
-            <div className="createInputContainer">
-              <input
-                type="text"
-                placeholder="Create Post"
-                className="inputBox"
-                onClick={createPostPage}
-              />
-            </div>
-          </div> */}
-          {postsLoaded ? (
-            posts.length ? (
-              posts.map((post) => {
-                return (
-                  <>
-                    {userOwnsProfile && (
-                      <div>
-                        <button
-                          onClick={() => {
-                            editPost(post.id);
-                          }}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => {
-                            deletePost(post.id);
-                          }}
-                        >
-                          Delete
-                        </button>
+      {postsLoaded ? (
+        <>
+          {posts.length ? (
+            <div className="homePageDiv">
+              <div className="rowOne">
+                {postsLoaded ? (
+                  posts.length ? (
+                    posts.map((post) => {
+                      return (
+                        <>
+                          {userOwnsProfile && (
+                            <div className="editDeletePostButtonDiv">
+                              <button
+                                className="editPostButton"
+                                onClick={() => {
+                                  editPost(post.id);
+                                }}
+                              >
+                                Edit
+                              </button>
+                              <button
+                                className="deletePostButton"
+                                onClick={() => {
+                                  deletePost(post.id);
+                                }}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          )}
+                          <PostCard post={post} />
+                        </>
+                      );
+                    })
+                  ) : (
+                    <div className="noPostsYetDiv">
+                      <span>No posts yet</span>
+                    </div>
+                  )
+                ) : (
+                  <div>Loading...</div>
+                )}
+              </div>
+              <div className="rowTwo">
+                {user && (
+                  <div className="userProfileInfo">
+                    <div className="userProfileBanner"></div>
+                    <div className="innerProfileInfoDiv">
+                      {userOwnsProfile && (
+                        <div className="profileCreatePostDiv">
+                          <a
+                            className="createSubredditPost"
+                            onClick={createPostPage}
+                          >
+                            {" "}
+                            create post
+                          </a>
+                        </div>
+                      )}
+                      <div className="profileInfodDiv">
+                        <img src={user.profile_image}></img>
+                        <span>u/{user.username}</span>
                       </div>
-                    )}
-                    <PostCard post={post} />
-                  </>
-                );
-              })
-            ) : (
-              <div className="noPostsYetDiv">
-                <span>No posts yet</span>
-              </div>
-            )
-          ) : (
-            <div>Loading...</div>
-          )}
-        </div>
-        <div className="rowTwo">
-          {user && (
-            <div className="userProfileInfo">
-              <div className="userProfileBanner"></div>
-                <div className="innerProfileInfoDiv">
-                <div className="profileCreatePostDiv">
-                      <a
-                        className="createSubredditPost"
-                        onClick={createPostPage}
-                      >
-                        {" "}
-                        create post
-                      </a>
+                      <div className="cakeDay">
+                        <div>
+                          <span className="cakeDaySpan">Cake Day:</span>
+                          <div>
+                            <span className="cakeDayDate">
+                              {formatCakeDay(user.created_at)}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-              <div className="profileInfodDiv">
-                <img src={user.profile_image}></img>
-                <span>u/{user.username}</span>
+                  </div>
+                )}
+                {userOwnsProfile && (
+                  <div className="followedSubredditInfo">
+                    <div className="aboutFollowedSubreddit">
+                      <span>Followed Subreddits</span>
                     </div>
+                    <div className="followedSubredditContent">
+                      {userSubredditsLoaded &&
+                        subreddits.map((subreddit) => {
+                          return (
+                            <>
+                              <div
+                                className="followedSubredditDescriptionDiv"
+                                onClick={(e) => subredditsPage(subreddit.id)}
+                              >
+                                <div className="followedSubredditDescription">
+                                  <div className="homeSubredditIcon">
+                                    <img
+                                      src={subreddit.icon_url}
+                                      onError={(e) => {
+                                        e.currentTarget.src =
+                                          "https://i.imgur.com/hkMSod3.png";
+                                      }}
+                                    ></img>
+                                  </div>
+                                  <div className="followedubredditName">
+                                    {subreddit.name}
+                                  </div>
+                                </div>
+                              </div>
+                            </>
+                          );
+                        })}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
+          ) : (
+            <div>
+              <ErrorPage />
+              <h1>User Profile Does not exist</h1>
+            </div>
           )}
+        </>
+      ) : (
+        <div className="loadingState">
+          <div>
+            <span>Loading...</span>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

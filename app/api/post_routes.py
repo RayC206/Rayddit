@@ -14,6 +14,8 @@ post_routes = Blueprint('post', __name__)
 @post_routes.route("/all")
 def get_all_posts():
   all_posts = Post.query.order_by(Post.created_at.desc()).all()
+  print("*******")
+  print(all_posts)
 
   all_posts_json = [post.to_dict() for post in all_posts]
   return jsonify(all_posts_json)

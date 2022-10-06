@@ -49,9 +49,24 @@
 .editSubredditButtonDiv {
   display: flex;
   margin: auto;
-  margin-top: 12px;
+  margin-top: 5px;
   height: 35px;
   width: 80px;
+  margin-left: 60px;
+}
+
+.editSubredditButton {
+  width: 120px;
+  border-radius: 9999px;
+  border-style:none ;
+  background-color: rgb(1,121,211);
+  color: white;
+}
+
+.editSubredditButton:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
+  background-color: rgb(5, 83, 142);
+  cursor: pointer;
 }
 
 .editSubredditPreview {
@@ -70,6 +85,7 @@
 
 .editBannerPreview img {
   width: 100%;
+  height: 62px;
 }
 
 .editSubredditIconPreview {

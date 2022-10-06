@@ -17,6 +17,7 @@ import {
   getPostRequest,
   upvotePostRequest,
 } from "../../store/posts";
+import ErrorPage from "../ErrorPage";
 
 const PostDetails = () => {
   const POST_TYPE_TEXT = 1;
@@ -89,7 +90,10 @@ const PostDetails = () => {
                 return <PostCard post={post} />;
               })
             ) : (
-              <div>No posts yet</div>
+              <div>
+                <ErrorPage/>
+                <h1>Post does not exist</h1>
+              </div>
             )
           ) : (
             <div>Loading...</div>
@@ -106,7 +110,7 @@ const PostDetails = () => {
                         src={subreddit.banner_img}
                         onError={(e) => {
                           e.currentTarget.src =
-                            "https://i.imgur.com/ymEibzq.png";
+                            "https://i.imgur.com/aQxmKOg.png";
                         }}
                       ></img>
                     </div>
