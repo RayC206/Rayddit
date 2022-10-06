@@ -80,7 +80,7 @@ def seed_posts():
         post_type_id = 2,
         title = 'Sign up to see content',
         img_url = "https://i.redd.it/mhasuo9z0gq91.png",
-        created_at = date.fromisoformat('2022-10-4')
+        created_at = date.fromisoformat('2022-10-04')
     )
     post11 = Post(
         user_id=6,
@@ -88,7 +88,7 @@ def seed_posts():
         post_type_id = 2,
         title = 'Dyson enters aviation',
         img_url = "https://preview.redd.it/cpw5pyfq8nr91.jpg",
-        created_at = date.fromisoformat('2022-10-5')
+        created_at = date.fromisoformat('2022-10-05')
     )
     post12 = Post(
         user_id=9,
@@ -96,7 +96,7 @@ def seed_posts():
         post_type_id = 2,
         title = 'Finally',
         img_url = "https://i.redd.it/95pda3ej3qm91.jpg",
-        created_at = date.fromisoformat('2022-10-5')
+        created_at = date.fromisoformat('2022-10-05')
     )
     post13 = Post(
         user_id=3,
@@ -104,7 +104,7 @@ def seed_posts():
         post_type_id = 2,
         title = 'Good luck to both of you',
         img_url = "https://i.redd.it/wld7f1cjhgn91.jpg",
-        created_at = date.fromisoformat('2022-10-3')
+        created_at = date.fromisoformat('2022-10-03')
     )
     post14 = Post(
         user_id=6,
@@ -112,7 +112,7 @@ def seed_posts():
         post_type_id = 2,
         title = 'Final Fantasy X was a masterpiece',
         img_url = "https://assets-prd.ignimgs.com/2021/12/20/ffx-art-1640032077055.jpg",
-        created_at = date.fromisoformat('2022-10-2')
+        created_at = date.fromisoformat('2022-10-02')
     )
     post15 = Post(
         user_id=7,
@@ -120,7 +120,7 @@ def seed_posts():
         post_type_id = 2,
         title = 'The graphical jump from Resident Evil 4 OG to Remake is Insane!',
         img_url = "https://i.redd.it/1lezx0wxaj591.png",
-        created_at = date.fromisoformat('2022-10-1')
+        created_at = date.fromisoformat('2022-10-01')
     )
     post16 = Post(
         user_id=2,
@@ -128,7 +128,7 @@ def seed_posts():
         post_type_id = 2,
         title = 'Graphics Card vs Xbox Series S',
         img_url = "https://i.redd.it/pw4tqrwmv0s91.jpg",
-        created_at = date.fromisoformat('2022-10-4')
+        created_at = date.fromisoformat('2022-10-04')
     )
     post17 = Post(
         user_id=5,
@@ -136,7 +136,7 @@ def seed_posts():
         post_type_id = 2,
         title = 'Visited a beach in Athens..',
         img_url = "https://preview.redd.it/0wo5xfxym8r91.jpg?width=640&crop=smart&auto=webp&s=9327ab3477b8350ce006e2e30f779fa5682ac626",
-        created_at = date.fromisoformat('2022-10-3')
+        created_at = date.fromisoformat('2022-10-03')
     )
     post18 = Post(
         user_id=1,
@@ -144,7 +144,7 @@ def seed_posts():
         post_type_id = 2,
         title = 'Crystal clear water in Boracay, Philippines',
         img_url = "https://i.redd.it/9kikacl8r7z61.jpg",
-        created_at = date.fromisoformat('2022-10-1')
+        created_at = date.fromisoformat('2022-10-01')
     )
     post19 = Post(
         user_id=8,
@@ -152,7 +152,7 @@ def seed_posts():
         post_type_id = 2,
         title = 'Witnessed the northern lights in Finland.',
         img_url = "https://i.redd.it/iqjy1shwi3181.jpg",
-        created_at = date.fromisoformat('2022-10-1')
+        created_at = date.fromisoformat('2022-10-01')
     )
 
 
