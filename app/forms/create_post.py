@@ -38,6 +38,6 @@ class PostForm(FlaskForm):
   title = StringField("title", validators=[DataRequired("Title is required!"), Length(min=3, max=130, message="Post title should be between 3 and 130 characters long!")])
   img_url = StringField("img_url")
   link_url = StringField("link_url")
-  text = TextAreaField("text")
+  text = TextAreaField("text", validators=[Length(max=2000, message="Text length must be less than 2000 characters!")])
   subreddit_id =IntegerField("subreddit_id")
   post_type_id = IntegerField("post_type", validators=[DataRequired(), type_check])
