@@ -22,7 +22,8 @@
   border: 1px solid rgb(206, 195, 195);
   margin-bottom: 1.5rem;
   background-color: rgb(247, 247, 252);
-  border-radius: 2px;
+  border-radius: 4px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .outerPostContainer:hover {
@@ -39,7 +40,8 @@
   border: 1px solid rgb(205,205,205);
   margin-bottom: 1.5rem;
   background-color: rgb(255,255,255);
-  border-radius: 2px;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .createIcon {
@@ -57,8 +59,17 @@
   margin-left: 10px;
 }
 
+.inputBox {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
 .inputBox:hover {
   border: 1px solid rgb(64, 59, 59);
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.inputBox:active {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
 .createInputContainer>input {
@@ -199,6 +210,7 @@
   background-color: #f2f4f5;
   border-radius: 4px;
   overflow-y: scroll hidden;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .homeSubredditIcon>img {
@@ -257,6 +269,8 @@
   margin-top: 20px;
   height: 150px;
   width: 310px;
+  border-radius: 4px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .developerInfoContent {
@@ -268,6 +282,7 @@
   height: 20%;
   width: 100%;
   align-items: center;
+  border-radius: 4px;
 }
 
 .developerInfoContent span {
@@ -297,6 +312,7 @@
 .iconContainer:hover {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 .iconContainer:active {

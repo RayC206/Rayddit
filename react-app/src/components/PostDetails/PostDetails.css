@@ -25,10 +25,10 @@
   height: 35px;
   width: 310px;
   background-color: rgb(161, 162, 180);
-  border-radius: 2px;
 }
 
 .postPageAboutSubreddit > img {
+  border-radius: 4px;
   max-width: 310px;
 }
 
