@@ -6,11 +6,7 @@ import PostCard from "../PostCard";
 import LoginFormModal from "../LoginFormModal";
 import "./PostDetails.css";
 
-
-import {
-  getPostRequest,
-  deletePostRequest,
-} from "../../store/posts";
+import { getPostRequest, deletePostRequest } from "../../store/posts";
 import ErrorPage from "../ErrorPage";
 
 const PostDetails = () => {
@@ -97,7 +93,7 @@ const PostDetails = () => {
               post.map((post) => {
                 return (
                   <>
-                    {sessionUser.id == post.user_id && (
+                    {sessionUser && sessionUser.id == post.user_id && (
                       <div className="editDeletePostButtonDiv">
                         <button
                           className="editPostButton"
@@ -117,7 +113,10 @@ const PostDetails = () => {
                         </button>
                       </div>
                     )}
-                    <PostCard post={post} />
+                    <PostCard
+                      post={post}
+                      modalToggle={setIsLoginFormModalIsOpen}
+                    />
                   </>
                 );
               })
@@ -126,7 +125,7 @@ const PostDetails = () => {
                 <h1>Post deleted / does not exist</h1>
                 <div className="goBackHome" onClick={homePage}>
                   <span>Go back to Homepage</span>
-                  </div>
+                </div>
               </div>
             )
           ) : (

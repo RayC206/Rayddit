@@ -191,7 +191,12 @@ const SubredditPage = () => {
                   {postsLoaded &&
                     (posts.length ? (
                       posts.map((post) => {
-                        return <PostCard post={post} />;
+                        return (
+                          <PostCard
+                            post={post}
+                            modalToggle={setIsLoginFormModalIsOpen}
+                          />
+                        );
                       })
                     ) : (
                       <div>No posts yet</div>
