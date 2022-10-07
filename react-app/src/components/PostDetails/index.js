@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { getSubredditRequest } from "../../store/subreddits";
 import PostCard from "../PostCard";
 import LoginFormModal from "../LoginFormModal";
 import "./PostDetails.css";
-import {
-  TiArrowUpOutline,
-  TiArrowUpThick,
-  TiArrowDownOutline,
-  TiArrowDownThick,
-} from "react-icons/ti";
+
 
 import {
-  downvotePostRequest,
   getPostRequest,
-  upvotePostRequest,
+  deletePostRequest,
 } from "../../store/posts";
 import ErrorPage from "../ErrorPage";
 
@@ -66,6 +60,20 @@ const PostDetails = () => {
     }
   };
 
+  const editPost = (postId) => {
+    let path = `/posts/${postId}/edit`;
+    history.push(path);
+  };
+
+  const deletePost = (postId) => {
+    dispatch(deletePostRequest(postId));
+  };
+
+  const homePage = () => {
+    let path = `/`;
+    history.push(path);
+  };
+
   return (
     <div className="pageContainer">
       <LoginFormModal
@@ -87,12 +95,38 @@ const PostDetails = () => {
           {postLoaded ? (
             post.length ? (
               post.map((post) => {
-                return <PostCard post={post} />;
+                return (
+                  <>
+                    {sessionUser.id == post.user_id && (
+                      <div className="editDeletePostButtonDiv">
+                        <button
+                          className="editPostButton"
+                          onClick={() => {
+                            editPost(post.id);
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="deletePostButton"
+                          onClick={() => {
+                            deletePost(post.id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                    <PostCard post={post} />
+                  </>
+                );
               })
             ) : (
-              <div>
-                <ErrorPage/>
-                <h1>Post does not exist</h1>
+              <div className="postNotExist">
+                <h1>Post deleted / does not exist</h1>
+                <div className="goBackHome" onClick={homePage}>
+                  <span>Go back to Homepage</span>
+                  </div>
               </div>
             )
           ) : (
