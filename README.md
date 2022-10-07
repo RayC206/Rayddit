@@ -1,6 +1,20 @@
 # Rayddit
 ## Welcome to Rayddit
-Rayddit is a Full-Stack clone of the popular site Reddit.
+Rayddit is a Full-Stack clone of the popular site Reddit. This project tests my Full-Stack developing ability using Flask/SQLAlchemy along with React/Redux. 
+
+# Live Site
+ https://rddit.herokuapp.com/
+ 
+# Features
+* Create / Login a user
+* Posts
+* Subreddits
+* Upvote and Downvoting posts
+
+## Future features in progress:
+* AWS for image uploading
+* Comment section
+* Theme change / Dark mode
 
 ## Tech Stack:
 
