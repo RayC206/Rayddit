@@ -22,7 +22,14 @@ const SubredditPage = () => {
   let { subredditId } = useParams();
   subredditId = Number(subredditId);
   const subredditInfo = useSelector((state) => Object.values(state.subreddits));
-  const posts = useSelector((state) => Object.values(state.posts));
+  const posts = useSelector((state) => {
+    let posts = Object.values(state.posts);
+    posts = posts.sort((postA, postB) =>
+      new Date(postA.created_at) < new Date(postB.created_at) ? 1 : -1
+    );
+
+    return posts;
+  });
   const sessionUser = useSelector((state) => state.session.user);
 
   const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
