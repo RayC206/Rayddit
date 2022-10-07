@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory, Redirect } from "react-router-dom";
 import { editPostRequest, getPostRequest } from "../../store/posts";
+import imgUrlBackup from "../PostCard/brokenImageUpload.png";
 import "./EditPost.css";
 
 const EditPost = () => {
@@ -164,7 +165,12 @@ const EditPost = () => {
                 <span>"{title}"</span>
               </div>
               <div className="editPreviewImage">
-                <img src={imageUrl}></img>
+                <img
+                  src={imageUrl}
+                  onError={(e) => {
+                    e.currentTarget.src = imgUrlBackup;
+                  }}
+                ></img>
               </div>
             </div>
           )}
