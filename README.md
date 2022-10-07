@@ -1,5 +1,8 @@
-# Rayddit
+
 ## Welcome to Rayddit
+![Screen Shot 2022-10-07 at 12 45 54 PM](https://user-images.githubusercontent.com/79509501/194641809-1421747e-1646-4355-adc0-a5cb2983f897.png)
+
+
 Rayddit is a Full-Stack clone of the popular site Reddit. This project tests my Full-Stack developing ability using Flask/SQLAlchemy along with React/Redux. 
 
 # Live Site
