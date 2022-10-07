@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { createPostRequest } from "../../store/posts";
-import icon from './icon.png'
+import icon from "./icon.png";
 import {
   getAllUsersSubredditsRequest,
   getAllSubredditsRequest,
@@ -16,15 +16,16 @@ const CreatePost = () => {
 
   const dispatch = useDispatch();
   const subreddits = useSelector((state) => Object.values(state.subreddits));
-  // const urlParams = new URLSearchParams(window.location.search);
-  // let subredditId = Number(urlParams.get("subreddit_id"));
-  // subredditId = subredditId > 0 ? subredditId : 1;
+  const urlParams = new URLSearchParams(window.location.search);
+  let subredditId = Number(urlParams.get("subreddit_id"));
+  subredditId = subredditId > 0 ? subredditId : 1;
+  // console.log("--------", subredditId);
 
   const [title, setTitle] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [linkUrl, setLinkUrl] = useState(null);
   const [text, setText] = useState(null);
-  const [subreddit, setSubreddit] = useState(1);
+  const [subreddit, setSubreddit] = useState(subredditId);
   const [postType, setPostType] = useState(1);
   const [errors, setErrors] = useState([]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -49,8 +50,10 @@ const CreatePost = () => {
   };
 
   const handleSubredditChange = (e) => {
+    // console.log("TARGET VALUE")
+    // console.log(e.target.value)
     setSubreddit(e.target.value);
-    console.log(subreddit);
+    // console.log(subreddit);
   };
 
   const handleSubmit = (e) => {
@@ -64,6 +67,7 @@ const CreatePost = () => {
       subreddit_id: subreddit,
       post_type_id: postType,
     };
+    console.log("SUBMITTED POST");
     console.log(newPostData);
     return dispatch(createPostRequest(newPostData)).then(async (res) => {
       if (!res.errors) {
@@ -80,16 +84,25 @@ const CreatePost = () => {
         <div className="createPostTitle">Create a Post</div>
         <ul>
           {errors.map((error, idx) => (
-            <li className="errorDiv"key={idx}>{error}</li>
+            <li className="errorDiv" key={idx}>
+              {error}
+            </li>
           ))}
         </ul>
         <div className="subredditDropdownDiv">
-          <select className="subredditDropdownSelect"onChange={handleSubredditChange}>
+          <select
+            className="subredditDropdownSelect"
+            onChange={handleSubredditChange}
+          >
             {subredditsLoaded &&
               subreddits.map((subreddit) => {
                 return (
-                  <option key={subreddit.id} value={subreddit.id}>
-                   r/{subreddit.name}
+                  <option
+                    key={subreddit.id}
+                    value={subreddit.id}
+                    selected={subreddit.id === subredditId}
+                  >
+                    r/{subreddit.name}
                   </option>
                 );
               })}
@@ -100,8 +113,7 @@ const CreatePost = () => {
           <div>
             <div className="createPostType">
               <button
-              className="createButtonText"
-
+                className="createButtonText"
                 onClick={() => {
                   selectPostType(POST_TYPE_TEXT);
                 }}
@@ -109,7 +121,7 @@ const CreatePost = () => {
                 Text
               </button>
               <button
-              className="createButtonImage"
+                className="createButtonImage"
                 onClick={() => {
                   selectPostType(POST_TYPE_IMAGE);
                 }}
@@ -232,10 +244,10 @@ const CreatePost = () => {
       </div>
       <div className="sideCreateContainer">
         <div className="postingRules">
-        <img src={icon}></img>
-        <span>Posting to Rayddit</span>
+          <img src={icon}></img>
+          <span>Posting to Rayddit</span>
         </div>
-        <ol >
+        <ol>
           <li className="ruleList">Remember the human</li>
           <li className="ruleList">Behave like you would in real life</li>
           <li className="ruleList">Look for the original source of content</li>

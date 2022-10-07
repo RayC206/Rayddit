@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.validators import DataRequired, Email, ValidationError, Length
+from wtforms.validators import DataRequired, Email, ValidationError, Length, Regexp
 from app.models import User
 
 
@@ -27,6 +27,6 @@ def email_check(form,field):
 
 class SignUpForm(FlaskForm):
     username = StringField(
-        'username', validators=[DataRequired(), username_exists, Length(min=4, max=12, message="Username must be length must between 4 and 12 characters!")])
+        'username', validators=[DataRequired(), username_exists, Length(min=4, max=12, message="Username must be length must between 4 and 12 characters!"), Regexp('^\w+$', message="Username name must contain only letters numbers or underscore (check for spaces)")])
     email = StringField('email', validators=[DataRequired(), user_exists, Email("Email address is not valid")])
     password = StringField('password', validators=[DataRequired(), Length(min=4, message="Password length must be greater than 4 characters")])
