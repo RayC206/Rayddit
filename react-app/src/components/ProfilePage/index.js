@@ -110,7 +110,10 @@ const ProfilePage = () => {
                               </button>
                             </div>
                           )}
-                          <PostCard post={post} />
+                          <PostCard
+                            post={post}
+                            modalToggle={setIsLoginFormModalIsOpen}
+                          />
                         </>
                       );
                     })
@@ -166,19 +169,14 @@ const ProfilePage = () => {
                       </div>
                       <div className="cakeDay">
                         <div>
-                            {user.created_at && (
-
-                              <span className="cakeDaySpan">Cake Day:</span>
-                            )
-
-
-                          }
+                          {user.created_at && (
+                            <span className="cakeDaySpan">Cake Day:</span>
+                          )}
                           <div>
                             <span className="cakeDayDate">
                               {formatCakeDay(user.created_at)}
                             </span>
                           </div>
-
                         </div>
                       </div>
                     </div>
