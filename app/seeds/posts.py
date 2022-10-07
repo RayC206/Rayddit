@@ -62,8 +62,8 @@ def seed_posts():
         user_id=4,
         subreddit_id = 5,
         post_type_id = 2,
-        title = 'The new leaf on my Philodendron "White Princess"!',
-        img_url = "https://preview.redd.it/athj2ntfs2i81.jpg?width=640&crop=smart&auto=webp&s=13ddd5680377abb35d8c16a3d3087cdaf1cc11c2",
+        title = 'The white variegation on this Variegated Frydek is unreal!"',
+        img_url = "https://i.imgur.com/4SgPTXC.png",
         created_at = date.fromisoformat('2022-09-21')
     )
     post9 = Post(
@@ -78,8 +78,8 @@ def seed_posts():
         user_id=5,
         subreddit_id = 3,
         post_type_id = 2,
-        title = 'Sign up to see content',
-        img_url = "https://i.redd.it/mhasuo9z0gq91.png",
+        title = 'Always have a spare ready',
+        img_url = "https://i.imgur.com/RsMqest.gif",
         created_at = date.fromisoformat('2022-10-04')
     )
     post11 = Post(
@@ -112,7 +112,7 @@ def seed_posts():
         post_type_id = 2,
         title = 'Final Fantasy X was a masterpiece',
         img_url = "https://assets-prd.ignimgs.com/2021/12/20/ffx-art-1640032077055.jpg",
-        created_at = date.fromisoformat('2022-10-02')
+        created_at = date.fromisoformat('2022-10-05')
     )
     post15 = Post(
         user_id=7,
@@ -144,7 +144,7 @@ def seed_posts():
         post_type_id = 2,
         title = 'Crystal clear water in Boracay, Philippines',
         img_url = "https://i.redd.it/9kikacl8r7z61.jpg",
-        created_at = date.fromisoformat('2022-10-01')
+        created_at = date.fromisoformat('2022-10-06')
     )
     post19 = Post(
         user_id=8,
@@ -153,6 +153,30 @@ def seed_posts():
         title = 'Witnessed the northern lights in Finland.',
         img_url = "https://i.redd.it/iqjy1shwi3181.jpg",
         created_at = date.fromisoformat('2022-10-01')
+    )
+    post20 = Post(
+        user_id=8,
+        subreddit_id = 5,
+        post_type_id = 2,
+        title = 'The leaves on my Gloriosum is almost bigger than me..',
+        img_url = "https://i.imgur.com/4kLY94b.png",
+        created_at = date.fromisoformat('2022-10-07')
+    )
+    post21 = Post(
+        user_id=6,
+        subreddit_id = 3,
+        post_type_id = 2,
+        title = 'Sorry for the sad post',
+        img_url = "https://i.imgur.com/58yuJEP.jpg",
+        created_at = date.fromisoformat('2022-10-01')
+    )
+    post22 = Post(
+        user_id=4,
+        subreddit_id = 1,
+        post_type_id = 2,
+        title = 'Simple Feature',
+        img_url = "https://i.imgur.com/dMC33H5.gif",
+        created_at = date.fromisoformat('2022-10-07')
     )
 
 
@@ -175,6 +199,9 @@ def seed_posts():
     db.session.add(post17)
     db.session.add(post18)
     db.session.add(post19)
+    db.session.add(post20)
+    db.session.add(post21)
+    db.session.add(post22)
     db.session.commit()
 
 
