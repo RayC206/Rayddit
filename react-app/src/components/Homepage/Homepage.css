@@ -130,6 +130,7 @@
 
 .postUsername:hover {
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .postImage {

@@ -14,7 +14,14 @@ const ProfilePage = () => {
   let { userId } = useParams();
   userId = Number(userId);
   const sessionUser = useSelector((state) => state.session.user);
-  const posts = useSelector((state) => Object.values(state.posts));
+  const posts = useSelector((state) => {
+    let posts = Object.values(state.posts);
+    posts = posts.sort((postA, postB) =>
+      new Date(postA.created_at) < new Date(postB.created_at) ? 1 : -1
+    );
+
+    return posts;
+  });
   const subreddits = useSelector((state) => Object.values(state.subreddits));
 
   const [postsLoaded, setPostsLoaded] = useState(false);
