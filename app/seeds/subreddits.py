@@ -18,7 +18,7 @@ def seed_subreddits():
   Funny = Subreddit (
     name = "Funny",
     owner_id = 5,
-    description = "Welcome to r/Funny, Reddit's largest humour depository.",
+    description = "Welcome to r/Funny, Rayddit's largest humour depository.",
     icon_url = "https://preview.redd.it/az4o9m5qqxl31.png?width=640&crop=smart&auto=webp&s=10bce5e4d64cd684d63600ebebd2cf9a46c41891",
     banner_img = "https://imgur.com/bc745470-5040-4f8b-8786-896c7d7a64d3"
   )

@@ -22,6 +22,9 @@ const Homepage = () => {
     posts = posts.sort((postA, postB) =>
       new Date(postA.created_at) < new Date(postB.created_at) ? 1 : -1
     );
+    posts.forEach((post) => {
+      console.log(post.title + " " + new Date(post.created_at));
+    });
 
     return posts;
   });
@@ -76,7 +79,7 @@ const Homepage = () => {
         <div className="rowOne">
           <div className="createPostDiv">
             <div className="createIcon">
-              <img src={createIcon} alt='createIcon'></img>
+              <img src={createIcon} alt="createIcon"></img>
             </div>
             <div className="createInputContainer">
               <input
@@ -130,7 +133,7 @@ const Homepage = () => {
                           <div className="homeSubredditIcon">
                             <img
                               src={subreddit.icon_url}
-                              alt='subredditIcon'
+                              alt="subredditIcon"
                               onError={(e) => {
                                 e.currentTarget.src =
                                   "https://i.imgur.com/hkMSod3.png";
@@ -161,15 +164,21 @@ const Homepage = () => {
               <span>Developer's Links:</span>
             </div>
             <div className="devLinkIcons">
-              <a className="iconContainer"  href="https://github.com/RayC206/Rayddit">
+              <a
+                className="iconContainer"
+                href="https://github.com/RayC206/Rayddit"
+              >
                 <div className="githubIcon">
-                  <img src={github} alt='gitHubLogo'></img>
+                  <img src={github} alt="gitHubLogo"></img>
                   <span>Github</span>
                 </div>
               </a>
-              <a className="iconContainer"  href="https://www.linkedin.com/in/ray-charles-henry/">
+              <a
+                className="iconContainer"
+                href="https://www.linkedin.com/in/ray-charles-henry/"
+              >
                 <div className="linkedInIcon">
-                  <img src={linkedin} alt='linkedInLogo'></img>
+                  <img src={linkedin} alt="linkedInLogo"></img>
                   <span>LinkedIn</span>
                 </div>
               </a>

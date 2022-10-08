@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./PostCard.css";
 import imgUrlBackup from "./brokenImageUpload.png";
 
@@ -26,11 +26,6 @@ const PostCard = ({ post, modalToggle }) => {
   const [isUpvotedByUser, setIsUpvotedByUser] = useState(false);
   const [isDownvotedByUser, setIsDownvotedByUser] = useState(false);
 
-  post.created_at = new Intl.DateTimeFormat("en", {
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(new Date(post.created_at));
-
   useEffect(() => {
     setIsUpvotedByUser(false);
     post.votes.forEach((vote) => {
@@ -44,6 +39,15 @@ const PostCard = ({ post, modalToggle }) => {
       }
     });
   }, [post, sessionUser]);
+
+  const formatDate = (date) => {
+    if (date) {
+      return new Intl.DateTimeFormat("en", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(new Date(date));
+    }
+  };
 
   const upvotePost = (postId) => {
     if (!sessionUser) {
@@ -128,7 +132,7 @@ const PostCard = ({ post, modalToggle }) => {
           >
             u/{post.username}
           </div>
-          <div className="postTimeago">{post.created_at}</div>
+          <div className="postTimeago">{formatDate(post.created_at)}</div>
         </div>
         <div className="postTitle" onClick={(e) => postDetailPage(post.id)}>
           <span
@@ -147,7 +151,7 @@ const PostCard = ({ post, modalToggle }) => {
                 <img
                   className="postImage"
                   src={post.img_url}
-                  alt='postImage'
+                  alt="postImage"
                   onError={(e) => {
                     e.currentTarget.src = imgUrlBackup;
                   }}

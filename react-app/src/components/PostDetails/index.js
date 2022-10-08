@@ -160,6 +160,10 @@ const PostDetails = () => {
                         className="subredditLgo"
                         src={subreddit.icon_url}
                         alt='subredditIcon'
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            "https://i.imgur.com/hkMSod3.png";
+                        }}
                       ></img>
                       <span>r/{subreddit.name}</span>
                     </div>
