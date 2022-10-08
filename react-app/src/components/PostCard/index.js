@@ -14,7 +14,7 @@ import {
 } from "react-icons/ti";
 
 const PostCard = ({ post, modalToggle }) => {
-  console.log(modalToggle);
+  // console.log(modalToggle);
   const POST_TYPE_TEXT = 1;
   const POST_TYPE_IMAGE = 2;
   const POST_TYPE_LINK = 3;
