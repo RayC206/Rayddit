@@ -33,13 +33,17 @@ const PostDetails = () => {
   const [postLoaded, setPostLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(getPostRequest(postId)).then(() => {
+    if (isNaN(postId)) {
       setPostLoaded(true);
-      subredditId &&
-        dispatch(getSubredditRequest(subredditId)).then(() => {
-          setSubredditLoaded(true);
-        });
-    });
+    } else {
+      dispatch(getPostRequest(postId)).then(() => {
+        setPostLoaded(true);
+        subredditId &&
+          dispatch(getSubredditRequest(subredditId)).then(() => {
+            setSubredditLoaded(true);
+          });
+      });
+    }
   }, [dispatch, subredditId]);
 
   const subredditPage = (subredditId) => {

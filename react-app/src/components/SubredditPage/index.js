@@ -43,12 +43,17 @@ const SubredditPage = () => {
   console.log(subredditInfo);
 
   useEffect(() => {
-    dispatch(getSubredditRequest(subredditId)).then(() => {
+    if (isNaN(subredditId)) {
       setSubredditLoaded(true);
-    });
-    dispatch(getAllSubredditsPostsRequest(subredditId)).then(() => {
       setPostsLoaded(true);
-    });
+    } else {
+      dispatch(getSubredditRequest(subredditId)).then(() => {
+        setSubredditLoaded(true);
+      });
+      dispatch(getAllSubredditsPostsRequest(subredditId)).then(() => {
+        setPostsLoaded(true);
+      });
+    }
   }, [dispatch]);
 
   useEffect(() => {
