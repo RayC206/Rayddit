@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import "./PostCard.css";
 import imgUrlBackup from "./brokenImageUpload.png";
 
 import { downvotePostRequest, upvotePostRequest } from "../../store/posts";
 
 import {
-  TiArrowUpOutline,
+  // TiArrowUpOutline,
   TiArrowUpThick,
-  TiArrowDownOutline,
+  // TiArrowDownOutline,
   TiArrowDownThick,
 } from "react-icons/ti";
 
@@ -147,6 +147,7 @@ const PostCard = ({ post, modalToggle }) => {
                 <img
                   className="postImage"
                   src={post.img_url}
+                  alt='postImage'
                   onError={(e) => {
                     e.currentTarget.src = imgUrlBackup;
                   }}

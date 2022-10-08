@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory, useParams } from "react-router-dom";
+import {  useHistory, useParams } from "react-router-dom";
 import {
   getSubredditRequest,
   subscribeToSubredditRequest,
@@ -54,7 +54,7 @@ const SubredditPage = () => {
         setPostsLoaded(true);
       });
     }
-  }, [dispatch]);
+  }, [dispatch, subredditId]);
 
   useEffect(() => {
     console.log("---");
@@ -66,7 +66,7 @@ const SubredditPage = () => {
       });
       setUserOwnsSubreddit(sessionUser.id === subredditInfo[0].owner_id);
     }
-  }, [subredditLoaded]);
+  }, [subredditLoaded, sessionUser, subredditInfo]);
 
   const createPostPage = () => {
     if (!sessionUser) {
@@ -77,10 +77,10 @@ const SubredditPage = () => {
     }
   };
 
-  const editSubredditPage = (subredditId) => {
-    let path = `/r/${subredditId}/edit`;
-    history.push(path);
-  };
+  // const editSubredditPage = (subredditId) => {
+  //   let path = `/r/${subredditId}/edit`;
+  //   history.push(path);
+  // };
 
   const deleteSubreddit = async (subredditId) => {
     await dispatch(deleteSubredditRequest(subredditId)).then(() => {
@@ -112,6 +112,7 @@ const SubredditPage = () => {
                   <div className="subredditBanner">
                     <img
                       src={subreddit?.banner_img}
+                      alt='bannerimage'
                       onError={(e) => {
                         e.currentTarget.src = "https://i.imgur.com/aQxmKOg.png";
                       }}
@@ -123,6 +124,7 @@ const SubredditPage = () => {
                           <img
                             className="subredditIcon"
                             src={subreddit?.icon_url}
+                            alt='iconImage'
                             onError={(e) => {
                               e.currentTarget.src =
                                 "https://i.imgur.com/hkMSod3.png";
@@ -189,7 +191,7 @@ const SubredditPage = () => {
                 <div className="rowOneSubreddit">
                   <div className="createPostDiv">
                     <div className="createIcon">
-                      <img src={createIcon}></img>
+                      <img src={createIcon} alt='createIcon'></img>
                     </div>
                     <div className="createInputContainer">
                       <input
@@ -229,13 +231,13 @@ const SubredditPage = () => {
                             {/* <div className="subredditBornDate">{subreddit.created_at}</div> */}
                           </div>
                           <div className="subredditCreatePostDiv">
-                            <a
+                            <div
                               className="createSubredditPost"
                               onClick={createPostPage}
                             >
                               {" "}
                               create post
-                            </a>
+                            </div>
                           </div>
                         </div>
                         {/* <div className="createSubreddit"></div> */}

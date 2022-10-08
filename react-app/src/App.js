@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import LoginForm from "./components/auth/LoginForm";
+// import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/Navigation/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
-import User from "./components/User";
+// import User from "./components/User";
 import { authenticate } from "./store/session";
 import Homepage from "./components/Homepage";
 import CreatePost from "./components/CreatePost";
@@ -18,6 +18,7 @@ import SubredditPage from "./components/SubredditPage";
 import LoginFormModal from "./components/LoginFormModal";
 import EditSubreddit from "./components/EditSubreddit";
 import ErrorPage from "./components/ErrorPage";
+// import SignUpFormModal from "./components/SignUpFormModal (unused)";
 
 function App() {
   const [loaded, setLoaded] = useState(false);

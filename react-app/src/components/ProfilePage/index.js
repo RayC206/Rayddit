@@ -96,7 +96,7 @@ const ProfilePage = () => {
                   posts.length ? (
                     posts.map((post) => {
                       return (
-                        <>
+                        <div key={post.id}>
                           {userOwnsProfile && (
                             <div className="editDeletePostButtonDiv">
                               <button
@@ -121,7 +121,7 @@ const ProfilePage = () => {
                             post={post}
                             modalToggle={setIsLoginFormModalIsOpen}
                           />
-                        </>
+                        </div>
                       );
                     })
                   ) : (
@@ -140,13 +140,13 @@ const ProfilePage = () => {
                     <div className="innerProfileInfoDiv">
                       {userOwnsProfile && (
                         <div className="profileCreatePostDiv">
-                          <a
+                          <div
                             className="createSubredditPost"
                             onClick={createPostPage}
                           >
                             {" "}
                             create post
-                          </a>
+                          </div>
                         </div>
                       )}
                       <div className="profileInfodDiv">
@@ -203,7 +203,7 @@ const ProfilePage = () => {
                       {userSubredditsLoaded &&
                         subreddits.map((subreddit) => {
                           return (
-                            <>
+                            <div key={subreddit.id}>
                               <div
                                 className="followedSubredditDescriptionDiv"
                                 onClick={(e) => subredditsPage(subreddit.id)}
@@ -212,6 +212,7 @@ const ProfilePage = () => {
                                   <div className="homeSubredditIcon">
                                     <img
                                       src={subreddit.icon_url}
+                                      alt='subredditIcon'
                                       onError={(e) => {
                                         e.currentTarget.src =
                                           "https://i.imgur.com/hkMSod3.png";
@@ -223,7 +224,7 @@ const ProfilePage = () => {
                                   </div>
                                 </div>
                               </div>
-                            </>
+                            </div>
                           );
                         })}
                     </div>

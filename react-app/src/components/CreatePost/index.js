@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect} from "react-router-dom";
 import { createPostRequest } from "../../store/posts";
 import icon from "./icon.png";
 import {
-  getAllUsersSubredditsRequest,
+  // getAllUsersSubredditsRequest,
   getAllSubredditsRequest,
 } from "../../store/subreddits";
 import "./CreatePost.css";
@@ -244,7 +244,7 @@ const CreatePost = () => {
       </div>
       <div className="sideCreateContainer">
         <div className="postingRules">
-          <img src={icon}></img>
+          <img src={icon} alt='ruleIcon'></img>
           <span>Posting to Rayddit</span>
         </div>
         <ol>

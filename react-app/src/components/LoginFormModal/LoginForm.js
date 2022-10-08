@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { login } from "../../store/session";
 import "./LoginForm.css";
 import logo from "../Navigation/logo.png";
-import SignUpFormModal from "../SignUpFormModal";
+// import SignUpFormModal from "../SignUpFormModal (unused)";
 
 const LoginForm = ({ onClose }) => {
+  const history = useHistory();
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  const [signUpFormModalIsOpen, setSignUpFormModalIsOpen] = useState(false);
+  // const [signUpFormModalIsOpen, setSignUpFormModalIsOpen] = useState(false);
 
   const onLogin = async (e, isDemoUser = false) => {
     e.preventDefault();
@@ -36,10 +37,16 @@ const LoginForm = ({ onClose }) => {
     return <Redirect to="/" />;
   }
 
+  const signUpPage = (subredditId) => {
+    onClose();
+    let path = `/sign-up`;
+    history.push(path);
+  };
+
   return (
     <div className="loginFormContainer">
       <div className="loginLogoDiv">
-        <img src={logo}></img>
+        <img src={logo} alt='logo'></img>
       </div>
       <div className="loginWelcome">
         <span>Welcome to Rayddit</span>
@@ -78,7 +85,9 @@ const LoginForm = ({ onClose }) => {
           </div>
           <div className="loginButtonsDiv">
             <div className="loginDemoButtons">
-              <button className="modalLoginButton"type="submit">Login</button>
+              <button className="modalLoginButton" type="submit">
+                Login
+              </button>
 
               <button
                 className="demoButton"
@@ -94,21 +103,20 @@ const LoginForm = ({ onClose }) => {
             </div>
           </div>
         </form>
-            <div className="loginSignUpDiv">
-              <div>
-                <span>Need an Account?</span>
-              </div>
-              <button
-                className="loginSignUpButton"
-                onClick={() => setSignUpFormModalIsOpen(true)}
-              >
-                Sign Up
-              </button>
-              <SignUpFormModal
+        <div className="loginSignUpDiv">
+          <div>
+            <span>Need an Account?</span>
+          </div>
+
+          <button className="loginSignUpButton" onClick={signUpPage}>
+            Sign Up
+          </button>
+
+          {/* <SignUpFormModal
                 isOpen={signUpFormModalIsOpen}
                 modalToggle={setSignUpFormModalIsOpen}
-              />
-            </div>
+              /> */}
+        </div>
       </div>
     </div>
   );

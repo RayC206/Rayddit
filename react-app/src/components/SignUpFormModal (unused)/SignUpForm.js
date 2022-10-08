@@ -60,7 +60,7 @@ const SignUpForm = ({ onClose }) => {
   return (
     <div className="signUpFormContainer">
       <div className="signUpLogoDiv">
-        <img src={signUpLogo}></img>
+        <img src={signUpLogo} alt='signuplogo'></img>
         <span className="registerSpan">Create your Account</span>
       </div>
       <div className="innerSignUpFormContainer">

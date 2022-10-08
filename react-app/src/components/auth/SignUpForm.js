@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
 import "./Auth.css";
+import signUpLogo from "./signUpLogo.png";
+import icon from "./icon.png";
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -23,6 +25,11 @@ const SignUpForm = () => {
     } else {
       setErrors(["Passwords do not match"]);
     }
+    // console.log("ERROR")
+    // console.log(errors)
+    // if (!errors.length) {
+    //   onClose();
+    // }
 
     // if (!email.includes("@")) {
     //   setErrors(['Email is not a valid address'])
@@ -50,51 +57,85 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp} className="signUpForm">
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+    <div className="signUpFormPageContainer">
+      <div className="signUpFormContainer">
+        <div className="signUpLogoDiv">
+          <img src={signUpLogo} alt='signuplogo'></img>
+          <span className="registerSpan">Create your Account</span>
+        </div>
+        <div className="innerSignUpFormContainer">
+          <form onSubmit={onSignUp} className="signUpForm">
+            <div className="errorDiv">
+              {errors.map((error, ind) => (
+                <div className="errorDiv" key={ind}>
+                  {" "}
+                  - {error}
+                </div>
+              ))}
+            </div>
+            <div className="signUpUsernameDiv">
+              <label>Username</label>
+              <input
+                className="signUpFormInput"
+                type="text"
+                name="username"
+                onChange={updateUsername}
+                value={username}
+              ></input>
+            </div>
+            <div className="signUpEmailDiv">
+              <label>Email</label>
+              <input
+                className="signUpFormInput"
+                type="text"
+                name="email"
+                onChange={updateEmail}
+                value={email}
+              ></input>
+            </div>
+            <div className="signUpPasswordDiv">
+              <label>Password</label>
+              <input
+                className="signUpFormInput"
+                type="password"
+                name="password"
+                onChange={updatePassword}
+                value={password}
+              ></input>
+            </div>
+            <div className="signUpPasswordRepeat">
+              <label>Repeat Password</label>
+              <input
+                className="signUpFormInput"
+                type="password"
+                name="repeat_password"
+                onChange={updateRepeatPassword}
+                value={repeatPassword}
+                required={true}
+              ></input>
+            </div>
+            <div className="createAccountDiv">
+              <button className="signUpButton" type="submit">
+                Create Account
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div>
-        <label>Username</label>
-        <input
-          type="text"
-          name="username"
-          onChange={updateUsername}
-          value={username}
-        ></input>
+      <div className="sideCreateContainer signUpFormRules">
+        <div className="postingRules">
+          <img src={icon} alt='rulesIcon'></img>
+          <span>Welcome to Rayddit</span>
+        </div>
+        <ol>
+          <li className="ruleList">Remember the human</li>
+          <li className="ruleList">Behave like you would in real life</li>
+          <li className="ruleList">Look for the original source of content</li>
+          <li className="ruleList">Search for duplicates before posting</li>
+          <li className="ruleList">Report any bugs to the developer</li>
+        </ol>
       </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="text"
-          name="email"
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type="password"
-          name="repeat_password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type="submit">Sign Up</button>
-    </form>
+    </div>
   );
 };
 
