@@ -43,8 +43,10 @@
 .subredditLgo {
   border-radius: 50%;
   height: 50px;
+  max-width: 55px;
   margin-right: 8px;
 }
+
 
 .postDescriptionSubredditLogo > span {
   font-size: 16px;
