@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { getAllSubredditsRequest } from "../../store/subreddits";
 import createIcon from "./createIcon.png";
 import linkedin from "./linkedin.png";
@@ -76,7 +76,7 @@ const Homepage = () => {
         <div className="rowOne">
           <div className="createPostDiv">
             <div className="createIcon">
-              <img src={createIcon}></img>
+              <img src={createIcon} alt='createIcon'></img>
             </div>
             <div className="createInputContainer">
               <input
@@ -130,6 +130,7 @@ const Homepage = () => {
                           <div className="homeSubredditIcon">
                             <img
                               src={subreddit.icon_url}
+                              alt='subredditIcon'
                               onError={(e) => {
                                 e.currentTarget.src =
                                   "https://i.imgur.com/hkMSod3.png";
@@ -146,13 +147,13 @@ const Homepage = () => {
                 })}
             </div>
             <div className="subredditCreateDiv">
-              <a
+              <div
                 className="createSubredditButton"
                 onClick={createSubredditPage}
               >
                 {" "}
                 Create a Subreddit
-              </a>
+              </div>
             </div>
           </div>
           <div className="developerInfoDiv">
@@ -162,13 +163,13 @@ const Homepage = () => {
             <div className="devLinkIcons">
               <a className="iconContainer"  href="https://github.com/RayC206/Rayddit">
                 <div className="githubIcon">
-                  <img src={github}></img>
+                  <img src={github} alt='gitHubLogo'></img>
                   <span>Github</span>
                 </div>
               </a>
               <a className="iconContainer"  href="https://www.linkedin.com/in/ray-charles-henry/">
                 <div className="linkedInIcon">
-                  <img src={linkedin}></img>
+                  <img src={linkedin} alt='linkedInLogo'></img>
                   <span>LinkedIn</span>
                 </div>
               </a>

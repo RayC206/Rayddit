@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { getSubredditRequest } from "../../store/subreddits";
 import PostCard from "../PostCard";
 import LoginFormModal from "../LoginFormModal";
 import "./PostDetails.css";
 
 import { getPostRequest, deletePostRequest } from "../../store/posts";
-import ErrorPage from "../ErrorPage";
+// import ErrorPage from "../ErrorPage";
 
 const PostDetails = () => {
-  const POST_TYPE_TEXT = 1;
-  const POST_TYPE_IMAGE = 2;
-  const POST_TYPE_LINK = 3;
+  // const POST_TYPE_TEXT = 1;
+  // const POST_TYPE_IMAGE = 2;
+  // const POST_TYPE_LINK = 3;
 
   let { postId } = useParams();
   postId = Number(postId);
@@ -44,7 +44,7 @@ const PostDetails = () => {
           });
       });
     }
-  }, [dispatch, subredditId]);
+  }, [dispatch, subredditId, postId]);
 
   const subredditPage = (subredditId) => {
     let path = `/r/${subredditId}`;
@@ -55,7 +55,7 @@ const PostDetails = () => {
     if (!sessionUser) {
       setIsLoginFormModalIsOpen(true);
     } else {
-      let path = `/submit`;
+      let path = `/submit?subreddit_id=${subredditId}`;
       history.push(path);
     }
   };
@@ -97,7 +97,7 @@ const PostDetails = () => {
               post.map((post) => {
                 return (
                   <>
-                    {sessionUser && sessionUser.id == post.user_id && (
+                    {sessionUser && sessionUser.id === post.user_id && (
                       <div className="editDeletePostButtonDiv">
                         <button
                           className="editPostButton"
@@ -145,6 +145,7 @@ const PostDetails = () => {
                     <div className="postPageAboutSubreddit">
                       <img
                         src={subreddit.banner_img}
+                        alt='bannerImage'
                         onError={(e) => {
                           e.currentTarget.src =
                             "https://i.imgur.com/aQxmKOg.png";
@@ -158,6 +159,7 @@ const PostDetails = () => {
                       <img
                         className="subredditLgo"
                         src={subreddit.icon_url}
+                        alt='subredditIcon'
                       ></img>
                       <span>r/{subreddit.name}</span>
                     </div>
@@ -168,13 +170,13 @@ const PostDetails = () => {
                       {/* <div className="subredditBornDate">{subreddit.created_at}</div> */}
                     </div>
                     <div className="subredditCreatePostDiv">
-                      <a
+                      <div
                         className="createSubredditPost"
                         onClick={createPostPage}
                       >
                         {" "}
                         create post
-                      </a>
+                      </div>
                     </div>
                   </div>
                   {/* <div className="createSubreddit"></div> */}

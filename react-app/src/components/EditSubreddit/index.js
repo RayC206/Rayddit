@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams, Redirect } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   editSubredditRequest,
   getSubredditRequest,
@@ -34,7 +34,7 @@ const EditSubreddit = ({ onClose }) => {
     dispatch(getSubredditRequest(subredditId)).then(() => {
       setSubredditLoaded(true);
     });
-  }, [dispatch]);
+  }, [dispatch, subredditId]);
 
   if (submitSuccess) {
     onClose();
@@ -122,6 +122,7 @@ const EditSubreddit = ({ onClose }) => {
               <div className="editBannerPreview">
                 <img
                   src={bannerImage}
+                  alt='bannerImage'
                   onError={(e) => {
                     e.currentTarget.src = "https://i.imgur.com/aQxmKOg.png";
                   }}
@@ -131,6 +132,7 @@ const EditSubreddit = ({ onClose }) => {
                 <div className="editIconBackground">
                   <img
                     src={iconUrl}
+                    alt='iconImage'
                     onError={(e) => {
                       e.currentTarget.src = "https://i.imgur.com/hkMSod3.png";
                     }}

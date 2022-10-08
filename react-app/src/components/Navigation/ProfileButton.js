@@ -33,10 +33,10 @@ function ProfileButton({ user }) {
     history.push("/");
   };
 
-  const usersProfilePage = (userId) => {
-    let path = `/user/${userId}`;
-    history.push(path);
-  };
+  // const usersProfilePage = (userId) => {
+  //   let path = `/user/${userId}`;
+  //   history.push(path);
+  // };
 
   return (
     <>
@@ -44,7 +44,7 @@ function ProfileButton({ user }) {
         <div className="profileDropdown">
           <div className="menu_drop">
             <div className="user_icon">
-              <img src={user.profile_image}></img>
+              <img src={user.profile_image} alt='userProfileImage'></img>
             </div>
             <span>{user.username}</span>
           </div>
