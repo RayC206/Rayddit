@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import {
   getSubredditRequest,
   subscribeToSubredditRequest,
@@ -62,11 +62,12 @@ const SubredditPage = () => {
       subredditInfo[0].subscriptions.forEach((subscription) => {
         if (subscription.user_id === sessionUser.id) {
           setUserJoinedSubreddit(true);
+          console.log("HERE");
         }
       });
       setUserOwnsSubreddit(sessionUser.id === subredditInfo[0].owner_id);
     }
-  }, [subredditLoaded, sessionUser, subredditInfo]);
+  }, [subredditLoaded, sessionUser]);
 
   const createPostPage = () => {
     if (!sessionUser) {
@@ -112,7 +113,7 @@ const SubredditPage = () => {
                   <div className="subredditBanner">
                     <img
                       src={subreddit?.banner_img}
-                      alt='bannerimage'
+                      alt="bannerimage"
                       onError={(e) => {
                         e.currentTarget.src = "https://i.imgur.com/aQxmKOg.png";
                       }}
@@ -124,7 +125,7 @@ const SubredditPage = () => {
                           <img
                             className="subredditIcon"
                             src={subreddit?.icon_url}
-                            alt='iconImage'
+                            alt="iconImage"
                             onError={(e) => {
                               e.currentTarget.src =
                                 "https://i.imgur.com/hkMSod3.png";
@@ -132,7 +133,7 @@ const SubredditPage = () => {
                           ></img>
                           <div className="subredditNameDiv">
                             <div className="bigSubredditName">
-                              {subreddit.name}
+                              <span> {subreddit.name} </span>
                               {/* <div className="joinToggleSubreddit"> */}
                               {userOwnsSubreddit ? (
                                 <div className="subredditButtonDiv">
@@ -178,7 +179,7 @@ const SubredditPage = () => {
                               {/* </div> */}
                             </div>
                             <div className="littleSubredditName">
-                              r/{subreddit.name}
+                              <span>r/{subreddit.name}</span>
                             </div>
                           </div>
                         </div>
@@ -191,7 +192,7 @@ const SubredditPage = () => {
                 <div className="rowOneSubreddit">
                   <div className="createPostDiv">
                     <div className="createIcon">
-                      <img src={createIcon} alt='createIcon'></img>
+                      <img src={createIcon} alt="createIcon"></img>
                     </div>
                     <div className="createInputContainer">
                       <input
