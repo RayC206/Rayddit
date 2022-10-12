@@ -31,24 +31,25 @@ Backend:
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white) ![SQLAlchemy](https://img.shields.io/badge/-SQLAlchemy-red?style=for-the-badge)
 
-# Homepage
+# Site Preview:
+## Homepage
 ![Screen Shot 2022-10-09 at 8 09 45 PM](https://user-images.githubusercontent.com/79509501/194794349-fe868506-9032-4cea-b70b-4d5b4e3d1a25.png)
 
-# Post Detail Page example
+## Post Detail Page example
 ![Screen Shot 2022-10-09 at 8 08 27 PM](https://user-images.githubusercontent.com/79509501/194794393-e7374701-9c09-4725-a487-bc3d2b73ed42.png)
 
-# Subreddit page example
+## Subreddit page example
 
 ![Screen Shot 2022-10-09 at 8 06 43 PM](https://user-images.githubusercontent.com/79509501/194794435-506e2f24-0f85-4727-a864-9194ea3be6c6.png)
 
-# Profile Page
+## Profile Page
 ![Screen Shot 2022-10-09 at 8 15 10 PM](https://user-images.githubusercontent.com/79509501/194794609-4253aa31-8f8d-49a5-86bf-eb44127ee708.png)
 
 
-# Create post page
+## Create post page
 ![Screen Shot 2022-10-09 at 8 09 11 PM](https://user-images.githubusercontent.com/79509501/194794476-1067404e-244c-4ba5-b24d-2689f9d40426.png)
 
-# Edit Post page 
+## Edit Post page 
 ![Screen Shot 2022-10-07 at 4 02 59 PM](https://user-images.githubusercontent.com/79509501/194794509-5092d333-74fe-4226-8115-e6c4fcc6f299.png)
 
 
