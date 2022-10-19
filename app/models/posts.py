@@ -21,6 +21,7 @@ class Post(db.Model):
   subreddit = db.relationship("Subreddit", back_populates="posts")
   post_type = db.relationship("Post_Type", back_populates="posts")
   votes = db.relationship("Vote", back_populates="post", cascade="all, delete-orphan")
+  comments = db.relationship("Comment", back_populates="post")
 
   def post_timeago(self):
     return timeago.format(self.created_at, datetime.datetime.now())
