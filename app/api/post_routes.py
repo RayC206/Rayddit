@@ -180,6 +180,7 @@ def create_comment(post_id):
     new_comment = Comment (
       user_id = user_id,
       post_id = post.id,
+      parent_id = form.data["parent_id"],
       text = form.data["text"]
     )
     db.session.add(new_comment)
