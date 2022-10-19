@@ -8,6 +8,7 @@ from ..models.post_types import Post_Type
 from ..models.users import User
 from ..models.votes import Vote
 from ..forms.create_post import PostForm
+from ..forms.create_comment import CommentForm
 
 post_routes = Blueprint('post', __name__)
 
@@ -164,5 +165,30 @@ def downvote_post(post_id):
 def get_comments(post_id):
   posts_comments = Comment.query.filter(Comment.post_id == post_id).order_by(Comment.created_at.desc()).all()
 
-  all_posts_comments = [comment.to_dict() for comment in posts_comments]
+  all_posts_comments = [comment.to_dict() for comment in posts_comments if comment.parent_id is None]
   return jsonify(all_posts_comments)
+
+# Create comment
+@post_routes.route('/<int:post_id>/comments/create', methods=["POST"])
+@login_required
+def create_comment(post_id):
+  form = CommentForm()
+  user_id = current_user.id
+  post = Post.query.get_or_404(post_id)
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    new_comment = Comment (
+      user_id = user_id,
+      post_id = post.id,
+      text = form.data["text"]
+    )
+    db.session.add(new_comment)
+    db.session.commit()
+
+    new_comment = new_comment.to_dict()
+    return new_comment
+  else:
+    error_response = {
+      'errors': form.errors
+    }
+    return jsonify(error_response), 400

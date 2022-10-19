@@ -25,12 +25,19 @@ def seed_comments():
         text = "Nice",
         parent_id = 3
     )
+    comment5 = Comment(
+        post_id = 1,
+        user_id = 3,
+        text = "This ^",
+        parent_id = 4
+    )
 
 
     db.session.add(comment1)
     db.session.add(comment2)
     db.session.add(comment3)
     db.session.add(comment4)
+    db.session.add(comment5)
     db.session.commit()
 
 def undo_comments():
