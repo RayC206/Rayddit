@@ -7,7 +7,7 @@ class Comment(db.Model):
     __tablename__ = "comments"
 
     id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(255), nullable=False)
+    text = db.Column(db.String(2000), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
     parent_id = db.Column(db.Integer, db.ForeignKey("comments.id"))
@@ -24,6 +24,7 @@ class Comment(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "username": self.user.username,
+            "text": self.text,
             "post_id": self.post.id,
             "parent_id": self.parent_id,
             "replies": [comment.to_dict() for comment in self.replies],

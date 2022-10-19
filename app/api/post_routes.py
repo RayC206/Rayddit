@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 
 from ..models.db import db
 from ..models.posts import Post
+from ..models.comments import Comment
 from ..models.post_types import Post_Type
 from ..models.users import User
 from ..models.votes import Vote
@@ -156,3 +157,12 @@ def downvote_post(post_id):
 
   db.session.commit()
   return jsonify(post.to_dict())
+
+
+# Get all comments for a post (including replies)
+@post_routes.route("/<int:post_id>/comments")
+def get_comments(post_id):
+  posts_comments = Comment.query.filter(Comment.post_id == post_id).order_by(Comment.created_at.desc()).all()
+
+  all_posts_comments = [comment.to_dict() for comment in posts_comments]
+  return jsonify(all_posts_comments)
