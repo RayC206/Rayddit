@@ -7,8 +7,12 @@ import LoginFormModal from "../LoginFormModal";
 import "./PostDetails.css";
 
 import { getPostRequest, deletePostRequest } from "../../store/posts";
-import { getAllPostCommentsRequest } from "../../store/comments";
+import {
+  getAllPostCommentsRequest,
+  deleteCommentRequest,
+} from "../../store/comments";
 import CreateComment from "../CreateComment";
+
 // import ErrorPage from "../ErrorPage";
 
 const PostDetails = () => {
@@ -78,6 +82,10 @@ const PostDetails = () => {
     dispatch(deletePostRequest(postId));
   };
 
+  const deleteComment = (commentId) => {
+    dispatch(deleteCommentRequest(commentId));
+  };
+
   const homePage = () => {
     let path = `/`;
     history.push(path);
@@ -133,11 +141,24 @@ const PostDetails = () => {
                     {commentsLoaded && (
                       <>
                         <div>{comments.length} comments</div>
-                      <CreateComment post={post}/>
+                        <CreateComment post={post} />
                         {comments.map((comment) => {
                           return (
                             <>
-                              <div>{comment.text}</div>
+                              <div>
+                                {comment.text}
+                                {sessionUser &&
+                                  sessionUser.id === comment.user_id && (
+                                    <button
+                                      className="deletePostButton"
+                                      onClick={() => {
+                                        deleteComment(comment.id);
+                                      }}
+                                    >
+                                      Delete
+                                    </button>
+                                  )}
+                              </div>
                               {comment.replies.map((reply) => {
                                 return <div>--&gt; {reply.text}</div>;
                               })}

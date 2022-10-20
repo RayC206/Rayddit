@@ -63,6 +63,18 @@ export const getAllPostCommentsRequest = (postId) => async (dispatch) => {
   return res;
 };
 
+// Delete comment
+export const deleteCommentRequest = (commentId) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${commentId}`, {
+    method: "DELETE"
+  });
+  if (res.ok) {
+    dispatch(deleteComment(commentId));
+    return commentId
+  }
+  return res;
+}
+
 //Initial State
 let initialState = {};
 
@@ -82,6 +94,11 @@ const commentsReducer = (state = initialState, action) => {
         newState[comment.id] = comment;
       });
       return { ...newState };
+    }
+    case DELETE_COMMENT: {
+      newState = {...state };
+      delete newState[action.commentId];
+      return newState
     }
     default:
       return state;
