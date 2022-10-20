@@ -1,6 +1,6 @@
 const CREATE_COMMENT = "comment/createComment";
 const GET_POST_COMMENTS = "comment/getComments";
-const UPDATE_COMMENT = "comment/updateComment";
+const EDIT_COMMENT = "comment/updateComment";
 const DELETE_COMMENT = "comment/deleteComment";
 
 // Action Creators
@@ -18,9 +18,9 @@ const getPostComments = (comments) => {
   };
 };
 
-const updateComment = (comment) => {
+const editComment = (comment) => {
   return {
-    type: UPDATE_COMMENT,
+    type: EDIT_COMMENT,
     comment,
   };
 };
@@ -63,6 +63,24 @@ export const getAllPostCommentsRequest = (postId) => async (dispatch) => {
   return res;
 };
 
+// Edit comment
+export const editCommentRequest = (data) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${data.id}`, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data),
+  });
+  if (res.ok) {
+    const editedComment = await res.json();
+    dispatch(editComment(editedComment));
+    return editedComment;
+  } else if (res.status < 500) {
+    return await res.json()
+  } else {
+    return ["An error occured. Please try again"]
+  }
+}
+
 // Delete comment
 export const deleteCommentRequest = (commentId) => async (dispatch) => {
   const res = await fetch(`/api/comments/${commentId}`, {
@@ -94,6 +112,11 @@ const commentsReducer = (state = initialState, action) => {
         newState[comment.id] = comment;
       });
       return { ...newState };
+    }
+    case EDIT_COMMENT: {
+      newState = { ...state };
+      newState[action.comment.id] = action.comment;
+      return newState
     }
     case DELETE_COMMENT: {
       newState = {...state };

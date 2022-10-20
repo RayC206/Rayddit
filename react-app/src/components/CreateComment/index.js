@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { createCommentRequest } from "../../store/comments";
+import './CreateComment.css'
 
 const CreateComment = ({ post }) => {
   const dispatch = useDispatch();
   const [text, setText] = useState(null);
   const [errors, setErrors] = useState([]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const sessionUser = useSelector((state) => state.session.user);
 
   console.log(post.id)
 
@@ -29,9 +31,9 @@ const CreateComment = ({ post }) => {
 
   return (
     <div className="commentFormContainer">
-      <form onSubmit={handleSubmit}>
+      <form className="innerCommentFormContainer" onSubmit={handleSubmit}>
         <div className="commentForm">
-          <div className="createCommentTitle">Create Comment</div>
+          {/* <div className="createCommentTitle">Create Comment</div> */}
           <ul>
             {errors.map((error, idx) => (
               <li className="errorDiv" key={idx}>
@@ -40,12 +42,12 @@ const CreateComment = ({ post }) => {
             ))}
           </ul>
 
+            <span className="commentAsSpan"> Comment as {sessionUser.username}</span>
           <label>
-            <span>Text:</span>
             <textarea
               className="commentTextBox"
               type="text"
-              placeholder="Comment message"
+              placeholder="What are your thoughts?"
               value={text}
               onChange={(e) => setText(e.target.value)}
             />

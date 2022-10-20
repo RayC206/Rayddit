@@ -24,6 +24,7 @@ class Comment(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "username": self.user.username,
+            "user_profile_image": self.user.profile_image,
             "text": self.text,
             "post_id": self.post.id,
             "parent_id": self.parent_id,

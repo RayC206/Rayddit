@@ -145,19 +145,27 @@ const PostDetails = () => {
                         {comments.map((comment) => {
                           return (
                             <>
-                              <div>
-                                {comment.text}
-                                {sessionUser &&
-                                  sessionUser.id === comment.user_id && (
-                                    <button
-                                      className="deletePostButton"
-                                      onClick={() => {
-                                        deleteComment(comment.id);
-                                      }}
-                                    >
-                                      Delete
-                                    </button>
-                                  )}
+                              <div className="commentDiv">
+                                <div className="commenterIcon">
+                                  <img src={comment.user_profile_image}></img>
+                                </div>
+                                <div className="commentContent">
+                                  <span>{comment.username}</span>
+                                  {sessionUser &&
+                                    sessionUser.id === comment.user_id && (
+                                      <button
+                                        className="deletePostButton"
+                                        onClick={() => {
+                                          deleteComment(comment.id);
+                                        }}
+                                      >
+                                        Delete
+                                      </button>
+                                    )}
+                                  <div className="innerCommentDiv">
+                                    {comment.text}
+                                  </div>
+                                </div>
                               </div>
                               {comment.replies.map((reply) => {
                                 return <div>--&gt; {reply.text}</div>;

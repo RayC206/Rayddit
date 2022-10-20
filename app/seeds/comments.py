@@ -6,30 +6,30 @@ def seed_comments():
     comment1 = Comment(
         post_id = 1,
         user_id = 2,
-        text = "Nice",
+        text = "outerComment",
     )
     comment2 = Comment(
         post_id = 1,
         user_id = 3,
-        text = "Agreed",
+        text = "innerComment",
         parent_id = 1
     )
     comment3 = Comment(
         post_id = 1,
         user_id = 2,
-        text = "Nice",
+        text = "outerComment",
     )
     comment4 = Comment(
         post_id = 1,
-        user_id = 2,
-        text = "Nice",
+        user_id = 5,
+        text = "InnerComment",
         parent_id = 3
     )
     comment5 = Comment(
         post_id = 1,
-        user_id = 3,
-        text = "This ^",
-        parent_id = 4
+        user_id = 6,
+        text = "Cool",
+
     )
 
 
