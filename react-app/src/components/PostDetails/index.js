@@ -7,6 +7,8 @@ import LoginFormModal from "../LoginFormModal";
 import "./PostDetails.css";
 
 import { getPostRequest, deletePostRequest } from "../../store/posts";
+import { getAllPostCommentsRequest } from "../../store/comments";
+import CreateComment from "../CreateComment";
 // import ErrorPage from "../ErrorPage";
 
 const PostDetails = () => {
@@ -23,7 +25,10 @@ const PostDetails = () => {
   const subredditInfo = useSelector((state) => Object.values(state.subreddits));
   const post = useSelector((state) => Object.values(state.posts));
   const sessionUser = useSelector((state) => state.session.user);
+  const comments = useSelector((state) => Object.values(state.comments));
   const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
+  console.log("COMMENTS");
+  console.log(comments);
 
   if (post && post.length) {
     subredditId = post[0].subreddit_id;
@@ -31,6 +36,7 @@ const PostDetails = () => {
 
   const [subredditLoaded, setSubredditLoaded] = useState(false);
   const [postLoaded, setPostLoaded] = useState(false);
+  const [commentsLoaded, setCommentsLoaded] = useState(false);
 
   useEffect(() => {
     if (isNaN(postId)) {
@@ -42,6 +48,9 @@ const PostDetails = () => {
           dispatch(getSubredditRequest(subredditId)).then(() => {
             setSubredditLoaded(true);
           });
+        dispatch(getAllPostCommentsRequest(postId)).then(() => {
+          setCommentsLoaded(true);
+        });
       });
     }
   }, [dispatch, subredditId, postId]);
@@ -121,6 +130,22 @@ const PostDetails = () => {
                       post={post}
                       modalToggle={setIsLoginFormModalIsOpen}
                     />
+                    {commentsLoaded && (
+                      <>
+                        <div>{comments.length} comments</div>
+                      <CreateComment post={post}/>
+                        {comments.map((comment) => {
+                          return (
+                            <>
+                              <div>{comment.text}</div>
+                              {comment.replies.map((reply) => {
+                                return <div>--&gt; {reply.text}</div>;
+                              })}
+                            </>
+                          );
+                        })}
+                      </>
+                    )}
                   </>
                 );
               })
@@ -145,7 +170,7 @@ const PostDetails = () => {
                     <div className="postPageAboutSubreddit">
                       <img
                         src={subreddit.banner_img}
-                        alt='bannerImage'
+                        alt="bannerImage"
                         onError={(e) => {
                           e.currentTarget.src =
                             "https://i.imgur.com/aQxmKOg.png";
@@ -159,7 +184,7 @@ const PostDetails = () => {
                       <img
                         className="subredditLgo"
                         src={subreddit.icon_url}
-                        alt='subredditIcon'
+                        alt="subredditIcon"
                         onError={(e) => {
                           e.currentTarget.src =
                             "https://i.imgur.com/hkMSod3.png";
