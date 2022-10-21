@@ -7,6 +7,9 @@ import LoginFormModal from "../LoginFormModal";
 import "./PostDetails.css";
 import EditComment from "../EditComment";
 
+import { AiFillCaretRight } from "react-icons/ai";
+
+
 import { getPostRequest, deletePostRequest } from "../../store/posts";
 import {
   getAllPostCommentsRequest,
@@ -149,48 +152,57 @@ const PostDetails = () => {
                           return (
                             <>
                               <div className="commentDiv">
+                                <div className="commenterIconDiv">
                                 <div className="commenterIcon">
                                   <img src={comment.user_profile_image}></img>
                                 </div>
+
+                                </div>
                                 <div className="commentContent">
-                                  <span>{comment.username}</span>
-                                  {sessionUser &&
-                                    sessionUser.id === comment.user_id && (
-                                      <div>
-                                        <button
-                                          className="deleteCommentButton"
-                                          onClick={() => {
-                                            deleteComment(comment);
-                                          }}
-                                        >
-                                          Delete
-                                        </button>
-                                        <button
-                                          className="editCommentButton"
-                                          onClick={() => {
-                                            setOpenCommentEditFormId(
-                                              comment.id
-                                            );
-                                          }}
-                                        >
-                                          Edit
-                                        </button>
-                                        {openCommentEditFormId ===
-                                          comment.id && (
-                                          <EditComment
-                                            comment={comment}
-                                            onSuccess={() => {
-                                              setOpenCommentEditFormId(false);
-                                            }}
-                                          />
+                                  <div className="commentHeader">
+                                    <span>{comment.username}</span>
+                                    <div className="commentButtons">
+                                      {sessionUser &&
+                                        sessionUser.id === comment.user_id && (
+                                          <div>
+                                            <button
+                                              className="deleteCommentButton"
+                                              onClick={() => {
+                                                deleteComment(comment);
+                                              }}
+                                            >
+                                              Delete
+                                            </button>
+                                            <button
+                                              className="editCommentButton"
+                                              onClick={() => {
+                                                setOpenCommentEditFormId(
+                                                  comment.id
+                                                );
+                                              }}
+                                            >
+                                              Edit
+                                            </button>
+                                            {openCommentEditFormId ===
+                                              comment.id && (
+                                              <EditComment
+                                                comment={comment}
+                                                onSuccess={() => {
+                                                  setOpenCommentEditFormId(
+                                                    false
+                                                  );
+                                                }}
+                                              />
+                                            )}
+                                          </div>
                                         )}
-                                      </div>
-                                    )}
+                                    </div>
+                                  </div>
                                   <div className="innerCommentDiv">
                                     {comment.text}
                                   </div>
                                   <button
-                                    className=""
+                                    className="replyButton"
                                     onClick={() => {
                                       setOpenCommentReplyFormId(comment.id);
                                     }}
@@ -211,18 +223,40 @@ const PostDetails = () => {
                               {comment.replies.map((reply) => {
                                 return (
                                   <>
-                                    <div>--&gt; {reply.text}</div>
-                                    {sessionUser &&
-                                      sessionUser.id === reply.user_id && (
-                                        <button
-                                          className="deleteCommentButton"
-                                          onClick={() => {
-                                            deleteComment(reply);
-                                          }}
-                                        >
-                                          Delete
-                                        </button>
-                                      )}
+                                    <div className="replyOuterContainer">
+                                      <div><AiFillCaretRight/></div>
+                                      <div className="commenterIconDiv">
+                                        <div className="commenterIcon">
+                                          <img
+                                            src={reply.user_profile_image}
+                                          ></img>
+                                        </div>
+                                      </div>
+                                      <div className="replyContainer">
+                                        <div className="commentHeader">
+                                          <span>{reply.username}</span>
+                                          <div className="commentButtons">
+                                            {sessionUser &&
+                                              sessionUser.id ===
+                                                reply.user_id && (
+                                                <button
+                                                  className="deleteCommentButton"
+                                                  onClick={() => {
+                                                    deleteComment(reply);
+                                                  }}
+                                                >
+                                                  Delete
+                                                </button>
+                                              )}
+                                          </div>
+                                        </div>
+
+                                        <div className="replyText">
+                                          {" "}
+                                          {reply.text}
+                                        </div>
+                                      </div>
+                                    </div>
                                   </>
                                 );
                               })}
