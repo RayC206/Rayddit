@@ -43,7 +43,7 @@ const ProfilePage = () => {
     async function fetchData() {
       const response = await fetch(`/api/users/${userId}`);
       const responseData = await response.json();
-      console.log("USER");
+      // console.log("USER");
       setUser(responseData);
     }
     fetchData();
@@ -212,7 +212,7 @@ const ProfilePage = () => {
                                   <div className="homeSubredditIcon">
                                     <img
                                       src={subreddit.icon_url}
-                                      alt='subredditIcon'
+                                      alt="subredditIcon"
                                       onError={(e) => {
                                         e.currentTarget.src =
                                           "https://i.imgur.com/hkMSod3.png";

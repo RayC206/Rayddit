@@ -48,7 +48,7 @@ const EditPost = () => {
     return <Redirect to={`/user/${sessionUser.id}`} />;
   }
   const handleSubmit = (e) => {
-    console.log("SUBMIT");
+    // console.log("SUBMIT");
     e.preventDefault();
     setErrors([]);
     let editedPostData = {
@@ -167,7 +167,7 @@ const EditPost = () => {
               <div className="editPreviewImage">
                 <img
                   src={imageUrl}
-                  alt='postImage'
+                  alt="postImage"
                   onError={(e) => {
                     e.currentTarget.src = imgUrlBackup;
                   }}

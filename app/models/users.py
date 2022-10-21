@@ -23,6 +23,7 @@ class User(db.Model, UserMixin):
     posts = db.relationship("Post", back_populates="user", cascade="all, delete-orphan")
     subscription = db.relationship("Subscription", back_populates="user", cascade="all, delete-orphan")
     votes = db.relationship("Vote", back_populates="user", cascade="all, delete-orphan")
+    comments = db.relationship("Comment", back_populates="user")
 
     @property
     def password(self):

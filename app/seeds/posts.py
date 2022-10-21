@@ -176,7 +176,15 @@ def seed_posts():
         post_type_id = 2,
         title = 'Simple Feature',
         img_url = "https://i.imgur.com/dMC33H5.gif",
-        created_at = date.fromisoformat('2022-10-07')
+        created_at = date.fromisoformat('2022-10-21')
+    )
+    post23 = Post(
+        user_id=3,
+        subreddit_id = 2,
+        post_type_id = 2,
+        title = 'What a Great year for Survival Horror Games!',
+        img_url = "https://i.redd.it/difuheijv1v91.jpg",
+        created_at = date.fromisoformat('2022-10-20')
     )
 
 
@@ -202,6 +210,7 @@ def seed_posts():
     db.session.add(post20)
     db.session.add(post21)
     db.session.add(post22)
+    db.session.add(post23)
     db.session.commit()
 
 

@@ -22,9 +22,9 @@ const Homepage = () => {
     posts = posts.sort((postA, postB) =>
       new Date(postA.created_at) < new Date(postB.created_at) ? 1 : -1
     );
-    posts.forEach((post) => {
-      console.log(post.title + " " + new Date(post.created_at));
-    });
+    // posts.forEach((post) => {
+    //   console.log(post.title + " " + new Date(post.created_at));
+    // });
 
     return posts;
   });

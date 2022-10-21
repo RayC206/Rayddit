@@ -21,8 +21,6 @@ export function ModalProvider({ children }) {
 }
 
 export function Modal({ onClose, children }) {
-  console.log("MODAL");
-  console.log(onClose);
   const modalNode = useContext(ModalContext);
   if (!modalNode) return null;
 
@@ -32,7 +30,6 @@ export function Modal({ onClose, children }) {
         id="modal-background"
         onClick={() => {
           onClose();
-          console.log("CLOSE");
         }}
       />
       <div id="modal-content">{children}</div>

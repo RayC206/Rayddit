@@ -5,8 +5,18 @@ import { getSubredditRequest } from "../../store/subreddits";
 import PostCard from "../PostCard";
 import LoginFormModal from "../LoginFormModal";
 import "./PostDetails.css";
+import EditComment from "../EditComment";
+
+import { AiFillCaretRight } from "react-icons/ai";
+
 
 import { getPostRequest, deletePostRequest } from "../../store/posts";
+import {
+  getAllPostCommentsRequest,
+  deleteCommentRequest,
+} from "../../store/comments";
+import CreateComment from "../CreateComment";
+
 // import ErrorPage from "../ErrorPage";
 
 const PostDetails = () => {
@@ -23,7 +33,12 @@ const PostDetails = () => {
   const subredditInfo = useSelector((state) => Object.values(state.subreddits));
   const post = useSelector((state) => Object.values(state.posts));
   const sessionUser = useSelector((state) => state.session.user);
+  const comments = useSelector((state) => Object.values(state.comments));
   const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
+  const [openCommentEditFormId, setOpenCommentEditFormId] = useState(false);
+  const [openCommentReplyFormId, setOpenCommentReplyFormId] = useState(false);
+  // console.log("COMMENTS");
+  // console.log(comments);
 
   if (post && post.length) {
     subredditId = post[0].subreddit_id;
@@ -31,6 +46,7 @@ const PostDetails = () => {
 
   const [subredditLoaded, setSubredditLoaded] = useState(false);
   const [postLoaded, setPostLoaded] = useState(false);
+  const [commentsLoaded, setCommentsLoaded] = useState(false);
 
   useEffect(() => {
     if (isNaN(postId)) {
@@ -42,6 +58,9 @@ const PostDetails = () => {
           dispatch(getSubredditRequest(subredditId)).then(() => {
             setSubredditLoaded(true);
           });
+        dispatch(getAllPostCommentsRequest(postId)).then(() => {
+          setCommentsLoaded(true);
+        });
       });
     }
   }, [dispatch, subredditId, postId]);
@@ -67,6 +86,10 @@ const PostDetails = () => {
 
   const deletePost = (postId) => {
     dispatch(deletePostRequest(postId));
+  };
+
+  const deleteComment = (comment) => {
+    dispatch(deleteCommentRequest(comment));
   };
 
   const homePage = () => {
@@ -121,6 +144,127 @@ const PostDetails = () => {
                       post={post}
                       modalToggle={setIsLoginFormModalIsOpen}
                     />
+                    {commentsLoaded && (
+                      <>
+                        <div>{comments.length} comments</div>
+                        <CreateComment post={post} />
+                        {comments.map((comment) => {
+                          return (
+                            <>
+                              <div className="commentDiv">
+                                <div className="commenterIconDiv">
+                                <div className="commenterIcon">
+                                  <img src={comment.user_profile_image}></img>
+                                </div>
+
+                                </div>
+                                <div className="commentContent">
+                                  <div className="commentHeader">
+                                    <span>{comment.username}</span>
+                                    <div className="commentButtons">
+                                      {sessionUser &&
+                                        sessionUser.id === comment.user_id && (
+                                          <div>
+                                            <button
+                                              className="deleteCommentButton"
+                                              onClick={() => {
+                                                deleteComment(comment);
+                                              }}
+                                            >
+                                              Delete
+                                            </button>
+                                            <button
+                                              className="editCommentButton"
+                                              onClick={() => {
+                                                setOpenCommentEditFormId(
+                                                  comment.id
+                                                );
+                                              }}
+                                            >
+                                              Edit
+                                            </button>
+                                            {openCommentEditFormId ===
+                                              comment.id && (
+                                              <EditComment
+                                                comment={comment}
+                                                onSuccess={() => {
+                                                  setOpenCommentEditFormId(
+                                                    false
+                                                  );
+                                                }}
+                                              />
+                                            )}
+                                          </div>
+                                        )}
+                                    </div>
+                                  </div>
+                                  <div className="innerCommentDiv">
+                                    {comment.text}
+                                  </div>
+                                  <button
+                                    className="replyButton"
+                                    onClick={() => {
+                                      setOpenCommentReplyFormId(comment.id);
+                                    }}
+                                  >
+                                    Reply
+                                  </button>
+                                  {openCommentReplyFormId === comment.id && (
+                                    <CreateComment
+                                      post={post}
+                                      replyToId={comment.id}
+                                      onSuccess={() => {
+                                        setOpenCommentReplyFormId(false);
+                                      }}
+                                    />
+                                  )}
+                                </div>
+                              </div>
+                              {comment.replies.map((reply) => {
+                                return (
+                                  <>
+                                    <div className="replyOuterContainer">
+                                      <div><AiFillCaretRight/></div>
+                                      <div className="commenterIconDiv">
+                                        <div className="commenterIcon">
+                                          <img
+                                            src={reply.user_profile_image}
+                                          ></img>
+                                        </div>
+                                      </div>
+                                      <div className="replyContainer">
+                                        <div className="commentHeader">
+                                          <span>{reply.username}</span>
+                                          <div className="commentButtons">
+                                            {sessionUser &&
+                                              sessionUser.id ===
+                                                reply.user_id && (
+                                                <button
+                                                  className="deleteCommentButton"
+                                                  onClick={() => {
+                                                    deleteComment(reply);
+                                                  }}
+                                                >
+                                                  Delete
+                                                </button>
+                                              )}
+                                          </div>
+                                        </div>
+
+                                        <div className="replyText">
+                                          {" "}
+                                          {reply.text}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </>
+                                );
+                              })}
+                            </>
+                          );
+                        })}
+                      </>
+                    )}
                   </>
                 );
               })
@@ -145,7 +289,7 @@ const PostDetails = () => {
                     <div className="postPageAboutSubreddit">
                       <img
                         src={subreddit.banner_img}
-                        alt='bannerImage'
+                        alt="bannerImage"
                         onError={(e) => {
                           e.currentTarget.src =
                             "https://i.imgur.com/aQxmKOg.png";
@@ -159,7 +303,7 @@ const PostDetails = () => {
                       <img
                         className="subredditLgo"
                         src={subreddit.icon_url}
-                        alt='subredditIcon'
+                        alt="subredditIcon"
                         onError={(e) => {
                           e.currentTarget.src =
                             "https://i.imgur.com/hkMSod3.png";
