@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { createPostRequest } from "../../store/posts";
 import icon from "./icon.png";
 import {
@@ -67,8 +67,8 @@ const CreatePost = () => {
       subreddit_id: subreddit,
       post_type_id: postType,
     };
-    console.log("SUBMITTED POST");
-    console.log(newPostData);
+    // console.log("SUBMITTED POST");
+    // console.log(newPostData);
     return dispatch(createPostRequest(newPostData)).then(async (res) => {
       if (!res.errors) {
         setSubmitSuccess(true);
@@ -244,7 +244,7 @@ const CreatePost = () => {
       </div>
       <div className="sideCreateContainer">
         <div className="postingRules">
-          <img src={icon} alt='ruleIcon'></img>
+          <img src={icon} alt="ruleIcon"></img>
           <span>Posting to Rayddit</span>
         </div>
         <ol>

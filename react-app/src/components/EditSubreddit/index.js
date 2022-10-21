@@ -20,7 +20,7 @@ const EditSubreddit = ({ onClose }) => {
   const [errors, setErrors] = useState([]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [subredditLoaded, setSubredditLoaded] = useState(false);
-  console.log(subreddit.name);
+  // console.log(subreddit.name);
 
   useEffect(() => {
     if (subreddit.name) {
@@ -122,7 +122,7 @@ const EditSubreddit = ({ onClose }) => {
               <div className="editBannerPreview">
                 <img
                   src={bannerImage}
-                  alt='bannerImage'
+                  alt="bannerImage"
                   onError={(e) => {
                     e.currentTarget.src = "https://i.imgur.com/aQxmKOg.png";
                   }}
@@ -132,7 +132,7 @@ const EditSubreddit = ({ onClose }) => {
                 <div className="editIconBackground">
                   <img
                     src={iconUrl}
-                    alt='iconImage'
+                    alt="iconImage"
                     onError={(e) => {
                       e.currentTarget.src = "https://i.imgur.com/hkMSod3.png";
                     }}

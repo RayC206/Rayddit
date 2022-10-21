@@ -4,14 +4,14 @@ import { Redirect } from "react-router-dom";
 import { createCommentRequest } from "../../store/comments";
 import "./CreateComment.css";
 
-const CreateComment = ({ post }) => {
+const CreateComment = ({ post, replyToId = null, onSuccess = null }) => {
   const dispatch = useDispatch();
-  const [text, setText] = useState(null);
+  const [text, setText] = useState("");
   const [errors, setErrors] = useState([]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
 
-  console.log(post.id);
+  // console.log(post.id);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,10 +20,14 @@ const CreateComment = ({ post }) => {
       text: text,
       post_id: post.id,
     };
+    if (replyToId) {
+      newComment.parent_id = replyToId;
+    }
     return dispatch(createCommentRequest(newComment)).then(async (res) => {
       if (!res.errors) {
         setSubmitSuccess(true);
         setText("");
+        onSuccess && onSuccess();
       } else {
         setErrors(Object.values(res.errors));
       }
@@ -59,6 +63,16 @@ const CreateComment = ({ post }) => {
           </label>
         </div>
         <div className="createCommentButtonDiv">
+          {replyToId && (
+            <button
+              className=""
+              onClick={() => {
+                onSuccess && onSuccess();
+              }}
+            >
+              Cancel
+            </button>
+          )}
           <button className="createCommentButton" type="submit">
             Create Comment
           </button>

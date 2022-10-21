@@ -32,7 +32,8 @@ const PostDetails = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const comments = useSelector((state) => Object.values(state.comments));
   const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
-  const [openCommentFormId, setOpenCommentFormId] = useState(false);
+  const [openCommentEditFormId, setOpenCommentEditFormId] = useState(false);
+  const [openCommentReplyFormId, setOpenCommentReplyFormId] = useState(false);
   // console.log("COMMENTS");
   // console.log(comments);
 
@@ -84,8 +85,8 @@ const PostDetails = () => {
     dispatch(deletePostRequest(postId));
   };
 
-  const deleteComment = (commentId) => {
-    dispatch(deleteCommentRequest(commentId));
+  const deleteComment = (comment) => {
+    dispatch(deleteCommentRequest(comment));
   };
 
   const homePage = () => {
@@ -157,26 +158,29 @@ const PostDetails = () => {
                                     sessionUser.id === comment.user_id && (
                                       <div>
                                         <button
-                                          className="deletePostButton"
+                                          className="deleteCommentButton"
                                           onClick={() => {
-                                            deleteComment(comment.id);
+                                            deleteComment(comment);
                                           }}
                                         >
                                           Delete
                                         </button>
                                         <button
-                                          className="editPostButton"
+                                          className="editCommentButton"
                                           onClick={() => {
-                                            setOpenCommentFormId(comment.id);
+                                            setOpenCommentEditFormId(
+                                              comment.id
+                                            );
                                           }}
                                         >
                                           Edit
                                         </button>
-                                        {openCommentFormId === comment.id && (
+                                        {openCommentEditFormId ===
+                                          comment.id && (
                                           <EditComment
                                             comment={comment}
                                             onSuccess={() => {
-                                              setOpenCommentFormId(false);
+                                              setOpenCommentEditFormId(false);
                                             }}
                                           />
                                         )}
@@ -185,10 +189,42 @@ const PostDetails = () => {
                                   <div className="innerCommentDiv">
                                     {comment.text}
                                   </div>
+                                  <button
+                                    className=""
+                                    onClick={() => {
+                                      setOpenCommentReplyFormId(comment.id);
+                                    }}
+                                  >
+                                    Reply
+                                  </button>
+                                  {openCommentReplyFormId === comment.id && (
+                                    <CreateComment
+                                      post={post}
+                                      replyToId={comment.id}
+                                      onSuccess={() => {
+                                        setOpenCommentReplyFormId(false);
+                                      }}
+                                    />
+                                  )}
                                 </div>
                               </div>
                               {comment.replies.map((reply) => {
-                                return <div>--&gt; {reply.text}</div>;
+                                return (
+                                  <>
+                                    <div>--&gt; {reply.text}</div>
+                                    {sessionUser &&
+                                      sessionUser.id === reply.user_id && (
+                                        <button
+                                          className="deleteCommentButton"
+                                          onClick={() => {
+                                            deleteComment(reply);
+                                          }}
+                                        >
+                                          Delete
+                                        </button>
+                                      )}
+                                  </>
+                                );
                               })}
                             </>
                           );

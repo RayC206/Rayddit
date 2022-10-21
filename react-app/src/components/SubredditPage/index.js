@@ -39,8 +39,8 @@ const SubredditPage = () => {
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [userOwnsSubreddit, setUserOwnsSubreddit] = useState(false);
   const [userJoinedSubreddit, setUserJoinedSubreddit] = useState(false);
-  console.log("SUBREDDITINFO");
-  console.log(subredditInfo);
+  // console.log("SUBREDDITINFO");
+  // console.log(subredditInfo);
 
   useEffect(() => {
     if (isNaN(subredditId)) {
@@ -57,12 +57,12 @@ const SubredditPage = () => {
   }, [dispatch, subredditId]);
 
   useEffect(() => {
-    console.log("---");
+    // console.log("---");
     if (sessionUser && subredditLoaded && subredditInfo[0]) {
       subredditInfo[0].subscriptions.forEach((subscription) => {
         if (subscription.user_id === sessionUser.id) {
           setUserJoinedSubreddit(true);
-          console.log("HERE");
+          // console.log("HERE");
         }
       });
       setUserOwnsSubreddit(sessionUser.id === subredditInfo[0].owner_id);

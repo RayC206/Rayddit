@@ -25,10 +25,10 @@ const editComment = (comment) => {
   };
 };
 
-const deleteComment = (commentId) => {
+const deleteComment = (comment) => {
   return {
     type: DELETE_COMMENT,
-    commentId,
+    comment,
   };
 };
 
@@ -67,7 +67,7 @@ export const getAllPostCommentsRequest = (postId) => async (dispatch) => {
 export const editCommentRequest = (data) => async (dispatch) => {
   const res = await fetch(`/api/comments/${data.id}`, {
     method: "PUT",
-    headers: {"Content-Type": "application/json"},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
   if (res.ok) {
@@ -75,23 +75,23 @@ export const editCommentRequest = (data) => async (dispatch) => {
     dispatch(editComment(editedComment));
     return editedComment;
   } else if (res.status < 500) {
-    return await res.json()
+    return await res.json();
   } else {
-    return ["An error occured. Please try again"]
+    return ["An error occured. Please try again"];
   }
-}
+};
 
 // Delete comment
-export const deleteCommentRequest = (commentId) => async (dispatch) => {
-  const res = await fetch(`/api/comments/${commentId}`, {
-    method: "DELETE"
+export const deleteCommentRequest = (comment) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${comment.id}`, {
+    method: "DELETE",
   });
   if (res.ok) {
-    dispatch(deleteComment(commentId));
-    return commentId
+    dispatch(deleteComment(comment));
+    return comment;
   }
   return res;
-}
+};
 
 //Initial State
 let initialState = {};
@@ -102,12 +102,19 @@ const commentsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_COMMENT: {
       newState = { ...state };
-      newState[action.comment.id] = action.comment;
+      // console.log("COMMENT");
+      // console.log(action.comment);
+      if (action.comment.parent_id) {
+        // if newly created comment is a reply, append to parent comment's replies array
+        newState[action.comment.parent_id].replies.push(action.comment);
+      } else {
+        newState[action.comment.id] = action.comment;
+      }
       return newState;
     }
     case GET_POST_COMMENTS: {
-      console.log("GET_POST_COMMENTS");
-      console.log(action.comments);
+      // console.log("GET_POST_COMMENTS");
+      // console.log(action.comments);
       action.comments.forEach((comment) => {
         newState[comment.id] = comment;
       });
@@ -116,12 +123,20 @@ const commentsReducer = (state = initialState, action) => {
     case EDIT_COMMENT: {
       newState = { ...state };
       newState[action.comment.id] = action.comment;
-      return newState
+      return newState;
     }
     case DELETE_COMMENT: {
-      newState = {...state };
-      delete newState[action.commentId];
-      return newState
+      newState = { ...state };
+      if (action.comment.parent_id) {
+        // if deleted comment is a reply, remove from the parent comment's replies array
+        newState[action.comment.parent_id].replies = newState[
+          action.comment.parent_id
+        ].replies.filter((reply) => {
+          return reply.id !== action.comment.id;
+        });
+      }
+      delete newState[action.comment.id];
+      return newState;
     }
     default:
       return state;
