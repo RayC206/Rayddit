@@ -9,7 +9,6 @@ import EditComment from "../EditComment";
 
 import { AiFillCaretRight } from "react-icons/ai";
 
-
 import { getPostRequest, deletePostRequest } from "../../store/posts";
 import {
   getAllPostCommentsRequest,
@@ -147,16 +146,15 @@ const PostDetails = () => {
                     {commentsLoaded && (
                       <>
                         <div>{comments.length} comments</div>
-                        <CreateComment post={post} />
+                        {sessionUser && <CreateComment post={post} />}
                         {comments.map((comment) => {
                           return (
                             <>
                               <div className="commentDiv">
                                 <div className="commenterIconDiv">
-                                <div className="commenterIcon">
-                                  <img src={comment.user_profile_image}></img>
-                                </div>
-
+                                  <div className="commenterIcon">
+                                    <img src={comment.user_profile_image}></img>
+                                  </div>
                                 </div>
                                 <div className="commentContent">
                                   <div className="commentHeader">
@@ -201,14 +199,16 @@ const PostDetails = () => {
                                   <div className="innerCommentDiv">
                                     {comment.text}
                                   </div>
-                                  <button
-                                    className="replyButton"
-                                    onClick={() => {
-                                      setOpenCommentReplyFormId(comment.id);
-                                    }}
-                                  >
-                                    Reply
-                                  </button>
+                                  {sessionUser && (
+                                    <button
+                                      className="replyButton"
+                                      onClick={() => {
+                                        setOpenCommentReplyFormId(comment.id);
+                                      }}
+                                    >
+                                      Reply
+                                    </button>
+                                  )}
                                   {openCommentReplyFormId === comment.id && (
                                     <CreateComment
                                       post={post}
@@ -224,7 +224,9 @@ const PostDetails = () => {
                                 return (
                                   <>
                                     <div className="replyOuterContainer">
-                                      <div><AiFillCaretRight/></div>
+                                      <div>
+                                        <AiFillCaretRight />
+                                      </div>
                                       <div className="commenterIconDiv">
                                         <div className="commenterIcon">
                                           <img
