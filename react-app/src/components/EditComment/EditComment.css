@@ -1,0 +1,39 @@
+.editCommentFormButton {
+  height: 23px;
+  width: 100px;
+  border-radius: 4px;
+  align-items: center;
+  font-family: verdana, sans-serif;
+  font-size: 12px;
+  margin-left: 5px;
+  justify-content: center;
+  color: #f2f4f5;
+  border-style: none;
+  background-color: rgb(0,121,211);
+}
+
+.editCommentFormButton:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
+  background-color: rgb(5, 83, 142);
+  cursor: pointer;
+}
+
+.cancelEditCommentButton {
+  height: 22px;
+  width: 100px;
+  border-radius: 4px;
+  align-items: center;
+  font-family: verdana, sans-serif;
+  font-size: 12px;
+  margin-left: 5px;
+  justify-content: center;
+  color: #f2f4f5;
+  border-style: none;
+  background-color: rgb(222, 47, 47);
+}
+
+.cancelEditCommentButton:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
+  background-color: rgb(156, 20, 20);
+  cursor: pointer;
+}

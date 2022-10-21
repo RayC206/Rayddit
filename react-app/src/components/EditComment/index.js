@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import './EditComment.css'
 
 import {
   getAllPostCommentsRequest,
@@ -56,14 +57,14 @@ const EditComment = ({ comment, onSuccess }) => {
           </div>
           <div className="editCommentButtonDiv">
             <button
-              className="editCommentButton"
+              className="cancelEditCommentButton"
               onClick={() => {
                 onSuccess();
               }}
             >
               Cancel
             </button>
-            <button className="editCommentButton" type="submit">
+            <button className="editCommentFormButton" type="submit">
               Edit Comment
             </button>
           </div>
