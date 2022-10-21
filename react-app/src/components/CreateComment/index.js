@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { createCommentRequest } from "../../store/comments";
-import './CreateComment.css'
+import "./CreateComment.css";
 
 const CreateComment = ({ post }) => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const CreateComment = ({ post }) => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
 
-  console.log(post.id)
+  console.log(post.id);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,6 +23,7 @@ const CreateComment = ({ post }) => {
     return dispatch(createCommentRequest(newComment)).then(async (res) => {
       if (!res.errors) {
         setSubmitSuccess(true);
+        setText("");
       } else {
         setErrors(Object.values(res.errors));
       }
@@ -42,7 +43,11 @@ const CreateComment = ({ post }) => {
             ))}
           </ul>
 
-            <span className="commentAsSpan"> Comment as {sessionUser.username}</span>
+          <span className="commentAsSpan">
+            {" "}
+            Comment as{" "}
+            <a href={`/user/${sessionUser.id}`}>{sessionUser.username}</a>
+          </span>
           <label>
             <textarea
               className="commentTextBox"

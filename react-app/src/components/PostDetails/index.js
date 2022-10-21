@@ -5,6 +5,7 @@ import { getSubredditRequest } from "../../store/subreddits";
 import PostCard from "../PostCard";
 import LoginFormModal from "../LoginFormModal";
 import "./PostDetails.css";
+import EditComment from "../EditComment";
 
 import { getPostRequest, deletePostRequest } from "../../store/posts";
 import {
@@ -31,8 +32,9 @@ const PostDetails = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const comments = useSelector((state) => Object.values(state.comments));
   const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
-  console.log("COMMENTS");
-  console.log(comments);
+  const [openCommentFormId, setOpenCommentFormId] = useState(false);
+  // console.log("COMMENTS");
+  // console.log(comments);
 
   if (post && post.length) {
     subredditId = post[0].subreddit_id;
@@ -153,14 +155,32 @@ const PostDetails = () => {
                                   <span>{comment.username}</span>
                                   {sessionUser &&
                                     sessionUser.id === comment.user_id && (
-                                      <button
-                                        className="deletePostButton"
-                                        onClick={() => {
-                                          deleteComment(comment.id);
-                                        }}
-                                      >
-                                        Delete
-                                      </button>
+                                      <div>
+                                        <button
+                                          className="deletePostButton"
+                                          onClick={() => {
+                                            deleteComment(comment.id);
+                                          }}
+                                        >
+                                          Delete
+                                        </button>
+                                        <button
+                                          className="editPostButton"
+                                          onClick={() => {
+                                            setOpenCommentFormId(comment.id);
+                                          }}
+                                        >
+                                          Edit
+                                        </button>
+                                        {openCommentFormId === comment.id && (
+                                          <EditComment
+                                            comment={comment}
+                                            onSuccess={() => {
+                                              setOpenCommentFormId(false);
+                                            }}
+                                          />
+                                        )}
+                                      </div>
                                     )}
                                   <div className="innerCommentDiv">
                                     {comment.text}
