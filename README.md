@@ -20,6 +20,7 @@ Rayddit is a Full-Stack clone of the popular site Reddit. This project tests my 
 * Upvote and downvoting comments
 * Theme change / Dark mode
 * Search functionality 
+* infinity scroll
 
 ## Tech Stack:
 
