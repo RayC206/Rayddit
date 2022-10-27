@@ -107,6 +107,7 @@ const commentsReducer = (state = initialState, action) => {
       if (action.comment.parent_id) {
         // if newly created comment is a reply, append to parent comment's replies array
         newState[action.comment.parent_id].replies.push(action.comment);
+        console.log(newState[action.comment.parent_id].replies);
       } else {
         newState[action.comment.id] = action.comment;
       }
@@ -122,7 +123,18 @@ const commentsReducer = (state = initialState, action) => {
     }
     case EDIT_COMMENT: {
       newState = { ...state };
-      newState[action.comment.id] = action.comment;
+      console.log("EDIT COMMENT");
+      console.log(action.comment);
+      if (action.comment.parent_id) {
+        // replies
+        newState[action.comment.parent_id].replies.forEach((reply, index) => {
+          if (reply.id === action.comment.id) {
+            newState[action.comment.parent_id].replies[index] = action.comment;
+          }
+        });
+      } else {
+        newState[action.comment.id] = action.comment;
+      }
       return newState;
     }
     case DELETE_COMMENT: {

@@ -241,14 +241,37 @@ const PostDetails = () => {
                                             {sessionUser &&
                                               sessionUser.id ===
                                                 reply.user_id && (
-                                                <button
-                                                  className="deleteCommentButton"
-                                                  onClick={() => {
-                                                    deleteComment(reply);
-                                                  }}
-                                                >
-                                                  Delete
-                                                </button>
+                                                <>
+                                                  <button
+                                                    className="deleteCommentButton"
+                                                    onClick={() => {
+                                                      deleteComment(reply);
+                                                    }}
+                                                  >
+                                                    Delete
+                                                  </button>
+                                                  <button
+                                                    className="editCommentButton"
+                                                    onClick={() => {
+                                                      setOpenCommentEditFormId(
+                                                        reply.id
+                                                      );
+                                                    }}
+                                                  >
+                                                    Edit
+                                                  </button>
+                                                  {openCommentEditFormId ===
+                                                    reply.id && (
+                                                    <EditComment
+                                                      comment={reply}
+                                                      onSuccess={() => {
+                                                        setOpenCommentEditFormId(
+                                                          false
+                                                        );
+                                                      }}
+                                                    />
+                                                  )}
+                                                </>
                                               )}
                                           </div>
                                         </div>

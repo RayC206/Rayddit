@@ -22,7 +22,6 @@ def edit_comment(commentId):
 
   if form.validate_on_submit():
     edited_comment.text = form.data['text']
-    edited_comment.parent_id = form.data['parent_id']
 
     db.session.commit()
     return edited_comment.to_dict()
