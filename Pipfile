@@ -27,6 +27,7 @@ greenlet = "==1.1.0"
 Mako = "==1.1.4"
 timeago = "==1.0.16"
 email-validator = "*"
+boto3 = "*"
 
 [dev-packages]
 
