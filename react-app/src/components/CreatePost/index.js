@@ -23,6 +23,7 @@ const CreatePost = () => {
 
   const [title, setTitle] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+  const [image, setImage] = useState(null);
   const [linkUrl, setLinkUrl] = useState(null);
   const [text, setText] = useState(null);
   const [subreddit, setSubreddit] = useState(subredditId);
@@ -59,17 +60,27 @@ const CreatePost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    let newPostData = {
-      title: title,
-      img_url: imageUrl,
-      link_url: linkUrl,
-      text: text,
-      subreddit_id: subreddit,
-      post_type_id: postType,
-    };
+    const formData = new FormData();
+    // let newPostData = {
+    //   title: title,
+    //   img_url: imageUrl,
+    //   link_url: linkUrl,
+    //   text: text,
+    //   subreddit_id: subreddit,
+    //   post_type_id: postType,
+    // };
+    formData.append("title", title);
+    formData.append("img_url", imageUrl);
+    formData.append("link_url", linkUrl);
+    formData.append("text", text);
+    formData.append("subreddit_id", subreddit);
+    formData.append("post_type_id", postType);
+    formData.append("image", image);
+    console.log("IMAGE");
+    console.log(image);
     // console.log("SUBMITTED POST");
     // console.log(newPostData);
-    return dispatch(createPostRequest(newPostData)).then(async (res) => {
+    return dispatch(createPostRequest(formData)).then(async (res) => {
       if (!res.errors) {
         setSubmitSuccess(true);
       } else {
@@ -192,6 +203,14 @@ const CreatePost = () => {
                     placeholder="Image URL"
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
+                  />
+                </label>
+                <label className="createTitle">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    name="image"
+                    onChange={(e) => setImage(e.target.files[0])}
                   />
                 </label>
                 <div className="createPostButtonDiv">

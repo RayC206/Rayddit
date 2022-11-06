@@ -78,8 +78,7 @@ const downvotePost = (post) => {
 export const createPostRequest = (newPost) => async (dispatch) => {
   const res = await fetch("/api/posts/", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(newPost),
+    body: newPost,
   });
   if (res.ok) {
     const post = await res.json();
