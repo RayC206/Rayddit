@@ -14,7 +14,7 @@ Rayddit is a Full-Stack clone of the popular site Reddit. This project tests my 
 * Subreddits
 * Upvote and Downvoting posts
 * Comment section
-* AWS for image uploads (in progress)
+* AWS for image uploads 
 
 ## Future features in progress:
 * Upvote and downvoting comments
