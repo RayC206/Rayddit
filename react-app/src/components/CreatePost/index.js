@@ -22,10 +22,10 @@ const CreatePost = () => {
   // console.log("--------", subredditId);
 
   const [title, setTitle] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
   const [image, setImage] = useState(null);
-  const [linkUrl, setLinkUrl] = useState(null);
-  const [text, setText] = useState(null);
+  const [linkUrl, setLinkUrl] = useState("");
+  const [text, setText] = useState("");
   const [subreddit, setSubreddit] = useState(subredditId);
   const [postType, setPostType] = useState(1);
   const [errors, setErrors] = useState([]);
@@ -70,12 +70,12 @@ const CreatePost = () => {
     //   post_type_id: postType,
     // };
     formData.append("title", title);
+    formData.append("post_type_id", postType);
+    formData.append("subreddit_id", subreddit);
+    formData.append("text", text);
+    formData.append("image", image);
     formData.append("img_url", imageUrl);
     formData.append("link_url", linkUrl);
-    formData.append("text", text);
-    formData.append("subreddit_id", subreddit);
-    formData.append("post_type_id", postType);
-    formData.append("image", image);
 
     // console.log("SUBMITTED POST");
     // console.log(newPostData);
