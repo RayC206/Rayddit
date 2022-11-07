@@ -53,30 +53,24 @@ def create_post():
   form = PostForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
-    # if "image" not in request.files:
-    #   return {"errors": "image required"}, 400
-    print("REQUEST")
-    print(request.files)
-    print(request.form)
-    image = request.files["image"]
-    print("IMAGE")
-    print(image)
+    if "image" not in request.files:
+      return {"errors": ["image required"]}, 400
 
-    # if not allowed_file(image.filename):
-    #     return {"errors": "file type not permitted"}, 400
+    image = request.files["image"]
+
+    if not allowed_file(image.filename):
+        return {"errors": ["file type not permitted"]}, 400
 
     image.filename = get_unique_filename(image.filename)
 
     upload = upload_file_to_s3(image)
-    print("UPLOAD")
-    print(upload)
-    # if "url" not in upload:
-    #     return upload, 400
-    # url = upload["url"]
+    if "url" not in upload:
+        return upload, 400
+    url = upload["url"]
 
     new_post = Post(
       title = form.data["title"],
-      img_url = form.data["img_url"],
+      img_url = url,
       link_url = form.data["link_url"],
       text = form.data["text"],
       user_id = current_user.id,

@@ -101,16 +101,17 @@ const EditPost = () => {
                   />
                 </label>
                 {postType === POST_TYPE_IMAGE && (
-                  <label>
-                    <span className="editFormTitleSpan">Image:</span>
-                    <input
-                      className="createTitleInputBox"
-                      type="text"
-                      placeholder="Image URL"
-                      value={imageUrl}
-                      onChange={(e) => setImageUrl(e.target.value)}
-                    />
-                  </label>
+                  // <label>
+                  //   <span className="editFormTitleSpan">Image:</span>
+                  //   <input
+                  //     className="createTitleInputBox"
+                  //     type="text"
+                  //     placeholder="Image URL"
+                  //     value={imageUrl}
+                  //     onChange={(e) => setImageUrl(e.target.value)}
+                  //   />
+                  // </label>
+                  <div>Uploaded images cannot be edited.</div>
                 )}
 
                 {postType === POST_TYPE_LINK && (

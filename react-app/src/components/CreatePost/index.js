@@ -76,8 +76,7 @@ const CreatePost = () => {
     formData.append("subreddit_id", subreddit);
     formData.append("post_type_id", postType);
     formData.append("image", image);
-    console.log("IMAGE");
-    console.log(image);
+
     // console.log("SUBMITTED POST");
     // console.log(newPostData);
     return dispatch(createPostRequest(formData)).then(async (res) => {
@@ -196,7 +195,7 @@ const CreatePost = () => {
                     required
                   />
                 </label>
-                <label className="createTitle">
+                {/* <label className="createTitle">
                   <input
                     className="createTitleInputBox"
                     type="text"
@@ -204,13 +203,16 @@ const CreatePost = () => {
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                   />
-                </label>
+                </label> */}
                 <label className="createTitle">
                   <input
                     type="file"
                     accept="image/*"
                     name="image"
-                    onChange={(e) => setImage(e.target.files[0])}
+                    onChange={(e) => {
+                      setImage(e.target.files[0]);
+                      setImageUrl(e.target.value);
+                    }}
                   />
                 </label>
                 <div className="createPostButtonDiv">
