@@ -25,6 +25,31 @@ const DarkModeButton = ({ darkMode, setDarkMode }) => {
         .menu_drop > span {
           color: ${darkMode ? 'white' : 'black'}
         }
+
+        .postContainer {
+          background-color : ${darkMode ? 'rgb(62, 60, 60)' : 'white'}
+        }
+
+        .postContainer > div {
+          color: ${darkMode ? 'white' : 'black'}
+        }
+        .outerPostContainer {
+          background-color: ${darkMode ? 'rgb(94, 94, 118)' : 'rgb(247, 247, 252)'};
+          border: ${darkMode ? '1px solid rgb(38 35 35)' : '1px solid rgb(206, 195, 195)'}
+        }
+        .homepageSubredditContent, .subredditCreateDiv, .iconContainer {
+          background-color: ${darkMode ? 'rgb(62, 60, 60)': 'white'};
+          color: ${darkMode ? 'white' : 'black'}
+        }
+
+        .homePageSubredditInfo, .developerInfoDiv{
+          border: ${darkMode ? '1px solid rgb(38 35 35)' : '1px solid rgb(206, 195, 195)'}
+        }
+        .aboutSubreddit, .developerInfoContent, .createSubredditButton{
+          background-color: ${darkMode ? 'rgb(98 122 146)' : 'rgb(0,121,211)' }
+        }
+
+
       `}</style>
     </div>
   );
