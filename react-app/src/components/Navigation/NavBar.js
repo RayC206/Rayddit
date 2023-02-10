@@ -8,6 +8,7 @@ import SignUpFormModal from "../SignUpFormModal (unused)";
 import "./NavBar.css";
 // import logo from "./logo.png";
 import raydittLogo from "./raydditlogo.png";
+import DarkModeButton from "../DarkMode";
 
 const NavBar = ({ isLoaded }) => {
   const history = useHistory();
@@ -26,6 +27,7 @@ const NavBar = ({ isLoaded }) => {
       <>
         <div id="rightNav">
           <ProfileButton user={sessionUser} />
+          <DarkModeButton />
         </div>
       </>
     );
