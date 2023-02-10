@@ -7,7 +7,8 @@ import LoginFormModal from "../LoginFormModal";
 import SignUpFormModal from "../SignUpFormModal (unused)";
 import "./NavBar.css";
 // import logo from "./logo.png";
-import raydittLogo from "./raydditlogo.png";
+import raydittLogo from './raydditlogo.png';
+import darkModeLogo from './darkModeLogo.png'
 import DarkModeButton from "../DarkMode";
 
 const NavBar = ({ isLoaded }) => {
@@ -15,6 +16,7 @@ const NavBar = ({ isLoaded }) => {
   const sessionUser = useSelector((state) => state.session.user);
   const [loginFormModalIsOpen, setLoginFormModalIsOpen] = useState(false);
   const [signUpFormModalIsOpen, setSignUpFormModalIsOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   const signUpPage = (subredditId) => {
     let path = `/sign-up`;
@@ -27,7 +29,7 @@ const NavBar = ({ isLoaded }) => {
       <>
         <div id="rightNav">
           <ProfileButton user={sessionUser} />
-          <DarkModeButton />
+          <DarkModeButton darkMode={darkMode} setDarkMode={setDarkMode} />
         </div>
       </>
     );
@@ -64,7 +66,7 @@ const NavBar = ({ isLoaded }) => {
           <div id="logo_div">
             <NavLink exact to="/">
               {/* <img src={logo} alt="rayddit"></img> */}
-              <img className="raydditLogo" src={raydittLogo} alt='raydditlogo'></img>
+              <img className="raydditLogo" src={darkMode ? darkModeLogo : raydittLogo} alt='raydditlogo'></img>
             </NavLink>
           </div>
           {isLoaded && sessionLinks}
