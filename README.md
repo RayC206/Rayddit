@@ -15,12 +15,13 @@ Rayddit is a Full-Stack clone of the popular site Reddit. This project tests my 
 * Upvote and Downvoting posts
 * Comment section
 * AWS for image uploads 
+* Infinity Scroll
+* Dark Mode Toggle
 
 ## Future features in progress:
 * Upvote and downvoting comments
-* Theme change / Dark mode
+* Theme change 
 * Search functionality 
-* infinity scroll
 
 ## Tech Stack:
 
