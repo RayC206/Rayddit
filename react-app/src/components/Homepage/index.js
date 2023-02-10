@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { getAllSubredditsRequest } from "../../store/subreddits";
 import createIcon from "./createIcon.png";
 import linkedin from "./linkedin.png";
@@ -15,6 +15,7 @@ import { getAllPostsRequest } from "../../store/posts";
 const Homepage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
   const sessionUser = useSelector((state) => state.session.user);
   const subredditInfo = useSelector((state) => Object.values(state.subreddits));
   const posts = useSelector((state) => {
@@ -22,20 +23,14 @@ const Homepage = () => {
     posts = posts.sort((postA, postB) =>
       new Date(postA.created_at) < new Date(postB.created_at) ? 1 : -1
     );
-    // posts.forEach((post) => {
-    //   console.log(post.title + " " + new Date(post.created_at));
-    // });
-
     return posts;
   });
-  // console.log("HERE___");
-  // console.log(subredditInfo);
-  // console.log("POSTS");
-  // console.log(posts);
 
   const [loginFormModalIsOpen, setIsLoginFormModalIsOpen] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [subredditLoaded, setSubredditLoaded] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
 
   useEffect(() => {
     dispatch(getAllSubredditsRequest()).then(() => {
@@ -45,6 +40,26 @@ const Homepage = () => {
       setPostsLoaded(true);
     });
   }, [dispatch]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + window.scrollY <
+      document.body.offsetHeight - 100
+    ) {
+      return;
+    }
+
+    setTimeout(() => {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }, 500);
+  };
 
   const createPostPage = () => {
     if (!sessionUser) {
@@ -71,6 +86,7 @@ const Homepage = () => {
 
   return (
     <div className="pageContainer">
+      <createPostPage />
       <LoginFormModal
         isOpen={loginFormModalIsOpen}
         modalToggle={setIsLoginFormModalIsOpen}
@@ -92,22 +108,18 @@ const Homepage = () => {
           </div>
           {postsLoaded ? (
             posts.length ? (
-              posts.map((post) => {
-                // console.log(post);
-                // console.log(
-                //   new Intl.DateTimeFormat("en", {
-                //     dateStyle: "medium",
-                //     timeStyle: "medium",
-                //   }).format(new Date(post.created_at))
-                // );
-                return (
+              <>
+                {posts.slice(0, currentPage * postsPerPage).map((post) => (
                   <PostCard
                     key={post.id}
                     post={post}
                     modalToggle={setIsLoginFormModalIsOpen}
                   />
-                );
-              })
+                ))}
+                {posts.length > currentPage * postsPerPage && (
+                  <div>Loading...</div>
+                )}
+              </>
             ) : (
               <div>No posts yet</div>
             )
