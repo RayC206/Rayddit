@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { MdOutlineFlashlightOn, MdOutlineFlashlightOff } from "react-icons/md";
-import "./DarkMode.css"
+import React from "react";
+import { FaSun, FaMoon } from "react-icons/fa";
+import "./DarkMode.css";
 
 const DarkModeButton = ({ darkMode, setDarkMode }) => {
   const toggleDarkMode = () => {
@@ -10,11 +10,7 @@ const DarkModeButton = ({ darkMode, setDarkMode }) => {
   return (
     <div>
       <button onClick={toggleDarkMode} className="darkmodeToggle">
-        {darkMode ? (
-          <MdOutlineFlashlightOn className="darkmodeOn" />
-        ) : (
-          <MdOutlineFlashlightOff className="darkModeOff" />
-        )}
+        {darkMode ? <FaSun /> : <FaMoon />}
       </button>
       <style jsx>{`
         body,
