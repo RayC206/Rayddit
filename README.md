@@ -6,7 +6,7 @@
 Rayddit is a Full-Stack clone of the popular site Reddit. This project tests my Full-Stack developing ability using Flask/SQLAlchemy along with React/Redux. 
 
 # Live Site
- https://rayddit.onrender.com/
+ https://rayddit.onrender.com/   (working on moving to new hosting site)
  
 # Features
 * Create / Login a user
